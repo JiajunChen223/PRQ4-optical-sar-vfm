@@ -1,0 +1,12 @@
+{
+  "status": "plan_estimate",
+  "compute": "RTX 3090 24GB; AMP; gradient accumulation; frozen or PEFT ViT-B-scale EO VFM; single-card first",
+  "input_resolution": "120x120 native Copernicus-Bench patches; 96x96 DFC2020 extension only if licensed; no 512+ global tiles",
+  "screening_budget": "5-15 epochs per candidate, batch 16-32 at 120x120 where the audited checkpoint permits; otherwise batch 8 with accumulation",
+  "formal_budget_after_route_approval": "20-50 epochs, 3 seeds only after matched baseline and route screen pass",
+  "trainable_parameter_target": "under 10M for router/adapters/decoder; frozen trunk or identical last-block mask across controls",
+  "memory_controls": ["AMP", "gradient accumulation", "local/windowed exchange", "gradient checkpointing only if required", "no large teacher cache"],
+  "data_cap": "core raw + labels + extracted copy + caches + checkpoints + necessary downloads <=50GB; hard-stop pre-download at 45GB",
+  "wall_clock_requirement": "measure peak VRAM, throughput and wall latency; do not infer efficiency from FLOPs",
+  "excluded": ["4M-21 or billion-parameter VLM pretraining", "RingMoE-scale expert banks", "full SEN12MS/PASTIS-R/MultiSenGE", "cloud task datasets"]
+}

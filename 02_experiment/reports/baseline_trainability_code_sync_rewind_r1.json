@@ -1,0 +1,16 @@
+{
+  "artifact_type": "gate_rewind_evidence",
+  "schema_version": "researchpilot.gate-rewind.v1",
+  "status": "pass",
+  "issue": "Baseline tap-connected trainability repair changes the code/config contract and must pass a fresh guarded code-only sync before baseline retraining.",
+  "from_gate": "BASELINE_REPRODUCTION",
+  "to_gate": "CLOUD_SYNC",
+  "preserve_history": true,
+  "scientific_result": false,
+  "test_accessed": false,
+  "data_download": false,
+  "weights_transfer": false,
+  "training_started": false,
+  "package_scope": "code_configs_tests_only",
+  "next_action": "Synchronize the reviewed tap-connected baseline package once, then replay cloud environment and baseline interfaces before a new baseline-only run."
+}

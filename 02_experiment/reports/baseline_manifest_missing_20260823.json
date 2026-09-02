@@ -1,0 +1,19 @@
+{
+  "artifact_type": "researchpilot_baseline_calibration_receipt",
+  "schema_version": "researchpilot.baseline_calibration.v1",
+  "status": "BLOCKED_FORMAL_DATA_MANIFEST_MISSING",
+  "dataset_id": "sen12ts_worldcover_3region_1200",
+  "calibration": "pass",
+  "ledger_schema_probe": "pass",
+  "ledger_first_record_fields": ["key", "size", "sha256", "etag", "status"],
+  "formal_loader_requirement": "JSON manifest with cloud_root, records/object_rows, split, parent, s1, s2, label and label_contract",
+  "remote_data_root": "/root/autodl-tmp/sen12ts_worldcover_3region_1200",
+  "manifest_found": false,
+  "data_read": false,
+  "weights_loaded": false,
+  "gpu_used": false,
+  "training_started": false,
+  "evaluation_started": false,
+  "test_accessed": false,
+  "note": "The append-only download ledger is not sufficient to reconstruct parent-first split records. Do not fabricate a manifest or launch baseline until an audited cloud manifest is provided or generated under a new approved data-verification operation."
+}

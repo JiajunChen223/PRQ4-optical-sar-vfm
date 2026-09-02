@@ -1,0 +1,30 @@
+{
+  "artifact_type": "researchpilot_independent_code_review",
+  "schema_version": "researchpilot.code_review.v2",
+  "status": "pass",
+  "decision": "PASS_FOR_LOCAL_CODE_ONLY; FRESH_CLOUD_SYNC_REQUIRED",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "route_id": "R-EO-CEAK-01",
+  "primary_core_candidate_id": "CEAK-01",
+  "candidate_ids": ["CEAK-01", "SUBPACK-02", "CFEDGE-03"],
+  "finding_count": 0,
+  "closed_findings": ["CEAK-R1", "CEAK-R2", "CEAK-R3", "CEAK-R4"],
+  "tests": {"pytest_passed": 225, "pytest_failed": 0, "targeted_passed": 31},
+  "validator": {"status": "pass", "scanned_executable_or_config_files": 78, "problems": [], "violations": []},
+  "zero_start": {"value_noop": true, "mechanism_gradient_live": true},
+  "successor_edge_contract": {"evidence_rank": 8, "subpack_candidate_limit": 64, "subpack_edge_budget": 32, "manifest_bound": true},
+  "candidate_direction_binding": {"exact_mapping": true, "missing_rejected": true, "mismatch_rejected": true, "baseline_reverse_rejected": true},
+  "cfedge": {"coalitions": ["paired", "optical_only", "sar_only", "null"], "individual_shapley_allocations": true, "causal_claim": false},
+  "scope_boundary": {"real_data_accessed": false, "real_weights_accessed": false, "gpu_used": false, "cloud_connected": false, "test_accessed": false},
+  "source_hashes": {
+    "src/geotoken3path/models/fusion.py": "6ccd3372629d5e6fab44f8bdbdd813dcafaac572b5b90da572b8f6b87fa97e68",
+    "src/geotoken3path/utils/config.py": "2cce5ff6676badcb6a5765c9351b5cfb7916041e3e756362e7e9cf94d5c5a57f",
+    "src/geotoken3path/utils/run_manifest.py": "292d62001475209c61f767b5a59d61203c15e9c3f938209d6f66bd657ddf9952",
+    "src/geotoken3path/engine/formal_runner.py": "8da5f6a23b6d22b4c0dc8827a86b904d19f15252cd6aba71d5dd35fbc14be0c8",
+    "src/geotoken3path/models/factory.py": "b1357a30ea521d7afaf0eddc23d1f47b61f4db1be40cfe0fb59a915bfe80d8fe",
+    "tests/unit/test_ceak_successor.py": "e7efbd734ceb7395b595c15afcc56e62705f4431095e73f894e68f4dbac64716"
+  },
+  "test_seal_status": "sealed",
+  "scientific_result": false
+}

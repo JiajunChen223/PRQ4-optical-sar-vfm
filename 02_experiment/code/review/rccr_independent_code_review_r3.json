@@ -1,0 +1,16 @@
+{
+  "artifact_type": "researchpilot_code_review",
+  "schema_version": "researchpilot.code-review.v1",
+  "status": "pass",
+  "route_id": "R-EO-RCCR-01",
+  "candidate_ids": ["MCRM-04", "MRTA-05", "CSCR-06"],
+  "review_report": "F:\\PRQ4\\02_experiment\\code\\review\\rccr_independent_code_review_r3.md",
+  "pytest": "167 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "local_gpu_probe": "forbidden_not_run",
+  "test_accessed": false,
+  "local_data_used": false,
+  "cloud_action": false,
+  "test_seal_status": "sealed",
+  "decision": "PASS_FOR_LOCAL_REVIEW_CONDITIONAL_ON_GUARDED_SYNC"
+}

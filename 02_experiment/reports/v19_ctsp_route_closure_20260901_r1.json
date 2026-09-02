@@ -1,0 +1,42 @@
+{
+  "artifact_type": "innovation_route_closure",
+  "schema_version": "researchpilot.v19.ctsp.route_closure.v1",
+  "status": "closed_scientific_failure",
+  "route_id": "R-EO-CTSP-V19-01",
+  "candidate_id": "CTSP-01",
+  "run_id": "PRQ4-V19-CTSP-CTSP01-FORMAL24-SEED0-20260901-R1",
+  "protocol_version": "sen12ts-geotoken3path-v19.20260901-ctsp-r1",
+  "dataset_id": "sen12ts_worldcover_3region_1200",
+  "objective": "ce_lovasz",
+  "seed": 0,
+  "epochs": 24,
+  "best_epoch": 16,
+  "best_mIoU_percent": 50.70312177743875,
+  "baseline_best_mIoU_percent": 49.78078791964122,
+  "best_delta_pp": 0.9223338577975326,
+  "epoch24_mIoU_percent": 49.00934254965163,
+  "baseline_epoch24_mIoU_percent": 49.76613907756286,
+  "epoch24_delta_pp": -0.7567965279112299,
+  "closure_threshold_delta_pp": 1.0,
+  "support_threshold_mIoU_percent": 51.78078791964122,
+  "effect_zone": "noise_or_marginal",
+  "decision": "rejected_below_preregistered_plus_1pp_closure_line",
+  "controls": {
+    "CTSP-C1": "locked_not_run",
+    "CTSP-C2": "locked_not_run",
+    "CTSP-C3": "locked_not_run"
+  },
+  "evidence_refs": {
+    "formal_result_summary": "F:/PRQ4/02_experiment/reports/v19_ctsp_formal_seed0_result_summary_20260901_r1.json",
+    "curve_packet": "F:/PRQ4/02_experiment/reports/v19_ctsp_innovation_curve_packet_20260901_r1.json",
+    "curve_validation": "F:/PRQ4/02_experiment/reports/v19_ctsp_innovation_curve_validation_20260901_r1.json",
+    "effect_evidence": "F:/PRQ4/02_experiment/reports/v19_ctsp_effect_evidence_20260901_r1.json",
+    "screening_validation": "F:/PRQ4/02_experiment/reports/v19_ctsp_innovation_screening_validation_20260901_r1.json"
+  },
+  "test_accessed": false,
+  "training_completed": true,
+  "sealed_test_status": "sealed",
+  "scientific_claim_supported": false,
+  "next_action": "request_new_plan_revision_or_user_route_decision",
+  "created_at_utc": "2026-09-01T06:05:00+00:00"
+}

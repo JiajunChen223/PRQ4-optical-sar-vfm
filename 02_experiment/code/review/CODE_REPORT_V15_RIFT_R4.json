@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "artifact_type": "researchpilot_code_report",
+  "status": "PASS",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "reviewed_commit_or_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r4.json",
+  "clean_sync_manifest_sha256": "bd9a4fabdd3086e756db5a2b4287d90475a5359adb3c0e4889982dbd604f0880",
+  "route_id": "R-EO-RIFT-V15-01",
+  "primary_core_candidate_id": "RIFT-01",
+  "test_summary": {
+    "status": "pass",
+    "commands": [
+      "pytest F:\\PRQ4\\02_experiment\\code\\tests -q -p no:cacheprovider",
+      "validate_code_project.py --project-root F:\\PRQ4",
+      "run_v15_rift_hard_contract.py"
+    ],
+    "pytest": "334 passed, 1 warning",
+    "validator": "pass; 144 executable/config files; 0 violations",
+    "hard_contract": "pass; 7/7 checks",
+    "synthetic_only": true,
+    "scientific_result": false
+  },
+  "review_summary": {
+    "status": "pass",
+    "review_mode": "coordinator_single_thread_adversarial_review",
+    "independent_review": false,
+    "review_report": "F:\\PRQ4\\02_experiment\\code\\review\\coordinator_v15_rift_code_review_r3_20260830.md",
+    "finding_count": 0,
+    "decision": "PASS_FOR_V15_RIFT_CODE_SYNC"
+  },
+  "rift_contract": {
+    "mechanism_set": "rift_relational_innovation_field",
+    "grid_side": 15,
+    "neighborhood": 3,
+    "pure_modality_relations": true,
+    "row_sum_zero": true,
+    "l1_normalization": true,
+    "semantic_transport_target": "fused_tokens",
+    "zero_start_stage_scale": true,
+    "stage_scale_parameter_budget": 1536,
+    "no_learnable_qk": true,
+    "no_extra_loss": true,
+    "matched_controls_registered": [
+      "rift_sar_relation_control",
+      "rift_shuffled_innovation_control"
+    ]
+  },
+  "training_object_parity": {
+    "status": "pass",
+    "same_detector_factory": true,
+    "single_internal_mechanism_delta": true,
+    "external_trainable_component_forbidden": true,
+    "same_entry_point": "geotoken3path.models.factory.build_model / build_vfm_segmentation_model"
+  },
+  "hard_contract_ref": "F:\\PRQ4\\02_experiment\\reports\\v15_rift_synthetic_hard_contract_20260830_r5.json",
+  "hard_contract_sha256": "d7e36633b58d09203d606675a8232d7a53937ec17cab2d83879c754c1372be12",
+  "local_data_status": "clean",
+  "local_gpu_probe": "forbidden_not_run",
+  "pretrained_initializer": "audited_cloud_only",
+  "pretrained_audit_ref": "F:\\PRQ4\\02_experiment\\reports\\v14_dtsf_croma_pretrained_weight_audit_20260830_r1.json",
+  "test_seal_guard": "present_and_tested",
+  "packaging_closure": {
+    "status": "pass_local_code_only",
+    "clean_sync_manifest": {
+      "path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r4.json",
+      "sha256": "bd9a4fabdd3086e756db5a2b4287d90475a5359adb3c0e4889982dbd604f0880",
+      "file_count": 120
+    },
+    "release_package": {
+      "path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_v15_rift_20260830_r3.tar.gz",
+      "sha256": "585993ee0128c49bb74ae66f9e6dd3e3ba8e45de6c6b8a93c11c520402dd7595",
+      "bytes": 208675,
+      "member_count": 121
+    },
+    "data_download": false,
+    "weights_download": false,
+    "gpu_or_training": false
+  },
+  "unresolved_issues": [
+    "V15 RIFT-01 real cloud seed-0 24-epoch result has not run",
+    "RIFT-C2/C3 remain locked until RIFT-01 reaches +2pp"
+  ],
+  "handoff_to_experiment": "After guarded V15 code sync and cloud reattachment, run RIFT-01 hard-contract successor and then the single seed-0 full-horizon run."
+}

@@ -1,0 +1,28 @@
+{
+  "status": "fail",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "scanned_executable_or_config_files": 135,
+  "problems": [
+    "semantic local data or local GPU behavior detected"
+  ],
+  "violations": [
+    {
+      "path": "02_experiment\\code\\tests\\unit\\test_v18_jack_config.py",
+      "scope": "executable",
+      "type": "local_data_path",
+      "line": 73,
+      "detail": "local/absolute or data-file path in executable string"
+    },
+    {
+      "path": "02_experiment\\code\\tests\\unit\\test_v18_jack_config.py",
+      "scope": "executable",
+      "type": "local_data_path",
+      "line": 83,
+      "detail": "local/absolute or data-file path in executable string"
+    }
+  ],
+  "local_real_data_allowed": false,
+  "local_gpu_probe": "forbidden_not_run",
+  "validator_policy": "scope-aware AST/config inspection; comments, docs, reviews, and outputs are not executable evidence"
+}

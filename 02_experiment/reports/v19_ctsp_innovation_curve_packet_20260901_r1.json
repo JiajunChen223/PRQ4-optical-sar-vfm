@@ -1,0 +1,239 @@
+{
+  "artifact_type": "innovation_curve_packet",
+  "schema_version": "innovation-curve-packet-v1",
+  "status": "pass",
+  "route_mode": "single_route",
+  "route_id": "R-EO-CTSP-V19-01",
+  "metric": {
+    "name": "mIoU",
+    "direction": "maximize",
+    "effect_unit": "percentage_points",
+    "role": "primary"
+  },
+  "training": {
+    "formal_horizon_epochs": 24,
+    "screening_seed": 0,
+    "no_early_pruning": true,
+    "direct_full_horizon": true
+  },
+  "comparison": {
+    "mode": "full_horizon_formal",
+    "baseline_reference_epoch": 24,
+    "candidate_reference_epoch": 24,
+    "baseline_reference_run_id": "PRQ4-V13-R2-DETERMINISTIC-REPLAY-SEED0-20260830-R1",
+    "candidate_run_ids": [
+      "PRQ4-V19-CTSP-CTSP01-FORMAL24-SEED0-20260901-R1"
+    ],
+    "external_frontier_used": false,
+    "same_split_and_evaluator": true,
+    "baseline_curve_source": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_baseline_curve_summary_20260901_r1.json",
+    "candidate_curve_source": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_formal_seed0_result_summary_20260901_r1.json"
+  },
+  "baseline": [
+    {
+      "epoch": 1,
+      "value": 0.3051858615918446
+    },
+    {
+      "epoch": 2,
+      "value": 0.33997850895827597
+    },
+    {
+      "epoch": 3,
+      "value": 0.40644526910496737
+    },
+    {
+      "epoch": 4,
+      "value": 0.39959358792052513
+    },
+    {
+      "epoch": 5,
+      "value": 0.3653630967357561
+    },
+    {
+      "epoch": 6,
+      "value": 0.39115462943329093
+    },
+    {
+      "epoch": 7,
+      "value": 0.4495964044115133
+    },
+    {
+      "epoch": 8,
+      "value": 0.4337283083020421
+    },
+    {
+      "epoch": 9,
+      "value": 0.4604376344430686
+    },
+    {
+      "epoch": 10,
+      "value": 0.4514292771949251
+    },
+    {
+      "epoch": 11,
+      "value": 0.4509426786074702
+    },
+    {
+      "epoch": 12,
+      "value": 0.47502877280922756
+    },
+    {
+      "epoch": 13,
+      "value": 0.4555391059383977
+    },
+    {
+      "epoch": 14,
+      "value": 0.45072202701335423
+    },
+    {
+      "epoch": 15,
+      "value": 0.48896869256523
+    },
+    {
+      "epoch": 16,
+      "value": 0.49049248603011375
+    },
+    {
+      "epoch": 17,
+      "value": 0.49251750819689466
+    },
+    {
+      "epoch": 18,
+      "value": 0.49780787919641223
+    },
+    {
+      "epoch": 19,
+      "value": 0.4852740101525325
+    },
+    {
+      "epoch": 20,
+      "value": 0.49730999565706446
+    },
+    {
+      "epoch": 21,
+      "value": 0.497742958602831
+    },
+    {
+      "epoch": 22,
+      "value": 0.49611648499545796
+    },
+    {
+      "epoch": 23,
+      "value": 0.4977690423151416
+    },
+    {
+      "epoch": 24,
+      "value": 0.4976613907756286
+    }
+  ],
+  "candidates": [
+    {
+      "direction_id": "CTSP-01",
+      "values": [
+        {
+          "epoch": 1,
+          "value": 0.29327098701582127
+        },
+        {
+          "epoch": 2,
+          "value": 0.39639039711400326
+        },
+        {
+          "epoch": 3,
+          "value": 0.3784491362667746
+        },
+        {
+          "epoch": 4,
+          "value": 0.37833743386206087
+        },
+        {
+          "epoch": 5,
+          "value": 0.44273233011574675
+        },
+        {
+          "epoch": 6,
+          "value": 0.40489250261238213
+        },
+        {
+          "epoch": 7,
+          "value": 0.44359656183556
+        },
+        {
+          "epoch": 8,
+          "value": 0.40333192990757927
+        },
+        {
+          "epoch": 9,
+          "value": 0.44265513038095916
+        },
+        {
+          "epoch": 10,
+          "value": 0.4235824454256418
+        },
+        {
+          "epoch": 11,
+          "value": 0.4761921667118356
+        },
+        {
+          "epoch": 12,
+          "value": 0.47625782470273353
+        },
+        {
+          "epoch": 13,
+          "value": 0.47303983654800286
+        },
+        {
+          "epoch": 14,
+          "value": 0.47803316318610195
+        },
+        {
+          "epoch": 15,
+          "value": 0.4668885414493003
+        },
+        {
+          "epoch": 16,
+          "value": 0.5070312177743875
+        },
+        {
+          "epoch": 17,
+          "value": 0.48645156727247263
+        },
+        {
+          "epoch": 18,
+          "value": 0.4891999956533706
+        },
+        {
+          "epoch": 19,
+          "value": 0.47621096138554286
+        },
+        {
+          "epoch": 20,
+          "value": 0.49284534912584416
+        },
+        {
+          "epoch": 21,
+          "value": 0.48274289384623037
+        },
+        {
+          "epoch": 22,
+          "value": 0.4898159753647462
+        },
+        {
+          "epoch": 23,
+          "value": 0.4909247592376441
+        },
+        {
+          "epoch": 24,
+          "value": 0.4900934254965163
+        }
+      ],
+      "run_id": "PRQ4-V19-CTSP-CTSP01-FORMAL24-SEED0-20260901-R1",
+      "test_accessed": false
+    }
+  ],
+  "effect_policy_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_innovation_effect_policy_20260901_r1.json",
+  "test_accessed": false,
+  "scientific_result": true,
+  "created_at_utc": "2026-09-01T05:08:28.661402+00:00"
+}

@@ -1,0 +1,36 @@
+{
+  "artifact_type": "local_code_review",
+  "schema_version": "researchpilot.v18.jack.local_review.v1",
+  "status": "pass",
+  "verdict": "pass",
+  "route_id": "R-EO-JACK-V18-01",
+  "candidate_id": "JACK-01",
+  "code_report_ref": "F:/PRQ4/02_experiment/code/review/CODE_REPORT_V18_JACK_R1.json",
+  "independent_review_refs": [
+    "F:/PRQ4/02_experiment/code/review/v18_jack_architecture_review_20260831_r1.jsonl",
+    "F:/PRQ4/02_experiment/code/review/v18_jack_data_repro_review_20260831_r1.jsonl",
+    "F:/PRQ4/02_experiment/code/review/v18_jack_release_adversarial_review_20260831_r1.jsonl"
+  ],
+  "review_roles": ["architecture", "data_interface", "reproducibility", "release", "adversarial"],
+  "tests": "372 passed, 0 warnings",
+  "code_validator": "pass; 135 executable/config files; 0 violations",
+  "hard_contract": "16/16 pass",
+  "full_path_liveness": "16/16 pass",
+  "unresolved_code_surface_blockers": [],
+  "unresolved_code_surface_major_findings": [],
+  "closed_process_preconditions": [
+    "V18 clean sync manifest and deterministic code-only package generated",
+    "canonical CODE_REPORT updated to V18",
+    "canonical experiment manifest and protocol rebound to V18 with successor hashes"
+  ],
+  "remaining_nonblocking_notes": [
+    "formal telemetry samples the first training batch of each epoch and is labeled accordingly",
+    "JACK-C2 is the exact same-index support control and its telemetry truthfully records no native-J query use"
+  ],
+  "local_data_status": "clean_code_sync_scope",
+  "local_gpu_probe": "forbidden_not_run",
+  "scientific_result": false,
+  "real_data_read": false,
+  "weights_read": false,
+  "test_accessed": false
+}

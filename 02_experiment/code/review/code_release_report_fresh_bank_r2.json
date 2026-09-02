@@ -1,0 +1,13 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code-release-report.v1",
+  "status": "pass",
+  "scope": "fresh_failure_informed_bank02_bank06_bank10_local_contract",
+  "clean_sync_manifest": {"path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json", "sha256": "f658a3326524bb4f0a318020c1ad8436f09adf31b4f93b2500865955baa9767d", "file_count": 59},
+  "release_package": {"path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_fresh_bank_r2.tar.gz", "sha256": "034015a9d0b86a33aab256e4020393f4b2388c74ef1153514cba99477460e858", "bytes": 77261, "file_count": 59},
+  "local_tests": "157 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "fresh_mechanisms": ["reliability_edge_router", "physical_group_dispatch", "deformable_transport"],
+  "contract_tests": "edge-level routing, physical 12+2 group projection, bounded [B,N,4,D] transport",
+  "cloud_sync": {"status": "pending", "data_transfer": false, "weights_transfer": false, "training_started": false, "sealed_test_accessed": false}
+}

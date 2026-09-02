@@ -1,0 +1,17 @@
+{
+  "artifact_type": "researchpilot_baseline_calibration_receipt",
+  "schema_version": "researchpilot.baseline_calibration.v1",
+  "status": "BLOCKED_SKILL_SNAPSHOT_DRIFT",
+  "guard_action": "baseline_calibration",
+  "classification": "evaluation",
+  "command_file": "02_experiment/cloud/commands/baseline_calibration_r7.sh",
+  "remote_execution": false,
+  "data_read": false,
+  "weights_loaded": false,
+  "gpu_used": false,
+  "training_started": false,
+  "evaluation_started": false,
+  "test_accessed": false,
+  "failure": "cloud_exec Skill snapshot check failed: installed ResearchPilot Skill files changed after this project was initialized",
+  "required_next_action": "Use the approved new Skill snapshot/maintenance mechanism; do not modify the global Skill or bypass the snapshot guard."
+}

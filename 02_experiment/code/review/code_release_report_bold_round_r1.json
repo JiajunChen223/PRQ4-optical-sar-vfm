@@ -1,0 +1,12 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code-release-report.v1",
+  "status": "pass",
+  "scope": "bold_round_03_partial_ot_triadic_relation_hierarchical_mass",
+  "clean_sync_manifest": {"path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json", "sha256": "3e5a52461fe1e0d2dd431ff16a945b6db1aab8653afc0dff374e3bf95a1ac44b", "file_count": 59},
+  "release_package": {"path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_bold_round_r1.tar.gz", "sha256": "df3c40b79ed504cc490a38ad4efe466e74975ad05082c9f8c4b950f7574efee3", "bytes": 78736, "file_count": 59},
+  "local_tests": "158 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "fresh_mechanisms": ["partial_ot_null_mass", "triadic_relation_hypergraph", "hierarchical_mass_transport"],
+  "cloud_sync": {"status": "pending", "data_transfer": false, "weights_transfer": false, "training_started": false, "sealed_test_accessed": false}
+}

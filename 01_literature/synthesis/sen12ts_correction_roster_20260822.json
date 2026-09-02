@@ -1,0 +1,9 @@
+{
+  "integrity_policy": "targeted_evidence_completion",
+  "final_handoff_requires_decision_critical_roles": true,
+  "roles": [
+    {"role": "resource_critic", "stage": "critic", "independent": true, "decision_critical": true},
+    {"role": "evidence_critic", "stage": "critic", "independent": true, "decision_critical": true},
+    {"role": "route_critic", "stage": "critic", "independent": true, "decision_critical": true}
+  ]
+}

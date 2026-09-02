@@ -1,0 +1,12 @@
+{
+  "artifact_type": "baseline_reproduction_followup_blocker",
+  "schema_version": "researchpilot.baseline.followup.v1",
+  "status": "blocked_for_gate_only",
+  "run_id": "PRQ4-SEN12TS-BASELINE-SEED0-PRETRAINED-R6",
+  "missing_evidence": "rapid_baseline_reference",
+  "reason": "The full run recorded epoch history but the current runner writes only the final checkpoint; no saved checkpoint is bound to the frozen T_rapid epoch.",
+  "scientific_result": false,
+  "test_accessed": false,
+  "next_repair": "add explicit rapid_horizon checkpoint capture, rerun the same optimized baseline, then validate compare_baseline and rapid reference",
+  "test_seal_status": "sealed"
+}

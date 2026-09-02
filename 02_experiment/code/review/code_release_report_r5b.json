@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "package": "F:\\PRQ4\\logs\\release_packages\\geotoken3path_code_r5b.tar.gz",
+  "sha256": "b12d8003a9c4c11a73a97e85ed7a6b0533924c92360c5b6d9a21cf41a3b8d448",
+  "bytes": 37319,
+  "source_clean_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json",
+  "source_clean_sync_manifest_sha256": "b55f21364189558cdd1162351db704552883288594771d2d83e4a1f1ed15bbd7",
+  "file_count": 42,
+  "archive_member_count": 43,
+  "payload_scope": "reviewed_code_configs_tests_manifests_only",
+  "real_data_included": false,
+  "pretrained_weights_included": false,
+  "credentials_included": false,
+  "cache_artifacts_included": false,
+  "scientific_results_included": false,
+  "package_audit": "F:\\PRQ4\\02_experiment\\code\\review\\final_package_audit_20260822_r5b.md",
+  "package_audit_sha256": "47130c1a0dd33718bc4d99cb071a4f9a3131256e376b03d6aa80a53ceb6a06f7"
+}

@@ -1,0 +1,407 @@
+{
+  "artifact_type": "researchpilot_effective_project_policy",
+  "schema_version": "researchpilot.effective_project_policy.v1",
+  "status": "pass",
+  "project_root": "F:\\PRQ4",
+  "governance_contract": "C:\\Users\\Administrator\\.codex\\skills\\researchpilot\\references\\governance-contract.json",
+  "governance_contract_sha256": "334d1fef3e50e37b0406d6a245a4262de8c4a27488d2824dd344f2d97bdf657a",
+  "plan_handoff": "F:\\PRQ4\\01_literature\\synthesis\\plan_handoff.json",
+  "plan_handoff_sha256": "8569731bd58ffa8bd72da489b1faee03c38827e0a5ac281663d95a84f6b7781f",
+  "amendment_ledger": "F:\\PRQ4\\00_project\\controls\\user_amendments.jsonl",
+  "amendment_ledger_sha256": "1b00a10e6c333f8cc874265ce3b91699981f8cb682d77f68001811c772f1915b",
+  "applied_amendment_ids": [
+    "AM-20260830-163302-e0804aad",
+    "AM-20260831-024049-faf8ada2",
+    "AM-20260831-084850-70f25770",
+    "AM-20260831-133836-8d267a13",
+    "AM-20260831-133904-31e2dd54"
+  ],
+  "ignored_legacy_amendments": [
+    {
+      "amendment_id": "AM-20260819-171409-bdcc4eb0",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260819-180704-d69f6681",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260820-162520-f90d8a42",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-014100-e086939d",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-033245-c78576b2",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-044102-6d7bf450",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-044125-f8a9641b",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-045728-cbf25e0d",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-051421-b7fcb65d",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-053249-953f6ace",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-053657-19bf7489",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-054702-47849259",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-055804-9e2d2f32",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-062106-d535b438",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-062122-5cb0ffb7",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-063445-8ed71b7d",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-072816-137d932e",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-080951-916d9485",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-082910-c2f805d7",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-083730-453f2a7c",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-084636-13006d6e",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-090315-5260ec10",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-091943-ddc4f1f4",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-091955-c8309483",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-101433-cb46768f",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-104751-5aacb6c3",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-112208-ac7e6a7d",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-112846-69fb6174",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-113842-cf652393",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-115014-1509bc56",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-121023-167332da",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260822-122300-484cf4d3",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260824-122115-e27778e5",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260825-073012-1179311f",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260825-080802-c71f32ac",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260825-093734-71531283",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260825-152132-f3f0553e",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260826-023631-fa9f8cc5",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260826-104537-45adf069",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260827-022117-f949e112",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260827-041300-2102754e",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260827-041357-9127d16e",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260827-093445-1d2b64b4",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260827-132846-ac2b023c",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260828-022201-8167a94f",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260828-030017-da2c57d2",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260828-PLANREVISION-D0-EF3500C1",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260828-135937-1200e458",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260828-162704-7bad4230",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-023807-8bcc5184",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-042231-94d238ec",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-042255-335dfc9d",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-074524-9b1c6746",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-155404-8d09b127",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-155415-ec44e6b6",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-155748-ec7b6f4e",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-162711-d5a5cf4b",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260829-163948-760515e5",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-013702-32a6f604",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-015917-33abb4e7",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-060152-b4a667a4",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-082131-939135d7",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-102303-bc80b9b1",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-102324-9ac83fa7",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-102954-bf24a250",
+      "reason": "no structured policy_patch"
+    },
+    {
+      "amendment_id": "AM-20260830-111447-a8e56838",
+      "reason": "no structured policy_patch"
+    }
+  ],
+  "protected_invariants": {
+    "cloud_only_real_data_and_weights": true,
+    "test_sealed_until_final_test": true,
+    "baseline_candidate_comparability": true,
+    "claim_run_evidence_traceability": true,
+    "rejected_or_inconclusive_not_support": true,
+    "reviewed_code_sync_for_formal_cloud_tree": true,
+    "honest_evidence_status": true
+  },
+  "policy": {
+    "research_mode": "opportunity_first",
+    "route_mode": "adaptive_single_core",
+    "candidate_policy": {
+      "plan_portfolio_min": 1,
+      "plan_portfolio_max": 1,
+      "idea_pool_min": 6,
+      "idea_pool_max": 10,
+      "rapid_bank_min": 1,
+      "rapid_bank_max": 1,
+      "rapid_bank_target": 1,
+      "max_rounds": 1,
+      "max_total_candidates": 1,
+      "formal_shortlist_min": 1,
+      "formal_shortlist_max": 1,
+      "final_core_min": 1,
+      "structural_floor": 1,
+      "require_composition": false,
+      "one_dimension_difference_retains_candidate": true
+    },
+    "multi_agent_policy": {
+      "minimum_blind_architects": 2,
+      "required_reviews": [
+        "novelty_counterevidence",
+        "resource_data"
+      ],
+      "final_judge_required": false,
+      "expand_only_for_observed_risk": true,
+      "evidence_id_membership_required": true,
+      "report_diversity_required": true
+    },
+    "source_gap_policy": {
+      "normalized_status": "unavailable_for_review",
+      "nonblocking_for_candidate_discovery": true,
+      "nonblocking_for_experimental_screening": true,
+      "eligible_as_verified_core_evidence": false,
+      "eligible_for_final_novelty_claim": false,
+      "skip_without_retry_chain": true
+    },
+    "initialization_policy": {
+      "preferred_mode": "pretrained_when_compatible",
+      "user_may_select_documented_alternative": true,
+      "same_initialization_for_comparisons": true
+    },
+    "baseline_policy": {
+      "fallback_relative_band": 0.1,
+      "prefer_empirical_bounds": true,
+      "better_than_acceptable_is_not_failure": true,
+      "comparison_cell_fields": [
+        "task",
+        "dataset",
+        "split",
+        "evaluation_protocol",
+        "metric_name",
+        "metric_unit",
+        "metric_direction"
+      ]
+    },
+    "statistical_evidence_profile": {
+      "confirmation_seed_count": 1,
+      "acceptance_seeds": [
+        0,
+        1,
+        2
+      ],
+      "require_raw_metric_recalculation": true,
+      "require_mean_std": true,
+      "confidence_interval": "when_supported_by_sample_size"
+    },
+    "task_profile": {
+      "task_type": "paired_optical_sar_semantic_segmentation",
+      "training_object_terms": {
+        "baseline_id": "baseline_training_object_id",
+        "candidate_id": "candidate_training_object_id",
+        "model_graph": "primary_model_graph"
+      },
+      "task_specific_protocol_fields": []
+    },
+    "applicability": {
+      "composition": "conditional",
+      "extension_matrix": "conditional",
+      "pretrained_initialization": "conditional",
+      "figure_sketch_review": "conditional"
+    },
+    "publication_target_profile": {
+      "primary_target": "Pattern Recognition special issue: Multimodal Representation Learning Based on Vision Foundation Models",
+      "upgrade_target": "",
+      "fallback_target": "",
+      "official_scope_required": true
+    },
+    "writing_policy": {
+      "review_profile": "minimal_review",
+      "required_reviews": [
+        "CONTENT_LOCK_REVIEW"
+      ],
+      "keyword_count_source": "journal_profile",
+      "figure_format_source": "journal_profile",
+      "style_lint_mode": "contextual_warning"
+    },
+    "dialogue_policy": {
+      "auto_continue": true,
+      "receipt_level": "milestone_summary",
+      "internal_gate_details_on_request_only": true
+    },
+    "experiment_order": [
+      "diagnosis_audit",
+      "plan_design",
+      "plan_approval",
+      "experiment"
+    ]
+  },
+  "policy_sha256": "dd4980ffde0d55f3d2a534ec9a60616631279dfceb1a84b7d0b4cfc2a638e5e5",
+  "compiled_at_utc": "2026-09-01T02:05:16.287089+00:00"
+}

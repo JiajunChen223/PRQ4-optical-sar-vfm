@@ -1,0 +1,42 @@
+{
+  "status": "fail",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "scanned_executable_or_config_files": 129,
+  "problems": [
+    "semantic local data or local GPU behavior detected"
+  ],
+  "violations": [
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v17_mcof_20260831_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[49].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v17_mcof_20260831_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[50].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v17_mcof_20260831_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[51].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v17_mcof_20260831_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[52].path",
+      "detail": "configuration string contains a local/data-file path"
+    }
+  ],
+  "local_real_data_allowed": false,
+  "local_gpu_probe": "forbidden_not_run",
+  "validator_policy": "scope-aware AST/config inspection; comments, docs, reviews, and outputs are not executable evidence"
+}

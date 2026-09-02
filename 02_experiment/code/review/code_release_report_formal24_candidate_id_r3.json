@@ -1,0 +1,32 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code-release-report.v1",
+  "status": "pass",
+  "scope": "code_only_candidate_direction_identity_binding",
+  "clean_sync_manifest": {
+    "path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json",
+    "sha256": "056ffa6a7db38952f525fc412488f668303ba1c154830cb844c9fa4a93bcfa23",
+    "file_count": 59
+  },
+  "release_package": {
+    "path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_formal24_candidate_id_r3.tar.gz",
+    "sha256": "b598cd0f6cdcd7264874df29ffea1badabb984ebbd74ba6a5ea9a6c6c5abb562",
+    "bytes": 73862,
+    "file_count": 59
+  },
+  "local_tests": "153 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "candidate_identity_binding": {
+    "allowed_direction_ids": ["CAND-01", "CAND-03", "CAND-07"],
+    "common_protocol_hash_unchanged": true,
+    "scientific_result": false
+  },
+  "cloud_sync": {
+    "status": "pass",
+    "operation_id": "ZZZZZZZZZZ-PRQ4-CANDIDATE-ID-BINDING-R3",
+    "data_transfer": false,
+    "weights_transfer": false,
+    "training_started": false,
+    "sealed_test_accessed": false
+  }
+}

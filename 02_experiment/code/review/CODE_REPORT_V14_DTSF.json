@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "artifact_type": "researchpilot_code_report",
+  "status": "PASS",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "reviewed_commit_or_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r3.json",
+  "clean_sync_manifest_sha256": "7a71892f81cf34ca89808edfd07e9f3590b9463c52fd39d2be63fd7a0ee5795c",
+  "test_summary": {
+    "status": "pass",
+    "commands": [
+      "F:\\anaconda3\\envs\\dl_env\\python.exe -B -m pytest F:\\PRQ4\\02_experiment\\code\\tests -q -p no:cacheprovider",
+      "F:\\anaconda3\\envs\\dl_env\\python.exe -B validate_code_project.py --project-root F:\\PRQ4"
+    ],
+    "pytest": "328 passed, 1 warning",
+    "validator": "pass; 133 executable/config files; 0 violations",
+    "synthetic_only": true,
+    "scientific_result": false
+  },
+  "review_summary": {
+    "status": "pass",
+    "review_mode": "coordinator_single_thread_adversarial_review",
+    "independent_review": false,
+    "review_report": "F:\\PRQ4\\02_experiment\\code\\review\\coordinator_v14_dtsf_code_review_20260830.md",
+    "finding_count": 0,
+    "decision": "PASS_FOR_V14_DTSF_CLOUD_SYNC"
+  },
+  "route_id": "R-EO-DTSF-V14-01",
+  "primary_core_candidate_id": "DTSF-01",
+  "dtsf_contract": {
+    "mechanism_set": "dtsf_depth_trajectory_fusion",
+    "depth_layers": [2, 3, 4, 5],
+    "basis": "hadamard4",
+    "rank": 8,
+    "alpha_zero_start": true,
+    "zero_start_straight_through": true,
+    "late_sar_pre_fusion_insertion": true,
+    "no_full_projection_matrix": true,
+    "matched_controls_registered": ["dtsf_raw_tap_low_rank_control", "dtsf_random_orthogonal_control", "dtsf_tap_permutation_control"]
+  },
+  "training_object_parity": {
+    "status": "pass",
+    "same_detector_factory": true,
+    "single_internal_mechanism_delta": true,
+    "external_trainable_component_forbidden": true,
+    "config_diff_test": "tests/unit/test_v14_dtsf_config.py::test_v14_dtsf_controls_share_common_protocol",
+    "trainable_parameter_audit_test": "tests/unit/test_dtsf.py::test_dtsf_zero_start_preserves_shared_token_model_output",
+    "same_entry_point": "geotoken3path.models.factory.build_model / build_vfm_segmentation_model"
+  },
+  "coupling_ablation_readiness": {
+    "status": "pass",
+    "enabled_mechanism_set_config": "F:\\PRQ4\\02_experiment\\code\\configs\\experiment\\v14_dtsf_route.yaml",
+    "same_entry_point_test": "tests/unit/test_v14_dtsf_config.py::test_v14_dtsf_controls_share_common_protocol",
+    "matched_protocol_budget_hash": "resolved at formal run from V14 route and clean-sync manifest",
+    "parent_row_config_test": "controls are explicitly registered and cannot alter common protocol leaves"
+  },
+  "local_data_status": "clean",
+  "local_gpu_probe": "forbidden_not_run",
+  "pretrained_initializer": "audited_cloud_only",
+  "pretrained_audit_ref": "F:\\PRQ4\\02_experiment\\reports\\v13_r2_replay_checkpoint_audit_20260830_r1.json",
+  "test_seal_guard": "present_and_tested",
+  "packaging_closure": {
+    "status": "pass_local_code_only",
+    "clean_sync_manifest": {"path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r3.json", "sha256": "7a71892f81cf34ca89808edfd07e9f3590b9463c52fd39d2be63fd7a0ee5795c", "file_count": 114},
+    "release_package": {"path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_v14_dtsf_20260830_r3.tar.gz", "sha256": "f6c4c20bd7a64f87fea4d21b2af036f852ec44710f229f81a93d724d9e5b7ea0", "bytes": 199750, "member_count": 115},
+    "data_download": false,
+    "weights_download": false,
+    "gpu_or_training": false
+  },
+  "unresolved_issues": [
+    "DTSF-01 cloud seed-0 24-epoch validation result has not yet run.",
+    "DTSF-C2/C3/C4 controls are locked behind the pre-registered >=+2pp performance gate."
+  ],
+  "handoff_to_experiment": "V14-DTSF cloud environment preflight, unchanged data/protocol reattachment, then DTSF-01 seed-0 full-horizon run."
+}

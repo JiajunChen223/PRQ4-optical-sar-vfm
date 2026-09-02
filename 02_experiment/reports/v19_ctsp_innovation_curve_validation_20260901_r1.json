@@ -1,0 +1,36 @@
+{
+  "artifact_type": "innovation_curve_validation",
+  "status": "pass",
+  "status_reason": "all formal candidates completed the locked horizon",
+  "comparison_mode": "full_horizon_formal",
+  "route_mode": "single_route",
+  "formal_horizon_epochs": 24,
+  "effect_policy_ref": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_innovation_effect_policy_20260901_r1.json",
+  "effect_policy_status": "pass",
+  "candidate_count": 1,
+  "completed_count": 1,
+  "candidate_decisions": [
+    {
+      "direction_id": "CTSP-01",
+      "decision": "complete",
+      "formal_horizon_epochs": 24,
+      "baseline_reference_epoch": 24,
+      "candidate_reference_epoch": 24,
+      "baseline_value": 0.4976613907756286,
+      "candidate_value": 0.4900934254965163,
+      "improvement_positive_delta": -0.007567965279112299,
+      "screening_effect": {
+        "metric": "mIoU",
+        "observed_delta": -0.007567965279112299,
+        "effect_unit": "percentage_points",
+        "effect_zone": "noise_or_marginal",
+        "noise_floor": 0.5,
+        "screening_deadband": 1.0,
+        "minimum_meaningful_delta": 2.0,
+        "strong_gain_threshold": 4.0
+      }
+    }
+  ],
+  "early_pruning_used": false,
+  "test_accessed": false
+}

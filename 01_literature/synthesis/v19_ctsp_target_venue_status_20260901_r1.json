@@ -1,0 +1,16 @@
+{
+  "artifact_type": "researchpilot_target_venue_status",
+  "schema_version": "researchpilot.v19.target_venue.v1",
+  "status": "verified_scope_active_with_deadline_update",
+  "journal": "Pattern Recognition",
+  "special_issue": "Multimodal Representation Learning Based on Vision Foundation Models",
+  "official_special_issue_url": "https://www.sciencedirect.com/special-issue/332578/multimodal-representation-learning-based-on-vision-foundation-models",
+  "official_listing_url": "https://www.sciencedirect.com/browse/calls-for-papers?subject=computer-science",
+  "submission_deadline": "2027-01-31",
+  "deadline_note": "The current official calls-for-papers listing supersedes the older local V18 deadline record.",
+  "project_fit": "CTSP studies representation-level use of an existing optical-SAR vision foundation model at a downstream dense-prediction interface; CROMA pretraining is comparison infrastructure, not the contribution.",
+  "cas_partition_claim": "not_claimed",
+  "verified_on": "2026-09-01",
+  "test_accessed": false,
+  "experiments_started": false
+}

@@ -1,0 +1,42 @@
+{
+  "artifact_type": "baseline_evidence_dossier",
+  "task": "optical+SAR WorldCover-consistent land-cover semantic segmentation under controlled registration error",
+  "dataset": "SEN12TS WorldCover 3-region successor, 11 native classes, 1200 parent objects; literature references use WHU-OPT-SAR as same-type context",
+  "split": "PRQ4 parent-first train/validation; sealed test excluded; literature split details remain source-specific",
+  "evaluation_protocol": "pixel-wise semantic segmentation with mIoU as primary metric; OA/accuracy are secondary context; no test access",
+  "baseline_target_type": "acceptable_same_type_mainstream_baseline",
+  "not_innovation_target": true,
+  "not_sota_target": true,
+  "reference_level_basis": "comparable_same_type_mainstream_distribution",
+  "mainstream_summary_ref": "F:\\PRQ4\\02_experiment\\reports\\baseline_frontier_summary.json",
+  "exact_official_configuration_required": false,
+  "metrics": [
+    {
+      "name": "mIoU",
+      "role": "primary",
+      "direction": "maximize",
+      "source_ids": ["LI23_WHUBASE", "FUSEFORM25_WHUBASE", "CLAIRE25_WHUBASE", "MFFNET24_WHUBASE", "MSFSA24_WHUBASE", "LSAR24_WHUBASE", "OSNET25_WHUBASE"],
+      "mainstream_center": 47.3,
+      "empirical_range": {"min": 39.97, "max": 55.84},
+      "acceptable_band": {"low": 42.57, "high": 52.03},
+      "relative_deviation_limit": 0.1,
+      "comparability_notes": "Weighted distribution of conventional full-fusion rows from same-type optical-SAR dense segmentation papers. Three high-comparability WHU full-modality sources are included, but exact SEN12TS 11-class/CROMA preprocessing is not represented; this band is a literature prior, not a transferred scientific result."
+    },
+    {
+      "name": "OA",
+      "role": "secondary",
+      "direction": "maximize",
+      "source_ids": ["LI23_WHUBASE", "CLAIRE25_WHUBASE", "MFFNET24_WHUBASE", "MSFSA24_WHUBASE"],
+      "mainstream_center": 78.9,
+      "empirical_range": {"min": 73.67, "max": 84.36},
+      "acceptable_band": {"low": 71.01, "high": 86.79},
+      "relative_deviation_limit": 0.1,
+      "comparability_notes": "Secondary OA context only; source splits and label taxonomies differ, so baseline reproduction must report OA on the frozen SEN12TS validation evaluator."
+    }
+  ],
+  "common_training_epochs": {"50": ["MFFNET24_WHUBASE"], "200": ["FUSEFORM25_WHUBASE"], "not_reported": ["LI23_WHUBASE", "CLAIRE25_WHUBASE", "MSFSA24_WHUBASE", "LSAR24_WHUBASE", "OSNET25_WHUBASE"]},
+  "pretrained_initialization_patterns": {"ImageNet encoder reported": ["FUSEFORM25_WHUBASE"], "not reported": ["LI23_WHUBASE", "CLAIRE25_WHUBASE", "MFFNET24_WHUBASE", "MSFSA24_WHUBASE", "LSAR24_WHUBASE", "OSNET25_WHUBASE"]},
+  "saturation_status": "not_claimed",
+  "source_evidence_refs": ["F:\\PRQ4\\logs\\agent_runs\\prq4-baseline-frontier-20260823\\baseline_metric_scout\\report.md"],
+  "notes": "No PRQ4 baseline result is present yet. External values are reference evidence only; they do not establish an SEN12TS result or innovation claim."
+}

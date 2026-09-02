@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "artifact_type": "researchpilot_code_report",
+  "status": "PASS",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "reviewed_commit_or_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r4.json",
+  "clean_sync_manifest_sha256": "ba9d9f4f67d96a53f22085694a7c7652ee7a26484fd9bcc63444ff87c2160ef3",
+  "test_summary": {
+    "status": "pass",
+    "targeted": "7 passed",
+    "pytest": "317 passed, 1 warning",
+    "validator": "pass; 121 executable/config files; 0 violations",
+    "synthetic_only": true,
+    "scientific_result": false
+  },
+  "review_summary": {
+    "status": "pass",
+    "review_mode": "coordinator_single_thread_adversarial_review",
+    "independent_review": false,
+    "user_amendment_ref": "AM-20260829-162711-d5a5cf4b",
+    "review_report": "F:\\PRQ4\\02_experiment\\code\\review\\coordinator_v13_checkpoint_repair_review_20260830.md",
+    "review_report_sha256": "7bb2b19d3331f6962615b0e66ee9287aa9f718e73ff388973b9caf0605e29088",
+    "finding_count": 0,
+    "decision": "PASS_FOR_GUARDED_CODE_SYNC_AND_UNCHANGED_R2_REPLAY"
+  },
+  "repair_contract": {
+    "best_checkpoint_separate": true,
+    "best_checkpoint_role": "best_validation",
+    "final_epoch_truthful": true,
+    "final_checkpoint_roles": ["final", "best_restored_final"],
+    "best_checkpoint_optimizer_included": false,
+    "final_checkpoint_optimizer_included": true,
+    "best_and_final_sha256_bytes_in_run_result": true,
+    "training_variables_changed": false
+  },
+  "local_data_status": "clean",
+  "local_gpu_probe": "forbidden_not_run",
+  "pretrained_initializer": "audited_cloud_only",
+  "test_seal_guard": "present_and_tested",
+  "packaging_closure": {
+    "status": "pass_local_code_only",
+    "clean_sync_manifest": {
+      "path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r4.json",
+      "sha256": "ba9d9f4f67d96a53f22085694a7c7652ee7a26484fd9bcc63444ff87c2160ef3",
+      "file_count": 107
+    },
+    "release_package": {
+      "path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_v13_checkpoint_repair_20260830_r4.tar.gz",
+      "sha256": "b2a8fa0beb0dc9b1ff6926dab1d8c3418e348ff5f44ddd884af9109fed920b64",
+      "bytes": 189947,
+      "member_count": 108
+    },
+    "data_download": false,
+    "weights_download": false,
+    "gpu_or_training": false
+  },
+  "unresolved_issues": [
+    "Cloud code sync and deterministic unchanged R2 replay have not yet run.",
+    "CMCD remains unauthorized before a verified replay best checkpoint and V13-D0 strong gate."
+  ],
+  "route_id": "R-EO-CMCD-V13-01",
+  "primary_core_candidate_id": "CMCD-01"
+}

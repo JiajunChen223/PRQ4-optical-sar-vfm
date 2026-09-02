@@ -1,0 +1,41 @@
+{
+  "artifact_type": "pretrained_alternative_search",
+  "schema_version": "geotoken3path.pretrained_search.v1",
+  "status": "random_init_exception_justified",
+  "task": "optical_sar_dense_land_cover_segmentation",
+  "target_input": {"optical_channels": 12, "sar_channels": 2, "resolution": 120},
+  "initialization_mode": "random_init",
+  "pretrained_preference_evaluated": true,
+  "pretrained_required_by_default": true,
+  "pretrained_eligible": false,
+  "fallback_reason": "pretrained_geography_overlap_confirmed",
+  "compatible_candidate_found": false,
+  "fallback_justified": true,
+  "constructor_weight_loading_disabled": true,
+  "attempts": [
+    {"source":"official CROMA","url":"https://github.com/antofuller/CROMA","outcome":"leakage_blocked","reason":"exact SSL4EO center coordinates overlap Ethiopia, Uganda, and Sumatra"},
+    {"source":"AnySat","url":"https://github.com/gastruc/AnySat","outcome":"incompatible","reason":"no checkpoint-bound exclusion evidence and no locked 12+2 CROMA contract"}
+  ],
+  "evidence_ref": "croma_coordinate_exact_overlap_audit_20260823.json",
+  "pretrained_search": {
+    "status": "complete",
+    "attempts": [
+      {"source":"official CROMA","url":"https://github.com/antofuller/CROMA","outcome":"leakage_blocked","reason":"exact SSL4EO center coordinates overlap Ethiopia, Uganda, and Sumatra"},
+      {"source":"AnySat","url":"https://github.com/gastruc/AnySat","outcome":"incompatible","reason":"no checkpoint-bound exclusion evidence and no locked 12+2 CROMA contract"}
+    ],
+    "compatible_candidate_found": false,
+    "fallback_justified": true
+  },
+  "compatibility": {"status":"not_applicable","architecture_match":true,"input_compatibility":true,"target_test_data_used":false},
+  "comparison_policy": {"same_initialization_for_baseline_and_innovation":true,"target_test_data_used":false,"pretraining_not_claimed_as_innovation":true},
+  "constructor_contract": {"constructor_weight_loading_disabled":true,"checkpoint_path":null,"weights_loaded":false},
+  "protocol_ready": true,
+  "data_read": false,
+  "weights_loaded": false,
+  "gpu_used": false,
+  "training": false,
+  "evaluation": false,
+  "test_accessed": false,
+  "dataset_read": false,
+  "metrics": false
+}

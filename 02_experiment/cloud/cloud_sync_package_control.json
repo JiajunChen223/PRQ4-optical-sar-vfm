@@ -1,0 +1,71 @@
+{
+  "artifact_type": "researchpilot.cloud_sync_package_control",
+  "schema_version": "researchpilot.cloud_sync_package.v1",
+  "status": "approved_for_one_code_sync",
+  "control_id": "CLOUD-SYNC-CPTR-R2-20260820",
+  "guard_action": "cloud_sync",
+  "required_current_gate": "CLOUD_SYNC",
+  "required_gate_status": "PENDING",
+  "required_router_checkpoint": "PLAN_APPROVAL",
+  "max_executions": 1,
+  "current_turn_approval": {
+    "approved_by": "user",
+    "approval_source": "current_user_message",
+    "scope": "CLOUD_SYNC_CODE_OVERWRITE_ONLY",
+    "approval_text": "按照skill，我有权利让你直接覆盖云端，把代码传上去就行",
+    "approval_text_sha256": "7ab62dadc4b71e35bd5825ea8aa582c942d9816f180dc264fc9eec1baf085550"
+  },
+  "package": {
+    "path": "F:\\PRQ4\\logs\\release_packages\\geotoken3path_code_r2.tar.gz",
+    "sha256": "2b12cfd39d52cb3f51e9b1240609cd3c902bf830f3a9fabdad04bf3df507fc48",
+    "manifest_path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json",
+    "manifest_sha256": "0762c7bde442a2accc8d190a863589de9886fc1768ceb604c89ce99da62fd87e",
+    "scope": "code_configs_tests_manifests_only",
+    "real_data_included": false,
+    "pretrained_weights_included": false,
+    "credentials_included": false,
+    "cache_artifacts_included": false,
+    "scientific_results_included": false
+  },
+  "remote": {
+    "target_root": "/root/autodl-workspace",
+    "data_root": "/root/autodl-tmp",
+    "staging_path": "/root/autodl-workspace.__cptr_sync_r2.tar.gz",
+    "new_path": "/root/autodl-workspace.__cptr_sync_r2.new",
+    "backup_path": "/root/autodl-workspace.previous/cptr-sync-r2"
+  },
+  "safety_contract": {
+    "data_root_touched": false,
+    "weights_touched": false,
+    "checkpoints_touched": false,
+    "logs_touched": false,
+    "test_accessed": false,
+    "training_started": false,
+    "evaluation_started": false,
+    "symlink_escape_allowed": false,
+    "destructive_delete_allowed": false,
+    "overwrite_existing_target": true,
+    "retry_allowed": false,
+    "second_execution_allowed": false
+  },
+  "operations": [
+    {
+      "operation_id": "CLOUD-SYNC-CPTR-R2-OP1",
+      "classification": "code_sync",
+      "guard_action": "cloud_sync",
+      "operation_type": "one_use_clean_export_code_sync",
+      "remote_effect": "replace_exact_code_workspace_with_verified_package",
+      "preflight_command": "set -eu; target=/root/autodl-workspace; stage=/root/autodl-workspace.__cptr_sync_r2.tar.gz; backup=/root/autodl-workspace.previous/cptr-sync-r2; new=/root/autodl-workspace.__cptr_sync_r2.new; test -d /root/autodl-tmp; test ! -L \"$target\"; test ! -e \"$stage\"; test ! -e \"$backup\"; test ! -e \"$new\"; if test -e \"$target\"; then find \"$target\" -type f | grep -E '(^|/)(data|weights|checkpoints?|outputs?|logs?|cache)(/|$)|\\.(pt|pth|ckpt|tar|tar.gz|zip|jsonl)$' && exit 41 || true; fi; printf 'CLOUD_SYNC_PREFLIGHT_PASS\\n'",
+      "preflight_command_sha256": "c2270a46dec2111ac3f67befb8b8d314028dd8704c3fa156cfaffe5590073fa0",
+      "remote_staging_path": "/root/autodl-workspace.__cptr_sync_r2.tar.gz",
+      "command": "set -eu; stage=/root/autodl-workspace.__cptr_sync_r2.tar.gz; target=/root/autodl-workspace; backup=/root/autodl-workspace.previous/cptr-sync-r2; new=/root/autodl-workspace.__cptr_sync_r2.new; printf '2b12cfd39d52cb3f51e9b1240609cd3c902bf830f3a9fabdad04bf3df507fc48  %s\\n' \"$stage\" | sha256sum -c -; tar -tzf \"$stage\" | grep -E '(^/|\\.\\.)' && exit 42 || true; test ! -L \"$stage\"; mkdir \"$new\"; tar -xzf \"$stage\" -C \"$new\"; test -f \"$new/researchpilot_code_release_manifest.json\"; test ! -L \"$new\"; if find \"$new\" -type l -print -quit | grep -q .; then exit 43; fi; mkdir -p /root/autodl-workspace.previous; if test -e \"$target\"; then mv \"$target\" \"$backup\"; fi; mv \"$new\" \"$target\"; rm -f \"$stage\"; printf 'CLOUD_SYNC_REPLACED %s\\n' \"$target\"",
+      "command_sha256": "b4692ce908ae5e49ea96983f018fb44b51dc88aa6f0e3999dfd6d78f527c8c68",
+      "retry_allowed": false,
+      "max_executions": 1,
+      "test_accessed": false,
+      "data_root_touched": false,
+      "weights_touched": false,
+      "checkpoints_touched": false
+    }
+  ]
+}

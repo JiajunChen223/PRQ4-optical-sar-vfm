@@ -1,0 +1,273 @@
+{
+  "schema_version": 3,
+  "project_id": "PRQ4",
+  "active_phase": "EXPERIMENT",
+  "active_gate": "PROJECT",
+  "active_service": "experiment",
+  "plan_status": "v19_ctsp_successor_route_bound_user_approved",
+  "experiment_status": "v19_ctsp_project_reopened_after_v18_closure",
+  "writing_handoff_status": "not_ready",
+  "approval_protocol": {
+    "policy": "fixed_checkpoint_automatic",
+    "checkpoint_order": [
+      "PLAN_APPROVAL",
+      "FINAL_CORE_APPROVAL"
+    ],
+    "current_checkpoint": "FINAL_CORE_APPROVAL",
+    "current_status": "automatic",
+    "automatic_zone": "PLAN_APPROVED_TO_AUTOMATIC_EXPERIMENT",
+    "request_ref": "",
+    "request_sha256": "",
+    "approved_checkpoints": [
+      "PLAN_APPROVAL"
+    ],
+    "history": [
+      {
+        "checkpoint": "PLAN_APPROVAL",
+        "approved_by": "user",
+        "approval_source": "current_user_message",
+        "approval_text_sha256": "8cbe697b157364a5b13646285b38409dc53ec5287deeb7913493e65b275cd14d",
+        "request_ref": "01_literature/synthesis/plan_handoff.json",
+        "request_sha256": "8569731bd58ffa8bd72da489b1faee03c38827e0a5ac281663d95a84f6b7781f",
+        "approved_at_utc": "2026-09-01T02:20:22.964106+00:00",
+        "decision": "approve",
+        "binding_kind": "successor_plan_rebind",
+        "successor_approval_record": "01_literature/synthesis/plan_successor_approval_record_v19_ctsp_20260901_r1.json",
+        "superseded_request_sha256": "91c402e3d19208ec1787754dd99039553cf8ec4d2d64e5c90435a90e93b2939d"
+      }
+    ],
+    "last_user_approval": {
+      "checkpoint": "PLAN_APPROVAL",
+      "approved_by": "user",
+      "approval_source": "current_user_message",
+      "approval_text_sha256": "8cbe697b157364a5b13646285b38409dc53ec5287deeb7913493e65b275cd14d",
+      "request_ref": "01_literature/synthesis/plan_handoff.json",
+      "request_sha256": "8569731bd58ffa8bd72da489b1faee03c38827e0a5ac281663d95a84f6b7781f",
+      "approved_at_utc": "2026-09-01T02:20:22.964106+00:00",
+      "decision": "approve",
+      "binding_kind": "successor_plan_rebind",
+      "successor_approval_record": "01_literature/synthesis/plan_successor_approval_record_v19_ctsp_20260901_r1.json",
+      "superseded_request_sha256": "91c402e3d19208ec1787754dd99039553cf8ec4d2d64e5c90435a90e93b2939d"
+    },
+    "successor_plan_rebind": {
+      "kind": "user_approved_successor_route_rebind",
+      "checkpoint": "PLAN_APPROVAL",
+      "amendment_id": "AM-20260831-133904-31e2dd54",
+      "successor_request_ref": "F:/PRQ4/01_literature/synthesis/plan_handoff.json",
+      "successor_request_sha256": "8569731bd58ffa8bd72da489b1faee03c38827e0a5ac281663d95a84f6b7781f",
+      "successor_evidence_packet_ref": "F:/PRQ4/01_literature/synthesis/frozen_evidence_packet.json",
+      "successor_evidence_packet_sha256": "a6b4905e9bda37dce52aa043a8d581ad215efacc5a89f60025229fbb65e74183",
+      "successor_validation_ref": "F:/PRQ4/01_literature/synthesis/plan_handoff_validation.json",
+      "successor_validation_sha256": "b6bcea4732983f9f1ee20ed611832b46cf87344a3eb3bf30209ff3ffd0ef6cf5",
+      "successor_integrity_ref": "F:/PRQ4/01_literature/synthesis/multi_agent_integrity.json",
+      "successor_integrity_sha256": "85f35ae5988915e2dec47aa58ee2e1ba06d5f5c4109e7798fc68645410b98185",
+      "approval_request_ref": "F:/PRQ4/01_literature/synthesis/plan_successor_approval_request_v19_ctsp_20260901_r1.json",
+      "approval_request_sha256": "1255c41388985685bc2b4abfd51b7d73455d78e8219a42ac2f0aaee901e1a670",
+      "approval_record": "F:/PRQ4/01_literature/synthesis/plan_successor_approval_record_v19_ctsp_20260901_r1.json",
+      "approval_record_sha256": "1f0bfdda103bc16cd133a418f894e34ea5dfedb44b8f1be4f7f6918830c7c274",
+      "approval_text_sha256": "8cbe697b157364a5b13646285b38409dc53ec5287deeb7913493e65b275cd14d",
+      "successor_route_id": "R-EO-CTSP-V19-01",
+      "successor_primary_core_candidate_id": "CTSP-01",
+      "candidate_ids": [
+        "CTSP-01"
+      ],
+      "first_executed_candidate_id": "CTSP-01",
+      "second_plan_checkpoint_opened": false,
+      "execution_authorized": true,
+      "note": "The user approved the validated V19 CTSP successor route while preserving task, data, initialization, compute, epoch, parity, cloud-only and sealed-test invariants.",
+      "rebound_at_utc": "2026-09-01T02:20:22.964106+00:00"
+    },
+    "successor_plan_rebind_history": [
+      {
+        "kind": "user_approved_successor_route_rebind",
+        "checkpoint": "PLAN_APPROVAL",
+        "amendment_id": "AM-20260830-045018-b4d68435",
+        "successor_request_ref": "F:/PRQ4/01_literature/synthesis/plan_handoff_v14_dtsf_20260830_r1.json",
+        "successor_request_sha256": "fda5ae0c10785957c9b4233f19888612e0bbdd67b3ceef600349ed52192e9d9d",
+        "successor_evidence_packet_ref": "F:/PRQ4/01_literature/synthesis/v14_dtsf_targeted_evidence_packet_20260830_r1.json",
+        "successor_evidence_packet_sha256": "ec8fe2ca6f95ac3ac803c77bea93dab5554fd22b79ee7d3fe5880f70ef8a785b",
+        "successor_validation_ref": "F:/PRQ4/01_literature/synthesis/plan_handoff_v14_dtsf_20260830_r1_validation.json",
+        "successor_validation_sha256": "3015313ae4cf650f80b00c5f9304724a6eff6b7d5fae153deab9f7bb1e98f391",
+        "successor_integrity_ref": "F:/PRQ4/01_literature/synthesis/v14_dtsf_plan_integrity_validation_20260830_r1.json",
+        "successor_integrity_sha256": "1f59e70cffd662e321f56959e39b9adf55cfbf352c55e6e02e5726fac99c844d",
+        "approval_record": "F:\\PRQ4\\01_literature\\synthesis\\plan_successor_approval_record_dtsf_20260830_r1.json",
+        "approval_record_sha256": "86a4a5bd4822d0096c4316b6c011b3dc5b694cf1376b2820d6f44cba717786ea",
+        "approval_text_sha256": "793c30225852101d0287d3a08a2d732f0af88082b9e662ad7a6a8899f7a29468",
+        "successor_route_id": "R-EO-DTSF-V14-01",
+        "successor_primary_core_candidate_id": "DTSF-01",
+        "candidate_ids": [
+          "DTSF-01",
+          "DTRD-02",
+          "DCCA-03"
+        ],
+        "second_plan_checkpoint_opened": false,
+        "execution_authorized": true,
+        "note": "The current-turn user route decision binds the DTSF successor within the existing PLAN_APPROVAL automatic zone. Task, dataset, initialization, compute, epoch, parity, cloud-only and sealed-test invariants are unchanged.",
+        "rebound_at_utc": "2026-08-30T05:08:04.361604+00:00"
+      },
+      {
+        "kind": "user_approved_successor_route_rebind",
+        "checkpoint": "PLAN_APPROVAL",
+        "amendment_id": "AM-20260830-111447-a8e56838",
+        "successor_request_ref": "F:/PRQ4/01_literature/synthesis/plan_handoff_v16_mcsl_20260830_r1.json",
+        "successor_request_sha256": "f9feefbd13842009f45bde2b453112cf8080ed47f6b4390de34eafeb4a781474",
+        "successor_evidence_packet_ref": "F:/PRQ4/01_literature/synthesis/v16_mcsl_targeted_evidence_packet_20260830_r1.json",
+        "successor_evidence_packet_sha256": "12648a30eacd349de56176fbcbd30bd9de0fba1710c79171612aae71a6f4e311",
+        "successor_validation_ref": "F:/PRQ4/01_literature/synthesis/plan_handoff_v16_mcsl_20260830_r1_validation.json",
+        "successor_validation_sha256": "0bf64b974cd1427720ea36d4dc0be7687c5b236def66815f927abd82c65fee37",
+        "successor_integrity_ref": "F:/PRQ4/01_literature/synthesis/v16_mcsl_coordinator_integrity_20260830_r1.json",
+        "successor_integrity_sha256": "25cd5d97913c1979743e1a0d2fe6a231a93b7c6e259c3c8d3e27efbb2739f16d",
+        "approval_record": "F:\\PRQ4\\01_literature\\synthesis\\plan_successor_approval_record_mcsl_20260830_r1.json",
+        "approval_record_sha256": "878b572dda0ee42b5f46ac70a8f7f5b3bba05910c70c1dac2610b5ec2983835c",
+        "approval_text_sha256": "007b3dd581e0da346f008bd96775f773c698b777e7aa2cc5bf5b1a93ab20afe1",
+        "successor_route_id": "R-EO-MCSL-V16-01",
+        "successor_primary_core_candidate_id": "MCSL-01",
+        "candidate_ids": [
+          "MCSL-01",
+          "AMRL-02",
+          "MHP-03"
+        ],
+        "first_executed_candidate_id": "MCSL-01",
+        "second_plan_checkpoint_opened": false,
+        "execution_authorized": true,
+        "note": "The current-turn user approval binds V16 MCSL within the existing PLAN approval automatic zone while preserving all protected experiment invariants.",
+        "rebound_at_utc": "2026-08-30T11:15:57.933810+00:00"
+      },
+      {
+        "kind": "user_approved_successor_route_rebind",
+        "checkpoint": "PLAN_APPROVAL",
+        "amendment_id": "AM-20260831-024049-faf8ada2",
+        "successor_request_ref": "F:\\PRQ4\\01_literature\\synthesis\\plan_handoff.json",
+        "successor_request_sha256": "7c7d239a254866e2452a765dd72808a3f4c6b5d7227634f1ee07c3afb2e6f204",
+        "successor_evidence_packet_ref": "F:\\PRQ4\\01_literature\\synthesis\\frozen_evidence_packet.json",
+        "successor_evidence_packet_sha256": "18fbc0abaefb7b03bc6cbb4c983bc60bf1612f37ee39715d85cd01da5afd0cc3",
+        "successor_validation_ref": "F:\\PRQ4\\01_literature\\synthesis\\plan_handoff_validation.json",
+        "successor_validation_sha256": "fd92b15b19911f2182a1ac0a1683800b76b20e0f99ac9e242e6d8473a8883ada",
+        "successor_integrity_ref": "F:\\PRQ4\\01_literature\\synthesis\\v17_multi_agent_integrity_20260831.json",
+        "successor_integrity_sha256": "527c9e9a29dd1514c88c9570b2f29a96ec8bb978b3070d1781ea51dda7da41a1",
+        "approval_record": "F:\\PRQ4\\01_literature\\synthesis\\plan_successor_approval_record_v17_mcof_20260831_r1.json",
+        "approval_record_sha256": "8b442be9c32c5d4ef6d4aa90286ea53cb165b06413fdcb3f9d7bcca406e4ae45",
+        "approval_text_sha256": "5d94a264fe706eb0c1a652f1887adb384599068f95061db20be2c9aaf43f19f7",
+        "successor_route_id": "R-EO-MCOF-V17-01",
+        "successor_primary_core_candidate_id": "MCOF-01",
+        "candidate_ids": [
+          "MCOF-01"
+        ],
+        "first_executed_candidate_id": "MCOF-01",
+        "second_plan_checkpoint_opened": false,
+        "execution_authorized": true,
+        "note": "The current-turn user selected MCOF-01, waived final-judge review, and authorized the validated single-route V17 successor while preserving all protected invariants.",
+        "rebound_at_utc": "2026-08-31T02:50:18.754925+00:00"
+      },
+      {
+        "kind": "user_approved_successor_route_rebind",
+        "checkpoint": "PLAN_APPROVAL",
+        "amendment_id": "AM-20260831-084850-70f25770",
+        "successor_request_ref": "F:\\PRQ4\\01_literature\\synthesis\\plan_handoff.json",
+        "successor_request_sha256": "91c402e3d19208ec1787754dd99039553cf8ec4d2d64e5c90435a90e93b2939d",
+        "successor_evidence_packet_ref": "F:\\PRQ4\\01_literature\\synthesis\\frozen_evidence_packet.json",
+        "successor_evidence_packet_sha256": "b330b4937ba57623fcdad7e9afd26ead9a7bcb4262c13ca542a5f704c5027795",
+        "successor_validation_ref": "F:\\PRQ4\\01_literature\\synthesis\\plan_handoff_validation.json",
+        "successor_validation_sha256": "9099d110ef56808a346561fcd43066f4195e715db8d8e1cbb485934ec65106dd",
+        "successor_integrity_ref": "F:\\PRQ4\\01_literature\\synthesis\\v18_multi_agent_integrity_20260831_r1.json",
+        "successor_integrity_sha256": "44f6e825f24902ed38e66c1ca0a46005efbb7f2792cb387d06e8c1884a8b0214",
+        "approval_record": "F:\\PRQ4\\01_literature\\synthesis\\plan_successor_approval_record_v18_jack_20260831_r1.json",
+        "approval_record_sha256": "055d353858e085a3e9847da514bfbe61f3ce307647e1805d734688fb21be0a8d",
+        "approval_text_sha256": "8d402d7abbbcfd236bc4741dfdc2b17e9fc3f97ee2b5bfa6a0bc6aa79c5baca8",
+        "successor_route_id": "R-EO-JACK-V18-01",
+        "successor_primary_core_candidate_id": "JACK-01",
+        "candidate_ids": [
+          "JACK-01"
+        ],
+        "first_executed_candidate_id": "JACK-01",
+        "second_plan_checkpoint_opened": false,
+        "execution_authorized": true,
+        "note": "The current-turn user approved the validated V18 JACK single route while preserving every protected experiment invariant.",
+        "rebound_at_utc": "2026-08-31T08:51:58.712932+00:00"
+      }
+    ],
+    "plan_approval_binding_history": [
+      {
+        "checkpoint": "PLAN_APPROVAL",
+        "approved_by": "user",
+        "approval_source": "current_user_message",
+        "approval_text_sha256": "5d94a264fe706eb0c1a652f1887adb384599068f95061db20be2c9aaf43f19f7",
+        "request_ref": "01_literature/synthesis/plan_handoff.json",
+        "request_sha256": "7c7d239a254866e2452a765dd72808a3f4c6b5d7227634f1ee07c3afb2e6f204",
+        "approved_at_utc": "2026-08-31T02:50:18.754925+00:00",
+        "decision": "approve",
+        "binding_kind": "successor_plan_rebind",
+        "successor_approval_record": "01_literature/synthesis/plan_successor_approval_record_v17_mcof_20260831_r1.json",
+        "superseded_request_sha256": "2b5ee8137267e4af98f63a078d8511941f3cba5372d05c25b2b06cb2e42b8b49"
+      },
+      {
+        "checkpoint": "PLAN_APPROVAL",
+        "approved_by": "user",
+        "approval_source": "current_user_message",
+        "approval_text_sha256": "8d402d7abbbcfd236bc4741dfdc2b17e9fc3f97ee2b5bfa6a0bc6aa79c5baca8",
+        "request_ref": "01_literature/synthesis/plan_handoff.json",
+        "request_sha256": "91c402e3d19208ec1787754dd99039553cf8ec4d2d64e5c90435a90e93b2939d",
+        "approved_at_utc": "2026-08-31T08:51:58.712932+00:00",
+        "decision": "approve",
+        "binding_kind": "successor_plan_rebind",
+        "successor_approval_record": "01_literature/synthesis/plan_successor_approval_record_v18_jack_20260831_r1.json",
+        "superseded_request_sha256": "7c7d239a254866e2452a765dd72808a3f4c6b5d7227634f1ee07c3afb2e6f204"
+      }
+    ]
+  },
+  "review_protocol": {
+    "policy": "default_continue_unless_user_pauses",
+    "review_order": [
+      "STRENGTHENING_RESULT_REVIEW",
+      "FINAL_EVIDENCE_REVIEW"
+    ],
+    "current_review": "STRENGTHENING_RESULT_REVIEW",
+    "current_status": "not_started",
+    "execution_control": "run",
+    "default_continue": true,
+    "history": [],
+    "last_review": null
+  },
+  "child_state_refs": {
+    "plan": "01_literature/synthesis/plan_handoff.json",
+    "code": "02_experiment/code/review/CODE_REPORT.json",
+    "experiment": "02_experiment/gate_status.json",
+    "writing": "03_writing/writing_handoff.json"
+  },
+  "updated_at": "2026-09-01T05:27:54.503779+00:00",
+  "migration": {
+    "kind": "new_current_state_index",
+    "legacy_state": "00_project/runtime/legacy/researchpilot_state_legacy_20260822.json",
+    "legacy_state_sha256": "7b0f0d97bbbd6f8d7c1217534f912e6db0f2563d580789b387037908d8a8cea6",
+    "preserved_approval_history": [
+      "PLAN_APPROVAL"
+    ],
+    "retired_approval_history_not_replayed": [
+      "BASELINE_TRAINING_APPROVAL"
+    ],
+    "created_by": "current_skill_snapshot_reconciliation",
+    "approval_rebind": {
+      "kind": "compatible_plan_successor_request_binding",
+      "amendment_id": "AM-20260822-104751-5aacb6c3",
+      "checkpoint": "PLAN_APPROVAL",
+      "historical_request_sha256": "793c257572c3482968129dbb72e8e0b9413b2a035794d104fa986e792a814b0f",
+      "successor_request_sha256": "56c8b4d8f218740b15e13f624dee59bf3b65b8c4d64975ad33a51659d9bec751",
+      "historical_state_backup": "00_project/runtime/legacy/researchpilot_state_pre_sen12ts_rebind_20260822.json",
+      "successor_binding_record": "01_literature/synthesis/plan_successor_approval_record_20260822.json",
+      "note": "This is a project-local request binding update for the user-approved compatible SEN12TS successor; it is not a second PLAN_APPROVAL checkpoint and does not authorize data, weights, GPU, training or metrics."
+    }
+  },
+  "effective_policy_ref": "00_project/controls/effective_project_policy.json",
+  "execution_control": "run",
+  "continuation_policy": {
+    "mode": "auto_continue",
+    "approval_requests": "key_checkpoints_only",
+    "receipt_mode": "progress_not_permission",
+    "pause_on": [
+      "fixed_user_decision",
+      "protected_blocker",
+      "explicit_user_pause",
+      "endpoint_or_credential_unavailable"
+    ]
+  }
+}

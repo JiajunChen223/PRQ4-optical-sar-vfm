@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "artifact_type": "researchpilot_code_report",
+  "status": "PASS",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "reviewed_commit_or_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r7.json",
+  "clean_sync_manifest_sha256": "244bee9708dfead6ca9c23c4e0118af585181703d84f14fad555f9375675172d",
+  "test_summary": {
+    "status": "pass",
+    "pytest": "319 passed, 1 warning",
+    "validator": "pass; 126 executable/config files; 0 violations",
+    "synthetic_only": true,
+    "scientific_result": false
+  },
+  "review_summary": {
+    "status": "pass",
+    "review_mode": "coordinator_single_thread_adversarial_review",
+    "independent_review": false,
+    "review_report": "F:\\PRQ4\\02_experiment\\code\\review\\coordinator_v13_d0_device_repair_review_20260830.md",
+    "finding_count": 0,
+    "decision": "PASS_FOR_IDENTICAL_V13_D0_VALIDATION_RERUN"
+  },
+  "repair_contract": {
+    "failure_class": "invalid_protocol_device_mismatch",
+    "failed_run": "PRQ4-V13-D0-COUNTERFACTUAL-AUDIT-20260830-R2",
+    "failed_stderr_ref": "F:\\PRQ4\\02_experiment\\cloud\\commands\\outputs\\PRQ4-V13-D0-COUNTERFACTUAL-AUDIT-20260830-R2-20260830T022018275085-22632.err",
+    "failed_stderr_sha256": "2503efecbf731df918cccc40b7beb035acc7e6b76979550570b31b9651734b9c",
+    "code_delta": "align detached batch risk tensors to persistent accumulator device and dtype before arithmetic",
+    "scientific_variables_changed": false,
+    "training_variables_changed": false,
+    "information_flow_changed": false
+  },
+  "v13_d0": {
+    "audit_script": "F:\\PRQ4\\02_experiment\\code\\scripts\\v13_d0_counterfactual_audit.py",
+    "audit_script_sha256": "39c6635bf8e198914539e99a8c9728c70a45775c22c3be47cb1bdd74e72430e5",
+    "same_model_same_croma_forward": true,
+    "on_path": "always_fuse local optical-SAR exchange",
+    "off_path": "same CROMA outputs with only local SAR write disabled",
+    "training": false,
+    "sealed_test": true,
+    "comparator_checkpoint_role": "best_validation",
+    "comparator_epoch": 18,
+    "comparator_mIoU_percent": 49.78078791964122,
+    "comparator_sha256": "45308835524c71696ebffd3fb3637ea1b468d38d0313343193dec0ab76e740e9"
+  },
+  "local_data_status": "clean",
+  "local_gpu_probe": "forbidden_not_run",
+  "pretrained_initializer": "audited_cloud_only",
+  "test_seal_guard": "present_and_tested",
+  "packaging_closure": {
+    "status": "pass_local_code_only",
+    "clean_sync_manifest": {
+      "path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r7.json",
+      "sha256": "244bee9708dfead6ca9c23c4e0118af585181703d84f14fad555f9375675172d",
+      "file_count": 109
+    },
+    "release_package": {
+      "path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_v13_checkpoint_repair_20260830_r7.tar.gz",
+      "sha256": "67a9cffacbc71f0f55d4ab60cd4eda80dbbbfe91bcd90d6a68473f7ca83240ea",
+      "bytes": 194686,
+      "member_count": 110,
+      "remote_release_manifest_sha256": "02163557c5aea8b550a8c3ec62ca53a0a86bd6a54c017f75fed8951f065c551e"
+    },
+    "data_download": false,
+    "weights_download": false,
+    "gpu_or_training": false
+  },
+  "unresolved_issues": [
+    "V13-D0 same-model ON/OFF audit has not yet completed.",
+    "CMCD implementation/training remains conditional on V13-D0 Gate A."
+  ],
+  "route_id": "R-EO-CMCD-V13-01",
+  "primary_core_candidate_id": "CMCD-01"
+}

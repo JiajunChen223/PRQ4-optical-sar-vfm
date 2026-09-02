@@ -1,0 +1,65 @@
+{
+  "compared_at_utc": "2026-08-24T13:45:56.278326+00:00",
+  "evidence": "F:\\PRQ4\\02_experiment\\reports\\baseline_evidence.json",
+  "reproduced": "F:\\PRQ4\\02_experiment\\reports\\baseline_seed0_pretrained_formal24_augmented_r2_metrics.json",
+  "metric_comparisons": [
+    {
+      "name": "mIoU",
+      "role": "primary",
+      "reference_type": "comparable_same_type_mainstream_distribution",
+      "reproduced": 38.76022926214301,
+      "mainstream_center": 47.3,
+      "acceptable_band": {
+        "low": 42.57,
+        "high": 52.03
+      },
+      "absolute_diff": -8.539771,
+      "relative_diff": -0.180545,
+      "relative_deviation_limit": 0.1,
+      "status": "outside_mainstream_band"
+    },
+    {
+      "name": "OA",
+      "role": "secondary",
+      "reference_type": "comparable_same_type_mainstream_distribution",
+      "reproduced": 65.90933641975309,
+      "mainstream_center": 78.9,
+      "acceptable_band": {
+        "low": 71.01,
+        "high": 86.79
+      },
+      "absolute_diff": -12.990664,
+      "relative_diff": -0.164647,
+      "relative_deviation_limit": 0.1,
+      "status": "outside_mainstream_band"
+    }
+  ],
+  "matched_count": 0,
+  "total_compared": 2,
+  "status": "conditional",
+  "reference_policy": "comparable_same_type_mainstream_distribution",
+  "baseline_target_type": "acceptable_same_type_mainstream_baseline",
+  "not_innovation_target": true,
+  "not_sota_target": true,
+  "exact_official_configuration_required": false,
+  "artifact_type": "baseline_comparison",
+  "schema_version": "researchpilot.baseline.comparison.v1",
+  "bounded_discrepancy": true,
+  "likely_cause_documented": true,
+  "scientifically_comparable": true,
+  "unresolvable_with_available_evidence": true,
+  "conditional_scope": "Amended 24-epoch, validation-only baseline strengthening evidence. Both metrics remain below the frozen same-type mainstream band; this is not an innovation claim or final-test result.",
+  "likely_causes": [
+    "Published reference rows use different label taxonomies and scene/split contracts than the frozen SEN12TS WorldCover 11-class 3-region validation split.",
+    "The reproduced route uses a frozen official CROMA trunk with PEFT adapters, paired D4 train-only augmentation, and dynamic per-micro-batch normalization; references do not share this complete contract.",
+    "No same-dataset, same-split, same-11-class, same-CROMA direct mainstream row is available in the frontier evidence packet."
+  ],
+  "rapid_reference_ref": "F:\\PRQ4\\02_experiment\\reports\\rapid_baseline_reference.json",
+  "run_id": "PRQ4-BASELINE-STRENGTHENING-SEED0-FORMAL24-AUG-R2",
+  "test_accessed": false,
+  "scientific_result_boundary": "conditional validation-only evidence; do not enter innovation claims or final-test reporting without a later approved baseline qualification review",
+  "formal_protocol_ref": "F:\\PRQ4\\02_experiment\\reports\\sen12ts_protocol_lock_formal24_augmented_20260824_r2.json",
+  "loader_contract_verified": true,
+  "early_stopping_contract_verified": true,
+  "paired_augmentation_contract_verified": true
+}

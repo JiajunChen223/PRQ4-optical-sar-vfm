@@ -1,0 +1,8 @@
+{
+  "status": "coordinator_adversarial_synthesis",
+  "independent_critic_artifact": "missing_due_workspace_credit_exhaustion",
+  "conclusion": "Retain CAND-01 as the sole primary hypothesis; demote CPTR to CAND-02 because IC-POT supplies a close partial-transport/rejection prior in satellite multimodal measurements and APS/SACFNet full-operation boundaries still require audit.",
+  "strongest_attack": "CAND-01 could be reframed as generic dynamic bypass or sparse fusion; its only defensible delta is per-spatial-token EO correspondence path selection with an invariant unimodal residual, not generic MoE/PEFT/sparse attention.",
+  "rebuttal_requirements": ["same initialization and trainability mask", "always-fuse/static-sparse/unimodal/random-budget controls", "route occupancy and entropy", "geographic holdout and controlled registration perturbation", "measured latency and peak VRAM", "reject route if all states collapse"],
+  "prior_art_limit": "No independent final-jury report was produced; this synthesis is not experimental evidence and does not certify novelty."
+}

@@ -1,0 +1,101 @@
+{
+  "artifact_type": "protocol_lock",
+  "schema_version": "researchpilot.v19.ctsp.protocol_lock.v1",
+  "status": "pass",
+  "protocol_locked": true,
+  "protocol_version": "sen12ts-geotoken3path-v19.20260901-ctsp-r1",
+  "protocol_file": "F:\\PRQ4\\02_experiment\\protocol\\experiment_protocol.yaml",
+  "protocol_file_sha256": "644c47b96ac76f1d20dce81f043f7adf370ada546515dabdb86b084cb8d1a084",
+  "route_id": "R-EO-CTSP-V19-01",
+  "candidate_id": "CTSP-01",
+  "research_plan_ref": "01_literature/synthesis/plan_handoff.json",
+  "research_plan_sha256": "8569731bd58ffa8bd72da489b1faee03c38827e0a5ac281663d95a84f6b7781f",
+  "approved_plan": {
+    "selected_route_id": "R-EO-CTSP-V19-01",
+    "primary_core_candidate_id": "CTSP-01",
+    "core_mechanism": "Classifier-Tangent Selective Projection: preserve the classifier-tangent part of the final multimodal residual and cap only normalized class-logit-visible displacement before the unchanged shared head.",
+    "main_claim": "PLAN hypothesis only: selective classifier-visible residual contraction may preserve useful optical-SAR complementary information better than unrestricted fusion or isotropic whole-residual shrinkage.",
+    "dataset_summary_ref": "01_literature/synthesis/plan_handoff.json",
+    "compute_profile": {
+      "target_profile": "RTX 3090 24GB",
+      "input_resolution": [120, 120],
+      "token_grid": [15, 15],
+      "micro_batch": 16,
+      "effective_batch": 32,
+      "formal_epochs": 24,
+      "amp": true,
+      "single_backbone_forward": true
+    },
+    "data_budget": {
+      "hard_stop_gb": 45,
+      "absolute_ceiling_gb": 50,
+      "extension_policy": "none_before_supported_final_core",
+      "cloud_only": true
+    },
+    "initialization_policy": {
+      "preferred_mode": "pretrained_when_compatible",
+      "selected_mode": "pretrained",
+      "source_policy": "official_or_reproducible_open_release",
+      "same_initialization_for_comparisons": true,
+      "target_test_data_exclusion": true,
+      "pretraining_not_claimed_as_innovation": true
+    },
+    "innovation_candidate_ids": ["CTSP-01"]
+  },
+  "code_sync": {
+    "status": "pass",
+    "package_sha256": "73a8da98afd215ac21aeda4af9cc84c8606c08a1427e5da90a2b62aa78cea8e4",
+    "release_manifest_sha256": "0986ffe0a05db9ac5292828cec1d7067bf46a5da135071c11d2a06b7b330f689",
+    "remote_target_replaced": true
+  },
+  "dataset": {
+    "status": "pass",
+    "audit_ref": "02_experiment/reports/v19_ctsp_dataset_audit_20260901_r1.json",
+    "manifest_sha256": "bd1c6f231938928750dc171ffb1170e78d7c60168ce84e388209b31975049967",
+    "split_manifest_sha256": "7011a4ddfba89280a13aa4606a17dcaf253085d7c6583a899b6c5f74e27ed2d2",
+    "sealed_test_objects_downloaded": 0,
+    "test_accessed": false
+  },
+  "pretrained": {
+    "status": "pass",
+    "audit_ref": "02_experiment/reports/v19_ctsp_croma_pretrained_weight_audit_20260901_r1.json",
+    "initialization_mode": "pretrained",
+    "checkpoint_sha256": "0238d814b53108f3574bf1ea240e38a0a6edd46173816d9a6962070561893b63",
+    "cloud_only": true
+  },
+  "hardware": {
+    "status": "pass",
+    "adaptation_ref": "02_experiment/reports/v19_ctsp_hardware_data_pipeline_adaptation_20260901_r2.json",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "selected_tf32": false,
+    "effective_batch": 32,
+    "epochs_changed": false
+  },
+  "ctsp_tau_calibration": {
+    "status": "pass",
+    "local_metadata_ref": "02_experiment/reports/v19_ctsp_tau_calibration_20260901_r1.json",
+    "remote_artifact_ref": "/root/autodl-tmp/v19_ctsp_tau_calibration_20260901_r2.json",
+    "remote_artifact_sha256": "a386606f6df405666ec0c2f04f1fe5bed1621764aeddf48b83df4aa86384ade1",
+    "tau": 2.1722421646118164,
+    "parent_count": 256,
+    "split": "train",
+    "shuffle": false,
+    "augmentation": "disabled",
+    "optimizer_step": 0,
+    "labels_read_for_statistic": false,
+    "target_test_data_used": false
+  },
+  "training_policy": {
+    "objective": "ce_lovasz",
+    "optimizer": "adamw",
+    "max_epochs": 24,
+    "seed": 0,
+    "formal_scale": "screening",
+    "test_seal_status": "sealed",
+    "controls_locked_until_primary_delta_pp": 2.0
+  },
+  "test_accessed": false,
+  "training_started": false,
+  "metrics_generated": false,
+  "created_at_utc": "2026-09-01T04:35:00+00:00"
+}

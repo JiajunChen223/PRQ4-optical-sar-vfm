@@ -1,0 +1,37 @@
+[
+  {
+    "id": "HF-01",
+    "candidate_id": "CAND-01",
+    "statement": "在相同 checkpoint、trainability mask、参数量和激活融合预算下，三态路由与 always-fuse、static-sparse、unimodal-bypass 或随机预算路由无稳定差异，或路由塌缩到单一状态。",
+    "severity": "route_reject",
+    "status": "pre_registered"
+  },
+  {
+    "id": "HF-02",
+    "candidate_id": "CAND-01",
+    "statement": "动态分支只降低理论 FLOPs，RTX 3090 实测峰值显存、吞吐或 wall-clock 延迟没有可重复改善；则不得声称计算收益。",
+    "severity": "efficiency_claim_reject",
+    "status": "pre_registered"
+  },
+  {
+    "id": "HF-03",
+    "candidate_id": "CAND-01",
+    "statement": "在地理区域留出、传感器扰动和受控配准误差网格上，性能增益仅在随机 patch split 或单一扰动下出现，或由元数据/地理 shortcut 解释。",
+    "severity": "generalization_claim_reject",
+    "status": "pre_registered"
+  },
+  {
+    "id": "HF-04",
+    "candidate_id": "CAND-02",
+    "statement": "SACFNet、APS-Net 或后续全文审计发现同一光学-SAR 分割场景已经使用同构的局部 partial transport、unmatched mass 与残差预算注入，则 CPTR 备选淘汰。",
+    "severity": "alternative_reject",
+    "status": "targeted_audit_required"
+  },
+  {
+    "id": "HF-05",
+    "candidate_id": "CAND-02",
+    "statement": "移除 dustbin/拒绝状态后与完整局部 attention 等价，或 transport mass 不随受控配准误差变化，则 CPTR 的因果机制不成立。",
+    "severity": "alternative_reject",
+    "status": "pre_registered"
+  }
+]

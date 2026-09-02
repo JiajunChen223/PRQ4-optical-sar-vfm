@@ -1,0 +1,16 @@
+{
+  "project_name": "PRQ4",
+  "project_root": "F:\\PRQ4",
+  "created_at_utc": "2026-08-19T17:14:09.711739+00:00",
+  "updated_at_utc": "2026-08-19T17:14:09.711739+00:00",
+  "as_of_date": "2026-08-20",
+  "topic": "Remote sensing multimodal representation learning based on vision foundation models for Pattern Recognition special issue; method-oriented; exclude cloud tasks",
+  "route_type": "method",
+  "compute": "1x RTX 3090 24GB; mixed precision; gradient accumulation; parameter-efficient adaptation preferred; single GPU or small-scale multi-GPU",
+  "data_cap": "50GB total core footprint including raw data, labels, required downloads, derived caches",
+  "pdf_download_policy": "metadata-first; no bulk publisher-PDF downloads during plan stage; lawful open-access full text may be read",
+  "schema_version": 3,
+  "workflow": "single_plan",
+  "multi_agent_policy": "record partial_multi_agent; final handoff validates decision-critical roles",
+  "library_lifecycle": "draft_then_freeze_then_annotate"
+}

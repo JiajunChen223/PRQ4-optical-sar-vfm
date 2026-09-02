@@ -1,0 +1,173 @@
+{
+  "artifact_type": "innovation_fast_screening_results",
+  "schema_version": "innovation-fast-screening-results-v1",
+  "status": "pass",
+  "route_mode": "single_route",
+  "experiment_class": "innovation_fast_screening",
+  "run_role": "candidate_innovation",
+  "candidate_is_baseline": false,
+  "baseline_retraining_allowed": false,
+  "baseline_reference_mode": "read_only_frozen_checkpoint",
+  "candidate_count": 1,
+  "screening_seed": 0,
+  "triage_only": true,
+  "scientific_variables_frozen": true,
+  "bank_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_fast_screening_bank_20260901_r1.json",
+  "bank_direction_ids": [
+    "CTSP-01"
+  ],
+  "candidate_design_review_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_candidate_design_review_20260901_r1.json",
+  "rapid_baseline_reference_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_rapid_baseline_reference_reattachment_20260901_r1.json",
+  "screening_policy_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_innovation_effect_policy_20260901_r1.json",
+  "protocol_ref": "F:/PRQ4/02_experiment/protocol/experiment_protocol.yaml",
+  "comparison_mode": "fixed_horizon_checkpoint",
+  "rapid_screen_horizon_epochs": 23,
+  "formal_planned_epochs": 24,
+  "comparison_horizon_epochs": 23,
+  "baseline_reference_run_id": "PRQ4-V13-R2-DETERMINISTIC-REPLAY-SEED0-20260830-R1",
+  "baseline_reference_epoch": 23,
+  "candidate_reference_epoch": 23,
+  "baseline_short_retraining_performed": false,
+  "all_candidates_completed_fixed_rapid_horizon": true,
+  "external_frontier_used_for_rapid_decision": false,
+  "rapid_survival_rule": {
+    "metric_name": "mIoU",
+    "minimum_improvement_positive_delta": -2.0,
+    "basis_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_formal_seed0_result_summary_20260901_r1.json",
+    "direct_formal_curve_reuse": true,
+    "ranking_performed": false,
+    "scientific_use": "none; canonical-gate compatibility only"
+  },
+  "allow_below_formal_floor": false,
+  "unresolved_infrastructure_failures": false,
+  "unresolved_protocol_failures": false,
+  "training_object_parity_policy": {
+    "schema_version": "training-object-parity-v2",
+    "baseline_training_object_id": "R-EO-CTSP-V19-01",
+    "primary_model_graph": "primary_model_graph",
+    "same_training_object_required": true,
+    "single_internal_mechanism_delta_required": true,
+    "mechanism_inside_primary_model_graph_required": true,
+    "mechanism_integration_mode": "internal",
+    "end_to_end_training_required": true,
+    "common_parameter_trainability_mask_required": true,
+    "frozen_baseline_wrapper_forbidden": true,
+    "external_trainable_component_forbidden": true,
+    "common_protocol_fields": [
+      "pretrained_initialization",
+      "data_split",
+      "preprocessing",
+      "augmentation",
+      "sampler",
+      "micro_batch",
+      "effective_batch",
+      "optimizer",
+      "learning_rate",
+      "scheduler",
+      "evaluator",
+      "seed"
+    ],
+    "task_specific_protocol_fields": [],
+    "rapid_only_shortenable_field": "rapid_screen_horizon_epochs",
+    "protocol_violation_status": "invalid_protocol"
+  },
+  "results": [
+    {
+      "direction_id": "CTSP-01",
+      "status": "survives_rapid_screen",
+      "candidate_completed_epochs": 23,
+      "baseline_reference_epoch": 23,
+      "candidate_reference_epoch": 23,
+      "comparison_mode": "fixed_horizon_checkpoint",
+      "baseline_reference_run_id": "PRQ4-V13-R2-DETERMINISTIC-REPLAY-SEED0-20260830-R1",
+      "rapid_baseline_reference_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_rapid_baseline_reference_reattachment_20260901_r1.json",
+      "candidate_design_review_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_candidate_design_review_20260901_r1.json",
+      "run_ids": [
+        "PRQ4-V19-CTSP-CTSP01-FORMAL24-SEED0-20260901-R1"
+      ],
+      "decision_reason": "Canonical-gate compatibility alias only: epoch-23 values are read from the completed CTSP formal curve; no separate rapid training or ranking occurred, and the 24-epoch formal result is the sole scientific decision.",
+      "metrics": [
+        {
+          "name": "mIoU",
+          "direction": "maximize",
+          "baseline_value": 0.4977690423151416,
+          "candidate_value": 0.4909247592376441,
+          "improvement_positive_delta": -0.0068442830774974595
+        },
+        {
+          "name": "OA",
+          "direction": "maximize",
+          "baseline_value": 0.7746998456790124,
+          "candidate_value": 0.7710266203703704,
+          "improvement_positive_delta": -0.003673225308642003
+        }
+      ],
+      "selected_for_formal_screen": true,
+      "training_object_parity": {
+        "schema_version": "training-object-parity-v2",
+        "required": true,
+        "status": "pass",
+        "baseline_training_object_id": "R-EO-CTSP-V19-01",
+        "candidate_training_object_id": "R-EO-CTSP-V19-01",
+        "primary_model_graph": "primary_model_graph",
+        "mechanism_id": "CTSP-01",
+        "same_training_object": true,
+        "mechanism_inside_primary_model_graph": true,
+        "mechanism_integration_mode": "internal",
+        "single_internal_mechanism_delta": true,
+        "end_to_end_training_executed": true,
+        "common_parameter_trainability_mask_match": true,
+        "candidate_new_parameters_trainable": true,
+        "baseline_frozen_as_wrapper": false,
+        "external_trainable_component_added": false,
+        "common_protocol_fields": [
+          "pretrained_initialization",
+          "data_split",
+          "preprocessing",
+          "augmentation",
+          "sampler",
+          "micro_batch",
+          "effective_batch",
+          "optimizer",
+          "learning_rate",
+          "scheduler",
+          "evaluator",
+          "seed"
+        ],
+        "task_specific_protocol_fields": [],
+        "common_protocol_matches": {
+          "pretrained_initialization": true,
+          "data_split": true,
+          "preprocessing": true,
+          "augmentation": true,
+          "sampler": true,
+          "micro_batch": true,
+          "effective_batch": true,
+          "optimizer": true,
+          "learning_rate": true,
+          "scheduler": true,
+          "evaluator": true,
+          "seed": true
+        },
+        "allowed_differences": [
+          "candidate_internal_mechanism",
+          "rapid_screen_horizon_epochs"
+        ],
+        "unexpected_config_differences": [],
+        "candidate_new_parameter_initialization": "none; CTSP has zero added parameters and uses the detached classifier geometry",
+        "config_diff_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_candidate_design_review_20260901_r1.json",
+        "trainable_parameter_audit_ref": "F:/PRQ4/02_experiment/code/review/CODE_REPORT.json",
+        "test_accessed": false
+      },
+      "test_accessed": false
+    }
+  ],
+  "selected_formal_direction_ids": [
+    "CTSP-01"
+  ],
+  "direct_formal_curve_reuse": true,
+  "ranking_performed": false,
+  "scientific_result": false,
+  "test_accessed": false,
+  "created_at_utc": "2026-09-01T05:11:03.708223+00:00"
+}

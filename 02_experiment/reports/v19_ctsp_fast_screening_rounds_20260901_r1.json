@@ -1,0 +1,51 @@
+{
+  "artifact_type": "innovation_fast_screening_rounds",
+  "schema_version": "innovation-fast-screening-rounds-v1",
+  "status": "pass",
+  "route_mode": "single_route",
+  "experiment_class": "innovation_fast_screening",
+  "run_role": "candidate_innovation",
+  "candidate_is_baseline": false,
+  "baseline_retraining_allowed": false,
+  "baseline_reference_mode": "read_only_frozen_checkpoint",
+  "rapid_baseline_reference_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_rapid_baseline_reference_reattachment_20260901_r1.json",
+  "candidate_design_review_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_candidate_design_review_20260901_r1.json",
+  "protocol_ref": "F:/PRQ4/02_experiment/protocol/experiment_protocol.yaml",
+  "effect_policy_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_innovation_effect_policy_20260901_r1.json",
+  "round_policy": {
+    "candidate_bank_size": 1,
+    "minimum_cumulative_survivors": 1,
+    "minimum_formal_directions": 1,
+    "maximum_formal_directions": 1,
+    "max_rounds": 1,
+    "max_total_candidates": 1,
+    "automatic_continuation": true,
+    "failure_informed_generation": true,
+    "no_repeated_mechanism_signatures": true,
+    "no_repeated_operation_deltas": true,
+    "user_approval_required_to_exceed_budget": true
+  },
+  "rounds": [
+    {
+      "round_id": "V19-CTSP-DIRECT-FORMAL-ALIAS-R1",
+      "candidate_generation_mode": "approved_plan_bank",
+      "bank_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_fast_screening_bank_20260901_r1.json",
+      "results_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_fast_screening_results_20260901_r1.json",
+      "candidate_design_review_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_candidate_design_review_20260901_r1.json",
+      "candidate_ids": ["CTSP-01"],
+      "survivor_ids": ["CTSP-01"],
+      "infrastructure_failure_count": 0,
+      "next_round_rationale": "No separate rapid round was run: the approved V19 route directly executed the full 24-epoch candidate. The compatibility alias reuses epoch-23 values from that completed formal curve and is excluded from the scientific decision."
+    }
+  ],
+  "total_candidate_count": 1,
+  "cumulative_survivor_ids": ["CTSP-01"],
+  "workflow_state": "formal_ready",
+  "formal_shortlist_ids": ["CTSP-01"],
+  "next_action": "formal_seed0_screen",
+  "direct_formal_curve_reuse": true,
+  "ranking_performed": false,
+  "scientific_result": false,
+  "test_accessed": false,
+  "created_at_utc": "2026-09-01T05:35:00+00:00"
+}

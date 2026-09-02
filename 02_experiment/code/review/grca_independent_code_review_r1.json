@@ -1,0 +1,18 @@
+{
+  "artifact_type": "researchpilot_code_review",
+  "schema_version": "researchpilot.code-review.v1",
+  "status": "pass",
+  "route_id": "R-EO-GRCA-01",
+  "candidate_ids": ["GCRA-01", "MRHT-02", "DAGB-03"],
+  "review_report": "F:\\PRQ4\\02_experiment\\code\\review\\grca_independent_code_review_r1.md",
+  "pytest": "170 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "zero_start_noop_parity": true,
+  "joint_bias_shape_contract": "[B,H,N,N]",
+  "joint_readout_decoder_visible": true,
+  "strict_checkpoint_cloud_audit_pending": true,
+  "3090_activation_preflight_pending": true,
+  "test_accessed": false,
+  "local_gpu_probe": "forbidden_not_run",
+  "decision": "PASS_FOR_LOCAL_REVIEW_CONDITIONAL_ON_CLOUD_QKV_AND_MEMORY_AUDIT"
+}

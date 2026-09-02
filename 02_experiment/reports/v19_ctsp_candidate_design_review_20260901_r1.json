@@ -1,0 +1,53 @@
+{
+  "artifact_type": "innovation_candidate_design_review",
+  "schema_version": "innovation-candidate-design-review-v1",
+  "status": "pass",
+  "route_mode": "single_route",
+  "approved_claim_ref": "F:/PRQ4/01_literature/synthesis/v19_ctsp_primary_candidate_contract_20260901_r1.json",
+  "baseline_failure_evidence_ref": "F:/PRQ4/01_literature/synthesis/v19_ctsp_critique_and_rebuttal_20260901_r1.md",
+  "idea_pool_ref": "F:/PRQ4/01_literature/synthesis/v19_ctsp_primary_candidate_contract_20260901_r1.json",
+  "screening_bank_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_fast_screening_bank_20260901_r1.json",
+  "design_gate": {
+    "all_candidates_reviewed": true,
+    "no_fatal_unresolved_objection": true,
+    "same_claim_center": true,
+    "distinct_mechanism_signatures": true,
+    "matched_protocol_planned": true
+  },
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "direction_id": "CTSP-01",
+      "plan_candidate_id": "CTSP-01",
+      "innovation_class": "architecture",
+      "design_status": "ready",
+      "baseline_failure_evidence": "V5-V18 mechanism families did not establish a meaningful gain; the frozen CE+Lovasz always-fuse comparator remains the only accepted reference.",
+      "bottleneck": "The final optical-SAR residual can move in classifier-visible directions that overwrite task-relevant local complementarity, while classifier-tangent information is not directly constrained.",
+      "mechanism_hypothesis": "Constrain only the classifier-visible component of the final multimodal residual and preserve its classifier-tangent complement, improving task-compatible information flow without adding parameters or inference modules.",
+      "mechanism_signature": "detached_classifier_rowspace_bound_with_tangent_residual_preservation",
+      "information_flow_delta": "The final fused residual is decomposed in the detached shared-classifier geometry; only the row-space displacement is capped before the unchanged head, while the tangent component bypasses the cap.",
+      "operation_delta": "At the final 15x15 post-fusion/pre-classifier hook, apply fixed-rcond float32 K-space projection and token-wise class-logit displacement bound tau=2.1722421646118164; preserve tangent residual.",
+      "screening_observable": "finite K-space solve, numerical rank, tangent leakage, class-logit bound violation, single backbone forward, unchanged state-dict/trainability surface, and validation curve",
+      "hard_falsifier": "Any label/argmax use, second CROMA pass, explicit inverse or dense projector, parity/finite/rank/leakage/bound failure, or best validation mIoU below 50.78078791964122% closes the route; 50.7808% to <51.7808% is marginal only.",
+      "implementation_plan": "Reuse the shared OpticalSarTokenModel and classifier; insert the parameter-free CTSP operator only at final-stage post-fusion, with C1/C2/C3 controls locked until the +2pp gate.",
+      "resource_feasibility": "Zero added trainable parameters, one 11x11 Gram solve, 225x768 token carrier, single CROMA forward, and the frozen micro-batch16/effective-batch32 AMP path are compatible with RTX 3090 24GB.",
+      "resource_risk": "Small float32 classifier-geometry solve under AMP and validation of the calibrated tau; no additional attention or backbone pass.",
+      "prior_art_boundary": "Classifier null/range geometry, pseudoinverse, orthogonal decomposition, residual clipping, multimodal fusion and CROMA are borrowed/known components; only the narrow bounded final residual operation is tested.",
+      "selection_rationale": "Single approved route with a parameter-free structural operation that directly targets the residual geometry bottleneck and has explicit matched controls.",
+      "rebuttal": "The strongest objection is that CTSP may reduce to generic clipping or classifier-null projection; the predeclared isotropic whole-residual and identity controls, fixed tau calibration and tangent/bound telemetry provide falsifiable separation.",
+      "training_object_contract_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_training_object_parity_policy_20260901_r1.json",
+      "information_flow_change": true,
+      "not_tuning_only": true,
+      "fatal_objection": false,
+      "source_evidence_ids": ["4bffba5ad5dc6ea8", "7f3e2082d0f31b0e", "194d31371ff32cb8", "839c37d39d9d9260", "3f7d680c1b3ebd15", "98ee47b14b96a7dd"],
+      "review_roles": {
+        "mechanism_review": {"status": "pass", "finding": "The operation changes final residual information flow and is parameter-free; it is not loss-only or a cosmetic module swap.", "evidence_ref": "F:/PRQ4/01_literature/synthesis/v19_ctsp_primary_candidate_contract_20260901_r1.json"},
+        "prior_art_review": {"status": "pass", "finding": "Broad null-space/orthogonal claims are rejected; the narrow operation is retained with high-overlap attribution and a bounded novelty claim.", "evidence_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_prior_art_overlap_20260901_r1.json"},
+        "resource_review": {"status": "pass", "finding": "The detached 11x11 Gram geometry adds no trainable state and fits the measured RTX 3090 single-forward budget.", "evidence_ref": "F:/PRQ4/02_experiment/reports/v19_ctsp_hardware_data_pipeline_adaptation_20260901_r2.json"},
+        "adversarial_review": {"status": "pass", "finding": "The route has explicit rank, finite, tangent-leakage, class-bound, parity and +1/+2pp falsifiers; controls remain locked until the support gate.", "evidence_ref": "F:/PRQ4/01_literature/synthesis/v19_ctsp_prior_art_lock_20260901_r1.json"}
+      }
+    }
+  ],
+  "test_accessed": false,
+  "created_at_utc": "2026-09-01T05:10:00+00:00"
+}

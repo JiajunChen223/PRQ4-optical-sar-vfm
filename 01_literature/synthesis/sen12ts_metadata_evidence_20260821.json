@@ -1,0 +1,59 @@
+{
+  "artifact_type": "metadata_first_dataset_evidence",
+  "artifact_version": "2026-08-21.sen12ts-r1",
+  "project_root": "F:/PRQ4",
+  "status": "conditional_plan_evidence_only",
+  "download_performed": false,
+  "training_performed": false,
+  "source": {
+    "name": "SEN12TS",
+    "provider": "Source Cooperative",
+    "landing_page": "https://source.coop/repositories/sen12ts/sen12ts",
+    "object_api": "https://data.source.coop/sen12ts/sen12ts?list-type=2",
+    "license": "CC-BY-NC-4.0",
+    "license_status": "explicit_on_source_page_noncommercial_attribution_required",
+    "full_dataset_bytes": 1685700000000,
+    "full_dataset_scope_note": "The complete public collection is much larger than the project budget; only the fixed subset below is a candidate core dataset."
+  },
+  "metadata_query": {
+    "regions": ["ethiopia", "uganda", "sumatra"],
+    "labels_requested_per_region": 400,
+    "selection": "lexicographically first 400 label TIFF keys in each region; for each label choose the lexicographically first matching S1/S2 basename with the same location prefix",
+    "selected_label_count": 1200,
+    "selected_pair_count": 1200,
+    "missing_pairs": 0,
+    "rows_sha256": "caa00f7c6e816eba1c7e5c7acecfd71e4f45f1ef03713e181489390ad44fa5ae",
+    "label_bytes": 157893504,
+    "s1_bytes": 5979943200,
+    "s2_bytes": 2205032576,
+    "payload_bytes": 8342869280,
+    "payload_gib": 7.77,
+    "metadata_only": true
+  },
+  "model_contract_candidate": {
+    "optical": "S2 L2A 12 spectral bands; ignore SCL/cloud-mask layers",
+    "sar": "S1 raw current-time VH,VV layers only (2 channels), deterministically reordered to canonical VV,VH; ignore auxiliary temporal/InSAR layers",
+    "parent_tile": "256x256",
+    "derived_input": "deterministic 120x120 crops/stitches, parent-tile split before cropping",
+    "raw_label_source": "ESA WorldCover 2020 v100 as documented by SEN12TS",
+    "raw_label_classes": 11,
+    "canonical_head": 11,
+    "label_mapping_status": "identity_mapping_to_native_WorldCover_11_classes_pending_value_audit",
+    "cloud_task": false,
+    "cloud_channels_used": false,
+    "quality_control": "SCL/cloud-mask may be read only for a pre-registered optical-quality exclusion; it is never a model input, target, metric, or research task"
+  },
+  "closure_requirements_before_download": [
+    "freeze exact 1200-row object manifest with object keys, sizes and provider ETags",
+    "verify license attribution and non-commercial use terms for data and WorldCover-derived labels",
+    "perform remote shape/dtype/value audit without training",
+    "freeze parent-first spatial/block split and sealed-test manifest",
+    "reconcile downloaded bytes, extracted peak and cache ledger against a 45,000,000,000-byte hard stop",
+    "confirm CROMA 12+2 input compatibility, explicit SAR VH,VV to VV,VH reorder, and native 11-class labels"
+  ],
+  "evidence_boundaries": {
+    "supported_now": ["object existence, pair matching, advertised license, metadata byte totals"],
+    "pending": ["actual TIFF shape/dtype, class frequencies, split leakage, ETag/hash reproducibility after transfer, loader compatibility"],
+    "not_claimed": ["accuracy, robustness, cross-region generalization, or any experiment result"]
+  }
+}

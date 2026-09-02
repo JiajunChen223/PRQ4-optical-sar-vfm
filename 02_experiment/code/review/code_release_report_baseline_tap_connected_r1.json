@@ -1,0 +1,33 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code-release-report.v1",
+  "status": "pass",
+  "scope": "baseline_only_tap_connected_trainability_repair",
+  "clean_sync_manifest": {
+    "path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json",
+    "sha256": "9542f62a99681f1e9a22dbba77f09bfa8a7f4fe05d827041ceeaf5b1759ce18d",
+    "file_count": 59
+  },
+  "release_package": {
+    "path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_baseline_tap_connected_r1.tar.gz",
+    "sha256": "61f76259917a15d2347fb280c5e3cc54bb1542829e5ab596851f7f0fe3867575",
+    "bytes": 74824,
+    "file_count": 59
+  },
+  "local_tests": "155 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "trainability_policy": {
+    "backbone_policy": "tap_connected",
+    "s1_layers": "all retained tap path",
+    "s2_layers": "stem plus layers 0 through 5",
+    "frozen_dead_paths": ["s2 layers 6-11", "GAP_FFN_s1", "GAP_FFN_s2", "cross_encoder"]
+  },
+  "cloud_sync": {
+    "status": "pass",
+    "operation_id": "ZZZZZZZZZZZ-PRQ4-BASELINE-TAP-CONNECTED-R1",
+    "data_transfer": false,
+    "weights_transfer": false,
+    "training_started": false,
+    "sealed_test_accessed": false
+  }
+}

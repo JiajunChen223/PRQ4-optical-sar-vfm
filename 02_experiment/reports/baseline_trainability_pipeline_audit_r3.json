@@ -1,0 +1,152 @@
+{
+  "artifact_type": "baseline_trainability_pipeline_audit",
+  "best_epoch": 10,
+  "croma_load": {
+    "audit_path": "/root/autodl-workspace/configs/model/pretrained_audit_successor.json",
+    "checkpoint_path": "/root/autodl-tmp/weights/prq4-croma-mirror-audit-20260822-r1/CROMA_base.pt",
+    "checkpoint_sha256": "0238d814b53108f3574bf1ea240e38a0a6edd46173816d9a6962070561893b63",
+    "load_report": {
+      "blocks": {
+        "joint_encoder": {
+          "target": "cross_encoder",
+          "tensor_count": 110
+        },
+        "s1_GAP_FFN": {
+          "target": "GAP_FFN_s1",
+          "tensor_count": 6
+        },
+        "s1_encoder": {
+          "target": "s1_encoder",
+          "tensor_count": 70
+        },
+        "s2_GAP_FFN": {
+          "target": "GAP_FFN_s2",
+          "tensor_count": 6
+        },
+        "s2_encoder": {
+          "target": "s2_encoder",
+          "tensor_count": 136
+        }
+      },
+      "missing_keys": [],
+      "unexpected_keys": []
+    }
+  },
+  "data_loader": {
+    "amp": true,
+    "non_blocking_device_copy": true,
+    "num_workers": 4,
+    "persistent_workers": true,
+    "pin_memory": true,
+    "prefetch_factor": 2
+  },
+  "data_read": false,
+  "early_stopping": {
+    "burn_in_epochs": 8,
+    "enabled": true,
+    "min_delta_percentage_points": 0.1,
+    "mode": "max",
+    "monitor": "validation.mIoU",
+    "patience": 5,
+    "restore_best_checkpoint": true
+  },
+  "gpu_used": false,
+  "initialization_ref": "02_experiment/reports/pretrained_alternative_search_20260823.json",
+  "max_epochs": 24,
+  "mechanism_set": "always_fuse",
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "learning_rate": 0.0001,
+    "name": "adamw",
+    "weight_decay": 0.05
+  },
+  "resolved_initialization": {
+    "audit_ref": "configs/model/pretrained_audit_successor.json",
+    "checkpoint_path": "/root/autodl-tmp/weights/prq4-croma-mirror-audit-20260822-r1/CROMA_base.pt",
+    "constructor_kwargs": {
+      "image_resolution": 120,
+      "modality": "both",
+      "size": "base",
+      "source_path": "/root/autodl-tmp/audits/prq4-croma-loader-compat-20260822-r1/use_croma.py",
+      "source_sha256": "a38567beed29eb08108a47cdc97fe98aec50fd4be0bd98a5266bcd18aafb7c5b"
+    },
+    "constructor_ref": "geotoken3path.models.croma_random:PinnedSourceRandomCROMA",
+    "fallback_reason": "",
+    "mode": "pretrained",
+    "pretrained_eligible": true,
+    "same_initialization_for_baseline_and_innovation": true,
+    "target_test_data_used": false
+  },
+  "resolved_model": {
+    "active_budget": 0.5,
+    "allow_synthetic_depth_group_fallback": false,
+    "backbone_family": "croma_radar_optical_vit_b",
+    "depth_group_size": 4,
+    "depth_taps": {
+      "sar_depth_group": {
+        "late": [
+          "s1_encoder.transformer.layers.2.1",
+          "s1_encoder.transformer.layers.3.1",
+          "s1_encoder.transformer.layers.4.1",
+          "s1_encoder.transformer.layers.5.1"
+        ],
+        "mid": [
+          "s1_encoder.transformer.layers.0.1",
+          "s1_encoder.transformer.layers.1.1",
+          "s1_encoder.transformer.layers.2.1",
+          "s1_encoder.transformer.layers.3.1"
+        ]
+      },
+      "stage": {
+        "optical": {
+          "late": "s2_encoder.transformer.layers.5.1",
+          "mid": "s2_encoder.transformer.layers.2.1"
+        },
+        "sar": {
+          "late": "s1_encoder.transformer.layers.5.1",
+          "mid": "s1_encoder.transformer.layers.2.1"
+        }
+      }
+    },
+    "ignore_index": 255,
+    "local_window_tokens": 49,
+    "mechanism_set": "always_fuse",
+    "num_classes": 11,
+    "stages": [
+      "mid",
+      "late"
+    ],
+    "token_dim": 768
+  },
+  "run_status": "formal_cloud_train_validation_complete",
+  "scheduler": {
+    "name": "cosine_with_warmup",
+    "warmup_fraction": 0.05
+  },
+  "schema_version": "researchpilot.baseline-trainability-audit.v1",
+  "scientific_result": false,
+  "sealed_test_status": "sealed",
+  "status": "pass",
+  "stopped_epoch": 15,
+  "test_accessed": false,
+  "trainability": {
+    "adapters": "trainable",
+    "decoder": "trainable",
+    "router": "trainable",
+    "trunk": "frozen_or_protocol_locked_last_blocks"
+  },
+  "training": false,
+  "weights_read": false,
+  "operation_id": "PRQ4-BASELINE-TRAINABILITY-PIPELINE-AUDIT-R3",
+  "classification": "monitoring",
+  "guard_action": "monitoring",
+  "command_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\baseline_trainability_pipeline_audit_r3.sh",
+  "command_sha256": "88f1ecb74e913f35852ae6c4d3037c8db06ae8fcbd6ce3a371db6f49141f5567",
+  "stdout_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\outputs\\PRQ4-BASELINE-TRAINABILITY-PIPELINE-AUDIT-R3-20260825T012904735377-35260.out",
+  "stdout_sha256": "7a744b9062fc5ad3d0b0308e5db7620481594ca570a07ce9c3a621ea894df245",
+  "stderr_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\outputs\\PRQ4-BASELINE-TRAINABILITY-PIPELINE-AUDIT-R3-20260825T012904735377-35260.err",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

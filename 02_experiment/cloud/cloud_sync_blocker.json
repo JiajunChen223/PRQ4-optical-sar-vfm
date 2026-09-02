@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "blocked",
+  "gate": "CLOUD_SYNC",
+  "project_root": "F:\\PRQ4",
+  "endpoint_validation": {
+    "status": "pass",
+    "host": "connect.nmb2.seetacloud.com",
+    "port": 28974,
+    "user": "root",
+    "probe_performed": false,
+    "validation_report": "F:\\PRQ4\\02_experiment\\code\\review\\cloud_probe_audit.md"
+  },
+  "blocker": "No approved formal code-sync source is bound to the user-provided endpoint. The local project has no git repository/remote, and the current cloud executor does not permit ad-hoc SCP, remote editors, or an unbound archive upload in the normal CLOUD_SYNC lane.",
+  "available_clean_export": {
+    "manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json",
+    "manifest_sha256": "0762c7bde442a2accc8d190a863589de9886fc1768ceb604c89ce99da62fd87e",
+    "release_package": "F:\\PRQ4\\logs\\release_packages\\geotoken3path_code_r2.tar.gz",
+    "release_sha256": "2b12cfd39d52cb3f51e9b1240609cd3c902bf830f3a9fabdad04bf3df507fc48"
+  },
+  "forbidden_or_not_done": [
+    "No SSH probe was executed because the guard requires current gate CLOUD_ENVIRONMENT.",
+    "No data, weights, GPU inspection, environment installation, or training was performed.",
+    "No code-sync success or cloud_access=true claim is made."
+  ],
+  "required_user_input": "Provide an accessible git repository/commit for cloud-side code sync, or explicitly identify an approved skill-compliant clean-export transfer path. Keep BASELINE_TRAINING_APPROVAL separate; the endpoint alone does not grant it."
+}

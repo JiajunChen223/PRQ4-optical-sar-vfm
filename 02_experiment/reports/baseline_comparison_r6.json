@@ -1,0 +1,45 @@
+{
+  "compared_at_utc": "2026-08-24T10:55:32.135249+00:00",
+  "evidence": "F:\\PRQ4\\02_experiment\\reports\\baseline_evidence.json",
+  "reproduced": "F:\\PRQ4\\02_experiment\\reports\\baseline_seed0_pretrained_r6_metrics.json",
+  "metric_comparisons": [
+    {
+      "name": "mIoU",
+      "role": "primary",
+      "reference_type": "comparable_same_type_mainstream_distribution",
+      "reproduced": 39.99747186372776,
+      "mainstream_center": 47.3,
+      "acceptable_band": {
+        "low": 42.57,
+        "high": 52.03
+      },
+      "absolute_diff": -7.302528,
+      "relative_diff": -0.154387,
+      "relative_deviation_limit": 0.1,
+      "status": "outside_mainstream_band"
+    },
+    {
+      "name": "OA",
+      "role": "secondary",
+      "reference_type": "comparable_same_type_mainstream_distribution",
+      "reproduced": 66.8184799382716,
+      "mainstream_center": 78.9,
+      "acceptable_band": {
+        "low": 71.01,
+        "high": 86.79
+      },
+      "absolute_diff": -12.08152,
+      "relative_diff": -0.153124,
+      "relative_deviation_limit": 0.1,
+      "status": "outside_mainstream_band"
+    }
+  ],
+  "matched_count": 0,
+  "total_compared": 2,
+  "status": "fail",
+  "reference_policy": "comparable_same_type_mainstream_distribution",
+  "baseline_target_type": "acceptable_same_type_mainstream_baseline",
+  "not_innovation_target": true,
+  "not_sota_target": true,
+  "exact_official_configuration_required": false
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "2-draft-successor",
+  "status": "blocked_pending_license_and_split_evidence",
+  "created_at": "2026-08-21",
+  "supersedes": "01_literature/synthesis/dataset_registry.json",
+  "datasets": [
+    {
+      "dataset_id": "copernicus_bench_dfc2020_s1s2_paired",
+      "scope": "conditional_core_candidate",
+      "source_url": "https://huggingface.co/datasets/wangyi111/Copernicus-Bench",
+      "source_revision": "50c23516233ce2145a76dac902ff0acf93725e88",
+      "archive_path": "l2_dfc2020_s1s2/dfc2020.zip",
+      "archive_bytes": 8755471893,
+      "archive_sha256": "5fef94b3481489941f3d409db25615212cc17f906cee48fdbe29b7bccedbc9fd",
+      "source_modalities": {
+        "sentinel1": ["VV", "VH"],
+        "sentinel2": ["B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B8A", "B09", "B10", "B11", "B12"]
+      },
+      "model_input_contract": {
+        "sentinel1": ["VV", "VH"],
+        "sentinel2": ["B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B8A", "B09", "B11", "B12"],
+        "dropped_source_band": "B10",
+        "parent_size_px": [256, 256],
+        "derived_model_crop_px": [120, 120]
+      },
+      "label_contract": {
+        "source_classes": 10,
+        "valid_classes": 8,
+        "ignore_index": 255,
+        "mapping_source": "official Copernicus-Bench DFC2020 loader"
+      },
+      "split_contract": {
+        "parent_split": {"train": 3156, "validation": 986, "test": 986},
+        "split_first": "parent_scene",
+        "scene_or_region_disjoint_proof": "pending",
+        "geolocation_time_metadata": "absent_in_derived_benchmark",
+        "region_holdout_supported": false,
+        "test_sealed": true
+      },
+      "license_contract": {
+        "mirror_declaration": "CC-BY-4.0",
+        "original_terms": "IEEE GRSS IADF/TUM case-by-case publication approval",
+        "status": "unresolved_source_license_conflict",
+        "required_before_acquisition": "written permission or explicit rights-holder clarification covering research, cloud storage, publication, derived masks/crops, and attribution"
+      },
+      "storage_contract": {
+        "hard_stop_bytes": 45000000000,
+        "project_ceiling_bytes": 50000000000,
+        "actual_peak_ledger": "pending cloud dry-run; archive + extracted + cache + weights + checkpoints must remain below hard stop"
+      },
+      "verification_status": "blocked_license_split_storage_pending"
+    },
+    {
+      "dataset_id": "c2seg_ab_s1s2",
+      "scope": "fallback_plan_candidate_only",
+      "source_url": "https://github.com/danfenghong/RSE_Cross-city",
+      "protocol_url": "https://openremotesensing.net/wp-content/uploads/2023/04/Datasets_and_Protocols_FINAL.pdf",
+      "estimated_payload_bytes": 1763000000,
+      "source_modalities": ["Sentinel-1", "Sentinel-2", "EnMAP"],
+      "proposed_model_modalities": ["Sentinel-1 (2 channels)", "Sentinel-2 (4 channels)"],
+      "split_contract": "Augsburg train / Berlin external test; official validation and test-GT availability pending",
+      "license_status": "data_license_missing; code GPL-3.0 does not license data",
+      "compatibility_status": "requires new VFM/input contract; not a silent substitute",
+      "verification_status": "blocked_license_and_test_gt_pending"
+    },
+    {
+      "dataset_id": "copernicus_bench_bigearthnet_s1s2_10pct",
+      "scope": "superseded_for_primary_task",
+      "reason": "scene-level 19-class multilabel targets cannot satisfy dense segmentation masks"
+    },
+    {
+      "dataset_id": "multisenge_full",
+      "scope": "rejected",
+      "reason": "external S1+S2 assets exceed 50GB before extraction/cache/checkpoints"
+    }
+  ]
+}

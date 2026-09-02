@@ -1,0 +1,33 @@
+{
+  "artifact_type": "researchpilot_plan_successor_request_rebind",
+  "schema_version": "researchpilot.plan_successor_request_rebind.v1",
+  "status": "pass",
+  "checkpoint": "PLAN_APPROVAL",
+  "amendment_id": "AM-20260822-104751-5aacb6c3",
+  "historical_request": {
+    "path": "00_project/runtime/legacy/plan_handoff_bigearthnet_20260822.json",
+    "sha256": "793c257572c3482968129dbb72e8e0b9413b2a035794d104fa986e792a814b0f"
+  },
+  "successor_request": {
+    "path": "01_literature/synthesis/plan_handoff.json",
+    "sha256": "56c8b4d8f218740b15e13f624dee59bf3b65b8c4d64975ad33a51659d9bec751",
+    "validation": "01_literature/synthesis/plan_handoff_validation.json",
+    "validation_sha256": "444a03581f1bd215c44f5549d6bd896328e56822f3eccc55a19816c04f8b36fc"
+  },
+  "approval": {
+    "text_sha256": "e02128b52882e389f00598d8e90bd7f00c1411b21de606cf6ccca211d1dc1554",
+    "scope": "metadata_shape_hash_preflight_only",
+    "binary_download": false,
+    "weight_access": false,
+    "gpu_probe": false,
+    "training": false,
+    "metrics": false
+  },
+  "router_action": "Update the project-local request binding used by internal gate checks while preserving the historical state backup and keeping PLAN_APPROVAL as a single checkpoint event.",
+  "protected_invariants": [
+    "no second PLAN_APPROVAL event",
+    "no rewriting of historical artifacts",
+    "no data, weights, GPU, training or metrics authorization",
+    "all cloud actions remain one-use and guard-bound"
+  ]
+}

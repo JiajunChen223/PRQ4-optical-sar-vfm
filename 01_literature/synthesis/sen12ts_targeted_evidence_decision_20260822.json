@@ -1,0 +1,60 @@
+{
+  "artifact_type": "targeted_evidence_completion_decision",
+  "artifact_version": "2026-08-22.sen12ts-r1",
+  "run_id": "prq4-data-correction-20260822-r1",
+  "integrity": {
+    "roster": "F:/PRQ4/01_literature/synthesis/sen12ts_correction_roster_20260822.json",
+    "validation": "F:/PRQ4/01_literature/synthesis/plan_correction_integrity_targeted_20260822.json",
+    "status": "clean",
+    "independent_critics": 3,
+    "claims": 22,
+    "evidence_ids": 34
+  },
+  "route_decision": {
+    "status": "CONDITIONAL_PASS_NO_ROUTE_REWRITE",
+    "route": "R-EO-TRI-FUSE-01 / CAND-01",
+    "mechanism": "GeoToken-3Path hard per-token/per-stage routing for optical-SAR alignment under controlled registration error",
+    "primary_task": "optical-SAR land-cover semantic segmentation",
+    "primary_operating_dimension": "controlled cross-modal spatial misregistration",
+    "pattern_recognition_fit": "method-centered multimodal VFM adaptation with explicit feature interaction and routing computation"
+  },
+  "dataset_decision": {
+    "dataset_id": "sen12ts_worldcover_3region_1200",
+    "status": "CONDITIONAL_PASS_FOR_PLAN_ONLY",
+    "selected_regions": ["ethiopia", "uganda", "sumatra"],
+    "pairs": 1200,
+    "advertised_payload_bytes": 8342869280,
+    "provisional_planned_peak_bytes": 39342869280,
+    "provisional_hard_stop_margin_bytes": 6565710720,
+    "license": "CC-BY-NC-4.0 for SEN12TS; WorldCover 2020 v100 is CC-BY-4.0 with attribution",
+    "download": "BLOCKED",
+    "training": "BLOCKED"
+  },
+  "contract_corrections": [
+    "Use native WorldCover 11-class head; withdraw unsupported 11-to-8 merge.",
+    "Record SEN12TS raw S1 order VH,VV and deterministic model/CROMA order VV,VH with reorder [1,0].",
+    "Freeze exact optical band order and normalization before protocol lock.",
+    "Use parent-first split and no-padding spatial shifts; never crop before split.",
+    "Document how mid/late and sar_fine[B,N,4,D] features are produced; official CROMA API alone does not establish this contract.",
+    "Treat WorldCover as a product-consistency reference, not independent ground truth.",
+    "Update code contract from BigEarthNet root/id only after successor PLAN approval."
+  ],
+  "hard_blockers_before_download": [
+    "reconstructible 1200-row object manifest with keys, sizes, ETags and hash",
+    "all-object shape/dtype/CRS/transform/bounds/nodata audit",
+    "sealed parent-first region/block split and crop-leakage rejection",
+    "license/attribution/no-redistribution record for SEN12TS and WorldCover-derived labels",
+    "reconciled storage ledger with safety margin below 45,000,000,000 bytes",
+    "CROMA checkpoint source/SHA/license/geographic-overlap and fine-feature compatibility audit",
+    "no-padding parent-tile registration-shift implementation and audit"
+  ],
+  "evidence_boundary": {
+    "no_binary_download": true,
+    "no_weight_download": true,
+    "no_ssh": true,
+    "no_gpu_probe": true,
+    "no_training": true,
+    "no_metric_claim": true
+  },
+  "next_action": "remain in PLAN; only after explicit successor PLAN approval may the Experiment service run a guarded metadata/shape/hash preflight on the configured cloud endpoint"
+}

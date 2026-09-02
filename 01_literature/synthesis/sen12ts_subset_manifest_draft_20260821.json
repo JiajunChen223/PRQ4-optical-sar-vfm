@@ -1,0 +1,81 @@
+{
+  "artifact_type": "dataset_subset_manifest_draft",
+  "artifact_version": "2026-08-22.sen12ts-worldcover-3region-1200-r2",
+  "status": "blocked_pending_license_shape_hash_split_audit",
+  "dataset_id": "sen12ts_worldcover_3region_1200",
+  "source": "Source Cooperative SEN12TS",
+  "source_url": "https://source.coop/repositories/sen12ts/sen12ts",
+  "license": "CC-BY-NC-4.0",
+  "license_policy": "research-only/non-commercial; retain attribution; do not redistribute source objects in project package",
+  "regions": ["ethiopia", "uganda", "sumatra"],
+  "selection_policy": {
+    "tiles_per_region": 400,
+    "ordering": "lexicographic object-key order",
+    "pair_rule": "same location prefix; lexicographically first common S1/S2 acquisition pair",
+    "parent_first_split": true,
+    "crop_after_split": true,
+    "split_status": "not_yet_frozen"
+  },
+  "object_summary": {
+    "labels": 1200,
+    "optical_s2": 1200,
+    "sar_s1": 1200,
+    "missing_pairs": 0,
+    "rows_sha256": "3530595462b55ef449546299be28436bae9e6929d798358298338f585d01caeb",
+    "advertised_payload_bytes": 8342869280,
+    "advertised_payload_gib": 7.77,
+    "metadata_only_manifest": true,
+    "object_rows": "remote preflight stdout contains the 1200 coordinate-paired metadata rows; binary objects were not downloaded",
+    "remote_preflight_output": "02_experiment/cloud/commands/outputs/sen12ts_metadata_shape_hash_preflight_r5-20260822T025048882988-37408.out",
+    "remote_preflight_status": "BLOCKED_PENDING_BAND_SELECTOR_AND_TWO_TRANSIENT_RANGE_ERRORS"
+  },
+  "input_contract": {
+    "s2_channels": 12,
+    "s2_raw_channels": 14,
+    "s2_source_band_indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "s2_excluded_band_indices": [12, 13],
+    "s2_excluded_layers": ["scene classification", "cloud mask"],
+    "s1_channels": 2,
+    "s1_raw_channels": 19,
+    "s1_raw_stack_order": ["VH_t", "VV_t", "InSAR_coherence_t", "InSAR_phase_t", "VH_t-1", "VV_t-1", "InSAR_coherence_t-1", "InSAR_phase_t-1", "VH_t-2", "VV_t-2", "InSAR_coherence_t-2", "InSAR_phase_t-2", "VH_t-3", "VV_t-3", "InSAR_coherence_t-3", "InSAR_phase_t-3", "local_incidence_angle", "SRTM_slope", "shadow_layover_mask"],
+    "s1_source_band_indices": [1, 0],
+    "s1_excluded_band_indices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+    "s1_raw_channel_order": ["VH", "VV"],
+    "s1_model_channel_order": ["VV", "VH"],
+    "s1_channel_reorder": [1, 0],
+    "s2_auxiliary_layers": "scene classification and cloud mask excluded before model input",
+    "s1_auxiliary_layers": "temporal/InSAR/incidence/slope/shadow-layover layers excluded before model input",
+    "parent_shape": [256, 256],
+    "model_shape": [120, 120],
+    "raw_label_ontology": "WorldCover 2020 v100, 11 classes",
+    "model_label_ontology": "native WorldCover 11 classes plus ignore=255; identity mapping to be frozen after value audit",
+    "cloud_task": false,
+    "cloud_mask_as_input": false,
+    "cloud_quality_policy": "exclude tiles failing a pre-registered optical-quality threshold after SCL audit; report exclusions as data curation only, never as a cloud-task result"
+  },
+  "budget_ledger": {
+    "core_payload_bytes": 8342869280,
+    "download_cache_bytes_reserved": 10000000000,
+    "extracted_working_bytes_reserved": 15000000000,
+    "weights_and_checkpoints_reserved": 5000000000,
+    "manifest_logs_reserved": 1000000000,
+    "hard_stop_bytes": 45000000000,
+    "planned_peak_bytes": 39342869280,
+    "ledger_status": "provisional_until_remote_preflight"
+  },
+  "route_binding": {
+    "route_id": "R-EO-TRI-FUSE-01",
+    "candidate_id": "CAND-01",
+    "mechanism": "GeoToken-3Path discrete per-token residual routing with optical/SAR exchange",
+    "primary_bottleneck": "cross-modal spatial misregistration",
+    "primary_task": "optical-SAR land-cover semantic segmentation",
+    "primary_stress_axis": "controlled registration error",
+    "secondary_stress_axis": "region holdout, only after split and label audits close"
+  },
+  "gate": {
+    "required_before_download": "CLOUD_DATA_DOWNLOAD",
+    "current_status": "BLOCKED",
+    "approval_needed": "successor PLAN approval after license, shape, hash, split and ledger evidence",
+    "experiment_results": "not_available"
+  }
+}

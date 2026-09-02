@@ -1,0 +1,58 @@
+[
+  {
+    "metric": "mIoU",
+    "role": "primary",
+    "claim_aligned": true,
+    "unacceptable_regression": false,
+    "basis": "Best validation checkpoint epoch 16 versus the frozen baseline best-validation checkpoint epoch 18; full 24-epoch train/validation-only run with test sealed.",
+    "observed_delta": 0.9223338577975326,
+    "effect_unit": "percentage_points",
+    "effect_zone": "noise_or_marginal",
+    "noise_floor": 0.5,
+    "screening_deadband": 1.0,
+    "minimum_meaningful_delta": 2.0,
+    "strong_gain_threshold": 4.0
+  },
+  {
+    "metric": "OA",
+    "role": "secondary",
+    "claim_aligned": true,
+    "unacceptable_regression": false,
+    "basis": "Best validation checkpoint epoch 16 versus the frozen baseline best-validation checkpoint epoch 18; same validation evaluator and test seal.",
+    "observed_delta": 0.1864583333333351,
+    "effect_unit": "percentage_points",
+    "effect_zone": "noise_or_marginal",
+    "noise_floor": 0.5,
+    "screening_deadband": 1.0,
+    "minimum_meaningful_delta": 2.0,
+    "strong_gain_threshold": 4.0
+  },
+  {
+    "metric": "rare_macro_IoU",
+    "role": "secondary",
+    "claim_aligned": true,
+    "unacceptable_regression": false,
+    "basis": "Best validation checkpoint epoch 16 versus the frozen baseline best-validation checkpoint epoch 18; same present-class confusion-matrix definition.",
+    "observed_delta": 1.855396042552546,
+    "effect_unit": "percentage_points",
+    "effect_zone": "meaningful_ordinary",
+    "noise_floor": 0.5,
+    "screening_deadband": 0.75,
+    "minimum_meaningful_delta": 1.0,
+    "strong_gain_threshold": 2.0
+  },
+  {
+    "metric": "mIoU",
+    "role": "primary",
+    "claim_aligned": true,
+    "unacceptable_regression": false,
+    "basis": "Epoch-24 validation endpoint versus the frozen baseline epoch-24 endpoint; full horizon completed.",
+    "observed_delta": -0.7567965279112299,
+    "effect_unit": "percentage_points",
+    "effect_zone": "harmful",
+    "noise_floor": 0.5,
+    "screening_deadband": 1.0,
+    "minimum_meaningful_delta": 2.0,
+    "strong_gain_threshold": 4.0
+  }
+]

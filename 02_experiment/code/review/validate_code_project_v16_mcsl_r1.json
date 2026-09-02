@@ -1,0 +1,11 @@
+{
+  "status": "pass",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "scanned_executable_or_config_files": 151,
+  "problems": [],
+  "violations": [],
+  "local_real_data_allowed": false,
+  "local_gpu_probe": "forbidden_not_run",
+  "validator_policy": "scope-aware AST/config inspection; comments, docs, reviews, and outputs are not executable evidence"
+}

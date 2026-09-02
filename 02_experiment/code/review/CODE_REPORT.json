@@ -1,0 +1,87 @@
+{
+  "artifact_type": "researchpilot_code_report",
+  "schema_version": 1,
+  "status": "PASS",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "route_id": "R-EO-CTSP-V19-01",
+  "primary_core_candidate_id": "CTSP-01",
+  "reviewed_commit_or_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\review\\clean_sync_manifest_v19_ctsp_20260901_r1.json",
+  "scaffold_report": "F:\\PRQ4\\02_experiment\\code\\review\\scaffold_report.json",
+  "test_summary": {
+    "status": "pass",
+    "pytest": "380 passed, 0 warnings",
+    "ctsp_unit_and_integration": "7 passed",
+    "hard_contract": "pass; shape [B,225,768], classifier [11,768], float32 K-space pinv, bound/leakage assertions",
+    "synthetic_hard_contract_ref": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_synthetic_hard_contract_20260901_r6.json",
+    "synthetic_train_entrypoint": "pass; CE+Lovasz; micro-batch16/effective32; optimizer and gradient finite",
+    "synthetic_evaluate_entrypoint": "pass; validation metric finite; run contract bound",
+    "validator": "pass; 143 executable/config files; 0 violations",
+    "validator_ref": "F:\\PRQ4\\02_experiment\\code\\review\\v19_ctsp_code_validation_20260901_r10.json",
+    "synthetic_only": true,
+    "scientific_result": false
+  },
+  "review_summary": {
+    "status": "pass",
+    "independent_review_count": 5,
+    "finding_count": 9,
+    "open_blocker_or_major_count": 0,
+    "roles": ["architecture", "data_interface", "reproducibility", "release", "adversarial"],
+    "ledger": "F:\\PRQ4\\02_experiment\\reports\\review_findings.jsonl"
+  },
+  "local_data_status": "clean",
+  "local_data_audit_ref": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_local_data_audit_20260901_r2.json",
+  "local_gpu_probe": "forbidden_not_run",
+  "pretrained_initializer": "audited_cloud_only",
+  "pretrained_audit_ref": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_croma_pretrained_weight_audit_20260901_r1.json",
+  "test_seal_guard": "present_and_tested",
+  "training_object_parity": {
+    "status": "pass",
+    "same_training_object_factory": true,
+    "single_internal_mechanism_delta": true,
+    "external_trainable_component_forbidden": true,
+    "config_diff_test": "F:\\PRQ4\\02_experiment\\code\\tests\\integration\\test_v19_ctsp_model.py",
+    "trainable_parameter_audit_test": "F:\\PRQ4\\02_experiment\\code\\tests\\integration\\test_v19_ctsp_model.py",
+    "formal_added_parameters": 0,
+    "single_backbone_forward": true,
+    "detached_classifier_geometry": true
+  },
+  "coupling_ablation_readiness": {
+    "status": "pass",
+    "applicability": "single_route_matched_controls_implemented_but_scientifically_locked",
+    "enabled_mechanism_set_config": [
+      "ctsp_classifier_tangent_selective_projection",
+      "ctsp_mid_stage_location_control",
+      "ctsp_whole_residual_scalar_control",
+      "ctsp_identity_bypass_control"
+    ],
+    "same_entry_point_test": "F:\\PRQ4\\02_experiment\\code\\tests\\integration\\test_v19_ctsp_model.py",
+    "matched_protocol_budget_hash": "c39fb4714479dd9cb33624a5afd0f6bb47761f1fe6840a75e08c1626edc9059c",
+    "parent_row_config_test": "F:\\PRQ4\\02_experiment\\code\\tests\\unit\\test_ctsp.py",
+    "controls_open_only_after_primary_plus_2pp": true
+  },
+  "packaging_closure": {
+    "status": "pass_local_code_only_cloud_sync_complete",
+    "clean_sync_manifest": {
+      "path": "F:\\PRQ4\\02_experiment\\code\\review\\clean_sync_manifest_v19_ctsp_20260901_r1.json",
+      "sha256": "68cfa3179fddd5b4c13b1f7b1a00a5f55391893909b1ec5f97de63da3fd966f1",
+      "file_count": 147
+    },
+    "release_package": {
+      "path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_v19_ctsp_20260901_r8.tar.gz",
+      "sha256": "c5858b7198f0013d774fd29e8ad0dc5370a226558fcf816a504ec7a3d15d0181",
+      "bytes": 249309,
+    "file_count": 147
+    },
+    "entry_audit": "pass_all_members_bytes_and_sha256",
+    "data_download": false,
+    "weights_download": false,
+    "gpu_or_training": false
+  },
+  "unresolved_issues": [
+    "Cloud RTX3090 capability, measured incremental VRAM and throughput require the guarded cloud preflight.",
+    "CTSP tau calibration artifact must be produced on the cloud before formal seed-0 training; no default tau may be used in a formal row.",
+    "No CTSP scientific result exists; CTSP-C1/C2/C3 remain locked until CTSP-01 reaches +2pp over the verified CE+Lovasz baseline."
+  ],
+  "generated_at_utc": "2026-09-01T04:40:00+00:00"
+}

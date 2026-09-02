@@ -1,0 +1,44 @@
+{
+  "artifact_type": "researchpilot_canonical_gate_rewind_evidence",
+  "schema_version": "researchpilot.canonical_gate_rewind.v1",
+  "status": "ready",
+  "project_id": "PRQ4",
+  "from_gate": "BASELINE_REPRODUCTION",
+  "to_gate": "CLOUD_SYNC",
+  "reason": "The formal SEN12TS runner and fail-closed evaluation preflight were added after the previously passed cloud sync. The reviewed R7 code-only snapshot must replace the stale remote code tree before baseline reproduction can continue.",
+  "authorization": {
+    "source": "current_user_message",
+    "text": "完全同意，做吧",
+    "scope": "one guarded R7 code-only cloud synchronization; no data download, weight access, GPU use, training, evaluation, or test access"
+  },
+  "bindings": {
+    "pre_rewind_gate_status_sha256": "058062be6feb60a354046b87f5b4d8f1951a6848131fe87ec42663cb2b6f396b",
+    "router_state_sha256": "4d8ae05201cb519c396181881e447ad7d1fa4856fb66fa45e1caa277e35a913e",
+    "package_control": {
+      "path": "02_experiment/reports/cloud_sync_package_control_PRQ4-CLOUDSYNC-20260823-SEN12TS-R7.json",
+      "sha256": "0579656af993947396c914091b39736e6b5ea6b078f95cd80672a55c3674584b"
+    },
+    "package": {
+      "path": "02_experiment/artifacts/geotoken3path_code_sen12ts_r7.tar.gz",
+      "sha256": "420554384bb49a68919c7dd6bb3afe02085226e6fa38cc23b6f5d897c9e8649e",
+      "bytes": 55610
+    },
+    "clean_sync_manifest": {
+      "path": "02_experiment/code/manifests/clean_sync_manifest.json",
+      "sha256": "ed31af89736f5d1010a24f05fcd52ab9041e140fc125e18b7c705a9d6acd313f",
+      "file_count": 50
+    },
+    "independent_review": {
+      "path": "logs/agent_runs/prq4-baseline-runner-20260823/fresh_runner_review/report.md",
+      "sha256": "e2a30706c7092806960d25a759989d67171e0f5c92e52bc1d52983cc4856da82"
+    }
+  },
+  "preserved_invariants": {
+    "test_seal_status": "sealed",
+    "training_authorized": false,
+    "evaluation_authorized": false,
+    "data_or_weight_transfer": false,
+    "max_sync_executions": 1,
+    "remote_target": "/root/autodl-workspace"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code-release-report.v1",
+  "status": "pass",
+  "scope": "fresh_failure_informed_bank02_bank06_bank10_local_contract",
+  "clean_sync_manifest": {"path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json", "sha256": "f5d20db3a5d7621e75f0f7cb7405387451f83f68d21923775c5fdf637e5544b6", "file_count": 59},
+  "release_package": {"path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_fresh_bank_r2.tar.gz", "sha256": "420772730679c413ad52b6515ebc5b14e3d2d27a73733c9356d578b1daf75350", "bytes": 77301, "file_count": 59},
+  "local_tests": "157 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "fresh_mechanisms": ["reliability_edge_router", "physical_group_dispatch", "deformable_transport"],
+  "candidate_id_binding": ["BANK-02", "BANK-06", "BANK-10"],
+  "cloud_sync": {"status": "pending", "data_transfer": false, "weights_transfer": false, "training_started": false, "sealed_test_accessed": false}
+}

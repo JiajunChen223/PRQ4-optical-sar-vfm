@@ -1,0 +1,47 @@
+{
+  "artifact_type": "sen12ts_band_contract_correction",
+  "schema_version": 1,
+  "status": "CONDITIONAL_PASS_FOR_PLAN_CORRECTION_ONLY",
+  "route": "GeoToken-3Path",
+  "task": "optical-SAR land-cover semantic segmentation under controlled registration error",
+  "primary_core_mechanism_unchanged": true,
+  "source_evidence": {
+    "official_documentation_url": "https://radiantearth.blob.core.windows.net/mlhub/sen12ts/Documentation.pdf",
+    "official_dataset_page": "https://source.coop/sen12ts/sen12ts",
+    "official_table_claim": "SEN12TS Table 3 orders S1 indices 0-18 as VH_t, VV_t, coherence_t, phase_t, VH_t-1, VV_t-1, coherence_t-1, phase_t-1, VH_t-2, VV_t-2, coherence_t-2, phase_t-2, VH_t-3, VV_t-3, coherence_t-3, phase_t-3, incidence, slope, shadow-layover; S2 indices 0-11 are optical bands and indices 12-13 are scene-classification and cloud-mask layers.",
+    "remote_ifd_output": "F:/PRQ4/02_experiment/cloud/commands/outputs/sen12ts_tiff_ifd_tag_audit_r2-20260822T025718597720-38424.out",
+    "remote_ifd_output_sha256": "2655845069d9b09fc2acb8b835ba82d4e9802134272c0fef16bd64b869b5b7b6",
+    "remote_ifd_command_sha256": "d3158d58931bd3c6cb6b112b3ef19e8e66d2397993707bdee02c44b4e6ff8139",
+    "representative_ifd_summary": {
+      "label": {"count": 1, "bits_per_sample": [16], "sample_format": [2], "pixel_scale": [10.0, 10.0, 0.0], "tiepoint": [0.0, 0.0, 0.0, 333600.0, 1108480.0, 0.0], "geo_ascii": "WGS 84 / UTM zone 37N|WGS 84|", "nodata": "-3000"},
+      "s1": {"count": 19, "bits_per_sample": [32], "sample_format": [3], "extra_samples_tag_338": [0], "pixel_scale": [10.0, 10.0, 0.0], "tiepoint": [0.0, 0.0, 0.0, 333600.0, 1108480.0, 0.0], "geo_ascii": "WGS 84 / UTM zone 37N|WGS 84|", "nodata": "-3000"},
+      "s2": {"count": 14, "bits_per_sample": [16], "sample_format": [2], "pixel_scale": [10.0, 10.0, 0.0], "tiepoint": [0.0, 0.0, 0.0, 333600.0, 1108480.0, 0.0], "geo_ascii": "WGS 84 / UTM zone 37N|WGS 84|", "nodata": "-3000"}
+    }
+  },
+  "croma_input_contract": {
+    "raw_s1_channels": 19,
+    "raw_s2_channels": 14,
+    "selected_s1_source_indices_zero_based": [1, 0],
+    "selected_s1_semantics": ["VV at t", "VH at t"],
+    "selected_s1_canonical_order": ["VV", "VH"],
+    "selected_s2_source_indices_zero_based": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "selected_s2_semantics": ["coastal aerosol", "blue", "green", "red", "red edge 1", "red edge 2", "red edge 3", "near infrared", "red edge 4", "water vapor", "short-wave infrared 1", "short-wave infrared 2"],
+    "excluded_s1_source_indices_zero_based": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+    "excluded_s2_source_indices_zero_based": [12, 13],
+    "excluded_s2_semantics": ["scene classification", "cloud mask"],
+    "cloud_task_or_cloud_input": false,
+    "adapter_required": "explicit deterministic band selector before CROMA stem; no backbone change or new scientific mechanism"
+  },
+  "gate_effect": {
+    "cloud_data_download": "BLOCKED",
+    "formal_training_allowed": false,
+    "why_not_pass": [
+      "Two of 3600 Range reads failed transiently in the full preflight.",
+      "Exact parent-first split manifest and sealed-test contract are not yet generated.",
+      "License/attribution and noncommercial handling remain pending for the selected subset.",
+      "Official CROMA checkpoint URL/SHA/input normalization and mid/late feature contract remain pending.",
+      "This correction establishes compatibility by channel selection but is not a training result."
+    ]
+  },
+  "claim_boundary": "The 19/14 observation is not a dataset rejection; it is a required source-to-CROMA selector correction. No cloud-related layer is used as a model input or target."
+}

@@ -1,0 +1,13 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code-release-report.v1",
+  "status": "pass",
+  "scope": "CCPA-01 pre-CROMA input adapter contract",
+  "clean_sync_manifest": {"path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json", "sha256": "5618b75b707e95457b41d3f83235c93244d74597811a013379156b919126f65d", "file_count": 59},
+  "release_package": {"path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_ccpa_r1.tar.gz", "sha256": "d8b891a967ab8be842f6d4d828dfa3b2ec456c527ebddaa03fd8888d43b8d72f", "bytes": 81099, "file_count": 59},
+  "local_tests": "161 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "route_amendment": "AM-20260825-080802-c71f32ac",
+  "ccpa_contract": "pre-CROMA bounded local correspondence, null mass and private residual",
+  "cloud_sync": {"status": "pending", "data_transfer": false, "weights_transfer": false, "training_started": false, "sealed_test_accessed": false}
+}

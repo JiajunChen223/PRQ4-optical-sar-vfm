@@ -1,0 +1,89 @@
+{
+  "artifact_type": "baseline_tap_connected_artifact_audit",
+  "best_epoch": 20,
+  "best_validation": {
+    "OA": 0.7789189814814815,
+    "loss": 0.5997408628463745,
+    "mIoU": 0.4876416616180537
+  },
+  "checkpoint": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_tap_connected_r1/always_fuse_seed0.pt",
+  "checkpoint_bytes": 1525032410,
+  "checkpoint_sha256": "c54cb41c505c7d0c8eb3e9fe6457fa9efc7b610e4a4345e7de141654abd35eab",
+  "croma_load": {
+    "audit_path": "/root/autodl-workspace/configs/model/pretrained_audit_successor.json",
+    "checkpoint_path": "/root/autodl-tmp/weights/prq4-croma-mirror-audit-20260822-r1/CROMA_base.pt",
+    "checkpoint_sha256": "0238d814b53108f3574bf1ea240e38a0a6edd46173816d9a6962070561893b63",
+    "load_report": {
+      "blocks": {
+        "joint_encoder": {
+          "target": "cross_encoder",
+          "tensor_count": 110
+        },
+        "s1_GAP_FFN": {
+          "target": "GAP_FFN_s1",
+          "tensor_count": 6
+        },
+        "s1_encoder": {
+          "target": "s1_encoder",
+          "tensor_count": 70
+        },
+        "s2_GAP_FFN": {
+          "target": "GAP_FFN_s2",
+          "tensor_count": 6
+        },
+        "s2_encoder": {
+          "target": "s2_encoder",
+          "tensor_count": 136
+        }
+      },
+      "missing_keys": [],
+      "unexpected_keys": []
+    }
+  },
+  "data_loader": {
+    "amp": true,
+    "non_blocking_device_copy": true,
+    "num_workers": 4,
+    "persistent_workers": true,
+    "pin_memory": true,
+    "prefetch_factor": 2
+  },
+  "early_stopping": {
+    "burn_in_epochs": 8,
+    "enabled": true,
+    "min_delta_percentage_points": 0.1,
+    "mode": "max",
+    "monitor": "validation.mIoU",
+    "patience": 5,
+    "restore_best_checkpoint": true
+  },
+  "max_epochs": 24,
+  "mechanism_set": "always_fuse",
+  "rapid_checkpoint": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_tap_connected_r1/always_fuse_seed0_rapid_epoch5.pt",
+  "rapid_checkpoint_bytes": 1525027802,
+  "rapid_checkpoint_sha256": "2f2f0bc97b198be33e521ac0cea15b52752fa15daceb459e23acc3e2ba1c067c",
+  "run_id": "PRQ4-BASELINE-STRENGTHENING-SEED0-FORMAL24-TAP-CONNECTED-R1",
+  "schema_version": "researchpilot.baseline-tap-connected-artifact-audit.v1",
+  "scientific_result": true,
+  "status": "pass",
+  "stopped_epoch": 24,
+  "test_accessed": false,
+  "test_seal_status": "sealed",
+  "trainability": {
+    "adapters": "trainable",
+    "backbone_policy": "tap_connected",
+    "decoder": "trainable",
+    "router": "trainable",
+    "trunk": "tap_connected_unfrozen"
+  },
+  "operation_id": "PRQ4-BASELINE-TAP-CONNECTED-ARTIFACT-AUDIT-R1",
+  "classification": "monitoring",
+  "guard_action": "monitoring",
+  "command_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\baseline_tap_connected_artifact_audit_r1.sh",
+  "command_sha256": "df63a14b7787faa25b2aa562f614e043976d3764aea7e30fa7c0899bfd4969df",
+  "stdout_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\outputs\\PRQ4-BASELINE-TAP-CONNECTED-ARTIFACT-AUDIT-R1-20260825T015203787183-20544.out",
+  "stdout_sha256": "d3cbe93ea1d7b33eec51d03f1b9b44de8f8292ed7e691801c9beb42d2222665b",
+  "stderr_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\outputs\\PRQ4-BASELINE-TAP-CONNECTED-ARTIFACT-AUDIT-R1-20260825T015203787183-20544.err",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sealed_test_status": "sealed"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "package": "F:\\PRQ4\\logs\\release_packages\\geotoken3path_code_r3.tar.gz",
+  "relocated_after_policy_audit": true,
+  "relocation_reason": "The local-data policy scanner classifies archives inside 02_experiment as data-like; the verified code-only archive is retained under logs/release_packages outside the enforced experiment scope.",
+  "sha256": "e7ea80daa0f24d67eb6511d02463cd783add607b05504feb4ba82ffdf6d4947e",
+  "bytes": 34319,
+  "source_clean_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json",
+  "source_clean_sync_manifest_sha256": "77b3a0aab8977d5c6fae5f5158a297bc263d6463bcc9e1105388513fa5f2e97d",
+  "file_count": 42,
+  "payload_scope": "reviewed_code_configs_tests_manifests_only",
+  "real_data_included": false,
+  "pretrained_weights_included": false,
+  "credentials_included": false,
+  "cache_artifacts_included": false,
+  "scientific_results_included": false
+}

@@ -1,0 +1,94 @@
+{
+  "artifact_type": "baseline_mainstream_summary",
+  "status": "pass",
+  "baseline_target_type": "acceptable_same_type_mainstream_baseline",
+  "not_innovation_target": true,
+  "not_sota_target": true,
+  "target_definition": "acceptable level of comparable same-type mainstream research; not an innovation-level or best-paper target",
+  "reference_policy": "comparable_same_type_mainstream_distribution",
+  "exact_official_configuration_required": false,
+  "official_reference_role": "supplementary_context_only",
+  "matrix": "F:\\PRQ4\\02_experiment\\reports\\baseline_frontier_matrix.csv",
+  "distinct_source_count": 7,
+  "comparable_mainstream_source_count": 7,
+  "official_source_count": 0,
+  "high_comparability_source_count": 3,
+  "minimum_direct_sources": 5,
+  "minimum_high_comparability_sources": 3,
+  "metric_role_counts": {
+    "primary": 7,
+    "secondary": 5
+  },
+  "required_metrics": [
+    "mIoU"
+  ],
+  "metric_mainstream_levels": {
+    "OA": {
+      "direction": "maximize",
+      "source_count": 4,
+      "weighted_median": 78.9,
+      "empirical_median": 77.77000000000001,
+      "empirical_min": 73.67,
+      "empirical_max": 84.36,
+      "relative_deviation_limit": 0.1,
+      "acceptable_lower": 71.01,
+      "acceptable_upper": 86.79,
+      "source_ids": [
+        "CLAIRE25_WHUBASE",
+        "LI23_WHUBASE",
+        "MFFNET24_WHUBASE",
+        "MSFSA24_WHUBASE"
+      ]
+    },
+    "accuracy": {
+      "direction": "maximize",
+      "source_count": 1,
+      "weighted_median": 76.68,
+      "empirical_median": 76.68,
+      "empirical_min": 76.68,
+      "empirical_max": 76.68,
+      "relative_deviation_limit": 0.1,
+      "acceptable_lower": 69.01200000000001,
+      "acceptable_upper": 84.34800000000001,
+      "source_ids": [
+        "LSAR24_WHUBASE"
+      ]
+    },
+    "mIoU": {
+      "direction": "maximize",
+      "source_count": 7,
+      "weighted_median": 47.3,
+      "empirical_median": 47.3,
+      "empirical_min": 39.97,
+      "empirical_max": 55.84,
+      "relative_deviation_limit": 0.1,
+      "acceptable_lower": 42.57,
+      "acceptable_upper": 52.03,
+      "source_ids": [
+        "CLAIRE25_WHUBASE",
+        "FUSEFORM25_WHUBASE",
+        "LI23_WHUBASE",
+        "LSAR24_WHUBASE",
+        "MFFNET24_WHUBASE",
+        "MSFSA24_WHUBASE",
+        "OSNET25_WHUBASE"
+      ]
+    }
+  },
+  "common_training_epochs": {
+    "not_reported": 9,
+    "50": 2,
+    "200": 1
+  },
+  "pretrained_initialization_patterns": {
+    "not_reported": 11,
+    "ImageNet-pretrained MiT encoder; random decoder": 1
+  },
+  "reference_role_counts": {
+    "conventional_baseline": 12
+  },
+  "relative_deviation_limit": 0.1,
+  "saturation_exception": false,
+  "saturation_note": "",
+  "problems": []
+}

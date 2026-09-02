@@ -1,0 +1,26 @@
+{
+  "artifact_type": "baseline_reproduction_metrics",
+  "schema_version": "researchpilot.baseline.metrics.v1",
+  "run_id": "PRQ4-SEN12TS-BASELINE-SEED0-PRETRAINED-R6",
+  "status": "pass",
+  "dataset_id": "sen12ts_worldcover_3region_1200",
+  "split": "validation",
+  "epochs": 20,
+  "mechanism_set": "always_fuse",
+  "seed": 0,
+  "metrics": {
+    "mIoU": {"value": 39.99747186372776, "unit": "percent", "epoch": 20},
+    "OA": {"value": 66.8184799382716, "unit": "percent", "epoch": 20}
+  },
+  "checkpoint_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_r6/always_fuse_seed0.pt",
+  "resolved_config_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_r6/resolved_config.json",
+  "run_result_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_r6/run_result.json",
+  "code_sync_manifest_sha256": "864816ffffefa56ad667c944bfc3b508daba61e9d265ba699153705e69e57832",
+  "test_accessed": false,
+  "test_seal_status": "sealed",
+  "weights_loaded": true,
+  "training_completed": true,
+  "evaluation_completed": true,
+  "scientific_result_boundary": "validation-only baseline evidence; not an innovation result and not final-test evidence",
+  "rapid_reference_status": "pending_runner_checkpoint_capture"
+}

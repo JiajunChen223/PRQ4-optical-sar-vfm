@@ -1,0 +1,17 @@
+{
+  "status": "annotated",
+  "library_version_id": "lib-2026-08-20-a9987c7fcf59",
+  "frozen_at_utc": "2026-08-19T17:31:51.363083+00:00",
+  "as_of_date": "2026-08-20",
+  "record_count": 305,
+  "core_annotation_count": 23,
+  "canonical_file": "F:\\PRQ4\\01_literature\\library\\literature.jsonl",
+  "frozen_jsonl_sha256": "a9987c7fcf5982e40c82d1fc87003eb0a944d1f5ff5913c837d165a79d7170b0",
+  "current_jsonl_sha256": "aac24981d402de3425f281cdf7b9a6b9f8b2ab6cdf770b6b79a2ded3b1b3cb22",
+  "source_summary": {
+    "recent36_count": 297,
+    "recent12_count": 89,
+    "core_recent12_ratio": null
+  },
+  "annotation_policy": "only append_evidence.py may change core annotations after freeze"
+}

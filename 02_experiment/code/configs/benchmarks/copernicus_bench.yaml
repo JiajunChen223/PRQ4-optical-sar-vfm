@@ -1,0 +1,20 @@
+dataset_id: copernicus_bench_bigearthnet_s1s2_10pct
+source_url: https://github.com/zhu-xlab/Copernicus-FM/tree/main/Copernicus-Bench
+scope: core
+modalities:
+  optical:
+    sensor: Sentinel-2
+    channels: 12
+  sar:
+    sensor: Sentinel-1
+    channels: 2
+patch_size: 120
+labels: 19
+official_split: train_validation_test_fixed_ids
+local_real_data_allowed: false
+cloud_data_root: /root/autodl-tmp/copernicus_bench
+listed_payload_bytes: 11876108982
+active_footprint_estimate_gb: 27-35
+hard_storage_stop_gb: 45
+total_project_ceiling_gb: 50
+license_status: pending_manifest_and_inheritance_audit

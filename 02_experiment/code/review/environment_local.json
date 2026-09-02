@@ -1,0 +1,14 @@
+{
+  "schema_version": "geotoken3path.environment.v1",
+  "python": "3.11.4 | packaged by Anaconda, Inc. | (main, Jul  5 2023, 13:47:18) [MSC v.1916 64 bit (AMD64)]",
+  "implementation": "CPython",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "packages": {
+    "torch": "2.12.0.dev20260309+cu128",
+    "PyYAML": "6.0.3",
+    "pytest": "9.0.2"
+  },
+  "local_gpu_probe": "forbidden_not_run",
+  "device_inventory": "not_collected",
+  "scientific_result": false
+}

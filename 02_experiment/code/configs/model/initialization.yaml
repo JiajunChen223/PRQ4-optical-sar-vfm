@@ -1,0 +1,18 @@
+initialization:
+  mode: pretrained
+  pretrained_eligible: true
+  constructor_ref: geotoken3path.models.croma_random:PinnedSourceRandomCROMA
+  constructor_kwargs:
+    source_path: /root/autodl-tmp/audits/prq4-croma-loader-compat-20260822-r1/use_croma.py
+    source_sha256: a38567beed29eb08108a47cdc97fe98aec50fd4be0bd98a5266bcd18aafb7c5b
+    size: base
+    modality: both
+    image_resolution: 120
+  checkpoint_path: /root/autodl-tmp/weights/prq4-croma-mirror-audit-20260822-r1/CROMA_base.pt
+  checkpoint_sha256: 0238d814b53108f3574bf1ea240e38a0a6edd46173816d9a6962070561893b63
+  strict_load: true
+  require_compatibility_audit: true
+  audit_report: configs/model/pretrained_audit_successor.json
+  target_test_data_used: false
+  same_initialization_for_baseline_and_innovation: true
+  source_revision: 59505a6bcadbf36ba20767270154bf9f3067c5e7

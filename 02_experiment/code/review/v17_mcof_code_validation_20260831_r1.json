@@ -1,0 +1,861 @@
+{
+  "status": "fail",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "scanned_executable_or_config_files": 158,
+  "problems": [
+    "semantic local data or local GPU behavior detected"
+  ],
+  "violations": [
+    {
+      "path": "02_experiment\\code\\configs\\model\\pretrained_audit_successor.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "pretrained_search.selected_candidate_ref",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_bold_r14.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_bold_r14.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_bold_r14.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_bold_r14.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_ceak_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[14].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_ceak_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[15].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_ceak_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[16].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_ceak_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[17].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d0_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[16].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d0_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[17].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d0_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[18].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d0_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d1_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d1_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d1_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d1_20260828.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d2_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d2_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d2_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d2_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[23].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d3_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d3_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d3_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[23].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_d3_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[24].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_math_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_math_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_math_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_math_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r12.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r12.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r12.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r12.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r13.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r13.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r13.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r13.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r8.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[19].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r8.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[20].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r8.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[21].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_operator_math_r8.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[22].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v11_tasr_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[34].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v11_tasr_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[35].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v11_tasr_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[36].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v11_tasr_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v12_d0_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[36].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v12_d0_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v12_d0_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v12_d0_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[36].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[36].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[36].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[36].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[40].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r6.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r6.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r6.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r6.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[40].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[37].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[38].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v13_checkpoint_repair_20260830_r7.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[40].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[40].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[41].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[42].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[39].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[40].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[41].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[42].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[40].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[41].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[42].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[43].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[40].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[41].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[42].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r5.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[43].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[43].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[44].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[45].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r2.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[46].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[43].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[44].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[45].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r3.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[46].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[43].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[44].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[45].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v15_rift_20260830_r4.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[46].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v16_mcsl_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[46].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v16_mcsl_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[47].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v16_mcsl_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[48].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v16_mcsl_20260830_r1.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[49].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v5_if_sgc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[23].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v5_if_sgc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[24].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v5_if_sgc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[25].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v5_if_sgc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[26].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v6_cc_scbc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[31].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v6_cc_scbc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[32].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v6_cc_scbc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[33].path",
+      "detail": "configuration string contains a local/data-file path"
+    },
+    {
+      "path": "02_experiment\\code\\manifests\\clean_sync_manifest_v6_cc_scbc_20260829.json",
+      "scope": "config",
+      "type": "local_data_config",
+      "key": "files[34].path",
+      "detail": "configuration string contains a local/data-file path"
+    }
+  ],
+  "local_real_data_allowed": false,
+  "local_gpu_probe": "forbidden_not_run",
+  "validator_policy": "scope-aware AST/config inspection; comments, docs, reviews, and outputs are not executable evidence"
+}

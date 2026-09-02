@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "local": {
+    "python_executable": "",
+    "notes": "Optional; run_windows.ps1 resolves environment fallbacks."
+  },
+  "cloud": {
+    "python_executable": "",
+    "notes": "Informational only; cloud_exec uses the user endpoint."
+  }
+}

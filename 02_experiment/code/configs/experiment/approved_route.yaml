@@ -1,0 +1,43 @@
+route_type: method
+selected_route_id: PRQ4-BASELINE-VERIFIED-R2
+primary_core_candidate_id: BASELINE-ALWAYS-FUSE
+primary_task: optical_sar_land_cover_segmentation
+operating_regime: cross_region_sen12ts_worldcover
+central_bottleneck: baseline_always_fuse_only_no_innovation_candidate_bound
+primary_core_mechanism: geotoken_3path
+test_accessed: false
+test_seal_status: sealed
+mechanism_sets:
+  baseline: always_fuse
+  candidate: always_fuse
+  controls: [always_fuse]
+  same_model_factory: true
+  single_internal_mechanism_delta: true
+screening:
+  epochs: 24
+  seeds: [0]
+formal_after_approval:
+  max_epochs: 24
+  seeds: [0, 1, 2]
+  early_stopping:
+    enabled: true
+    monitor: validation.mIoU
+    mode: max
+    burn_in_epochs: 8
+    patience: 5
+    min_delta_percentage_points: 0.1
+    restore_best_checkpoint: true
+  augmentation:
+    name: paired_geometric_v1
+    enabled: true
+    train_only: true
+    deterministic: true
+    orientation_space: D4
+    operations: [horizontal_flip, vertical_flip, rotate_90, rotate_180, rotate_270, transpose, anti_transpose]
+  region_holdout_required: true
+  controlled_registration_grid_required: true
+efficiency_metrics:
+  - peak_vram_mb
+  - samples_per_second
+  - wall_clock_ms
+  - active_token_fraction

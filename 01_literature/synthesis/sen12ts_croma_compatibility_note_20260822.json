@@ -1,0 +1,44 @@
+{
+  "artifact_type": "pretrained_compatibility_plan_note",
+  "artifact_version": "2026-08-22.croma-sen12ts-r1",
+  "status": "metadata_compatible_pending_cloud_weight_audit",
+  "model": "CROMA-base",
+  "official_source": "https://github.com/antofuller/CROMA",
+  "weight_source": "https://huggingface.co/antofuller/CROMA",
+  "source_license": "MIT for the official repository; checkpoint license and exact artifact metadata remain to be audited before acquisition",
+  "declared_contract": {
+    "sar_channels": 2,
+    "optical_channels": 12,
+    "default_image_resolution": 120,
+    "patch_size": 8,
+    "input_gsd": "10m-class SEN12TS tiles, pending loader audit"
+  },
+  "candidate_dataset_contract": {
+    "dataset_id": "sen12ts_worldcover_3region_1200",
+    "s1_layers": "raw current-time VH,VV; deterministic reorder to canonical VV,VH",
+    "s2_layers": "12 spectral bands with cirrus excluded",
+    "parent_shape": [256, 256],
+    "derived_shape": [120, 120],
+    "raw_sar_order": ["VH", "VV"],
+    "canonical_sar_order": ["VV", "VH"],
+    "sar_reorder": [1, 0],
+    "label_head": 11
+  },
+  "fairness_policy": {
+    "baseline_and_innovation_same_initialization": true,
+    "pretraining_is_not_innovation": true,
+    "target_test_exclusion": "must be audited",
+    "cloud_only_checkpoint_storage": true,
+    "random_init_fallback": "only if compatible audited checkpoint is unavailable or legally unusable; must be documented and applied identically"
+  },
+  "pending_before_protocol_lock": [
+    "checkpoint commit/version and SHA256",
+    "checkpoint license and redistribution/use terms",
+    "state-dict key/shape compatibility with the remote implementation",
+    "band order and normalization parity",
+    "geographic pretraining overlap audit",
+    "remote 3090 memory preflight without formal training"
+  ],
+  "download_performed": false,
+  "training_performed": false
+}

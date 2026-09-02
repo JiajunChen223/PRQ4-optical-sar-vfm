@@ -1,0 +1,9 @@
+{
+  "target": "Pattern Recognition special issue: Multimodal Representation Learning Based on Vision Foundation Models",
+  "official_url": "https://www.sciencedirect.com/special-issue/332578/multimodal-representation-learning-based-on-vision-foundation-models",
+  "venue_exact_match": true,
+  "cas_partition_claim": "not_claimed",
+  "status": "target_scope_recorded; authoritative CAS partition not used for a claim",
+  "scope_fit": ["vision foundation model adaptation", "heterogeneous modality alignment", "fusion/cross-attention/adapters", "parameter-efficient adaptation", "robustness and generalization"],
+  "source_note": "ScienceDirect target page is access-restricted in this environment; scope wording is retained as a planning fit and cross-checked against the special-issue listing, without claiming acceptance or CAS tier."
+}

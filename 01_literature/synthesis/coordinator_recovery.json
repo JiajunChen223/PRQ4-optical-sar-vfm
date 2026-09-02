@@ -1,0 +1,10 @@
+{
+  "status": "coordinator_recovered",
+  "run_id": "prq4-plan-20260820-r1",
+  "reason": "Three scout artifacts completed and validated; architect and critic roles could not obtain independent reports because the shared workspace exhausted credits.",
+  "completed_independent_roles": ["remote_sensing_scout", "top_conference_scout"],
+  "completed_but_validation_incomplete_roles": ["dataset_benchmark_scout"],
+  "failed_or_missing_decision_critical_roles": ["architect_01", "architect_02", "architect_03", "route_critic", "novelty_critic", "resource_critic", "journal_critic", "evidence_critic", "rebuttal_01", "rebuttal_02", "rebuttal_03", "final_judge"],
+  "use_policy": "Coordinator synthesis may provide a provisional route for user review, but it must not be represented as a clean final handoff or as independent consensus.",
+  "handoff_effect": "blocked_until_decision_critical_agent_artifacts_are_recovered"
+}

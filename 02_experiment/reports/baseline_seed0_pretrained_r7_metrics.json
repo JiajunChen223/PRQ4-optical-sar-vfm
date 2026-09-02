@@ -1,0 +1,41 @@
+{
+  "artifact_type": "baseline_reproduction_metrics",
+  "schema_version": "researchpilot.baseline.metrics.v1",
+  "run_id": "PRQ4-SEN12TS-BASELINE-SEED0-PRETRAINED-R7",
+  "status": "pass",
+  "dataset_id": "sen12ts_worldcover_3region_1200",
+  "split": "validation",
+  "epochs": 20,
+  "rapid_horizon_epochs": 5,
+  "mechanism_set": "always_fuse",
+  "seed": 0,
+  "metrics": {
+    "mIoU": {"value": 39.99671111353416, "unit": "percent", "epoch": 20},
+    "OA": {"value": 66.81898148148148, "unit": "percent", "epoch": 20}
+  },
+  "rapid_metrics": {
+    "mIoU": {"value": 32.2820860209959, "unit": "percent", "epoch": 5},
+    "OA": {"value": 60.89135802469136, "unit": "percent", "epoch": 5}
+  },
+  "checkpoint_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_r7/always_fuse_seed0.pt",
+  "checkpoint_sha256": "25b99fd4187bab7ed566b0fbf403e38fa23e57bfb2226ed668f43a6fc1841379",
+  "rapid_checkpoint_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_r7/always_fuse_seed0_rapid_epoch5.pt",
+  "rapid_checkpoint_sha256": "1f435b1818c6fb6e800b13566177aafacd7cbd20e0bec53c446302c511a128fc",
+  "resolved_config_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_r7/resolved_config.json",
+  "run_result_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_r7/run_result.json",
+  "code_sync_manifest_sha256": "2c27be3146362a171e006d850ed29af51ba9de2e51a6bafdbf71dc1fd8f6757e",
+  "test_accessed": false,
+  "test_seal_status": "sealed",
+  "weights_loaded": true,
+  "training_completed": true,
+  "evaluation_completed": true,
+  "scientific_result_boundary": "validation-only baseline evidence; not an innovation result and not final-test evidence",
+  "data_pipeline_optimization": {
+    "num_workers": 4,
+    "pin_memory": true,
+    "persistent_workers": true,
+    "prefetch_factor": 2,
+    "amp": true,
+    "non_blocking_device_copy": true
+  }
+}

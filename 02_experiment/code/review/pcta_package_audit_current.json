@@ -1,0 +1,13 @@
+{
+  "artifact_type": "researchpilot_code_only_package_audit",
+  "schema_version": "researchpilot.code-package-audit.v1",
+  "status": "pass",
+  "route_id": "R-EO-PCTA-01",
+  "primary_core_candidate_id": "PCTA-01",
+  "manifest": {"path":"F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json","sha256":"2f23291d286c6cf0ff884a5971c82ba226546f4b5493d98b929c5532235c245a","file_count":63},
+  "package": {"path":"F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_pcta_current.tar.gz","sha256":"d12ab2d9520deea6101b28e193a3677f30875bf703326073f48602d2f0567721","bytes":96720,"member_count":64},
+  "allowlist_policy": {"code_configs_tests_only":true,"dataset_registry_config_allowed":true,"real_data_payload_included":false,"weight_binary_included":false,"checkpoint_included":false,"credential_included":false,"cache_included":false,"symlink_or_absolute_member":false,"path_traversal_member":false,"pyc_or_pycache_member":false},
+  "route_binding": {"manifest_route":"R-EO-PCTA-01","manifest_primary":"PCTA-01","release_route":"R-EO-PCTA-01","release_primary":"PCTA-01"},
+  "execution_boundary": {"data_download":false,"weights_download":false,"gpu_probe":false,"training":false,"test_accessed":false,"cloud_sync":false},
+  "note": "dataset_registry.yaml and its unit test are code-contract artifacts, not dataset payloads; they are permitted by the code-only allowlist."
+}

@@ -1,0 +1,87 @@
+{
+  "artifact_type": "baseline_reproduction_metrics",
+  "schema_version": "researchpilot.baseline.metrics.v2",
+  "run_id": "PRQ4-BASELINE-STRENGTHENING-SEED0-FORMAL24-AUG-R2",
+  "status": "pass",
+  "dataset_id": "sen12ts_worldcover_3region_1200",
+  "split": "validation",
+  "formal_scale": "strengthening",
+  "epochs": 24,
+  "stopped_epoch": 15,
+  "best_epoch": 10,
+  "rapid_horizon_epochs": 5,
+  "mechanism_set": "always_fuse",
+  "seed": 0,
+  "metrics": {
+    "mIoU": {
+      "value": 38.76022926214301,
+      "unit": "percent",
+      "epoch": 10
+    },
+    "OA": {
+      "value": 65.90933641975309,
+      "unit": "percent",
+      "epoch": 10
+    }
+  },
+  "rapid_metrics": {
+    "mIoU": {
+      "value": 36.73396832608235,
+      "unit": "percent",
+      "epoch": 5
+    },
+    "OA": {
+      "value": 63.51323302469136,
+      "unit": "percent",
+      "epoch": 5
+    }
+  },
+  "checkpoint_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_aug_r2/always_fuse_seed0.pt",
+  "checkpoint_sha256": "44306d126a491fe3ea3841ffb09055e882abc66de1da0083971223053e0ff5f9",
+  "rapid_checkpoint_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_aug_r2/always_fuse_seed0_rapid_epoch5.pt",
+  "rapid_checkpoint_sha256": "c6a15488d33646b225db974b89cdb6ed6d82fabedf592498f8493a085948684d",
+  "resolved_config_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_aug_r2/resolved_config.json",
+  "run_result_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_aug_r2/run_result.json",
+  "code_sync_manifest_ref": "02_experiment/code/manifests/clean_sync_manifest.json",
+  "matched_common_protocol_sha256": "cc19a1f45fd2d1c77f6b364c978f8ab88241a9a2d566c590811394fbcb5dd081",
+  "test_accessed": false,
+  "test_seal_status": "sealed",
+  "weights_loaded": true,
+  "training_completed": true,
+  "evaluation_completed": true,
+  "scientific_result_boundary": "formal validation-only baseline evidence under amended 24-epoch protocol; not an innovation result and not final-test evidence",
+  "data_pipeline_optimization": {
+    "amp": true,
+    "non_blocking_device_copy": true,
+    "num_workers": 4,
+    "persistent_workers": true,
+    "pin_memory": true,
+    "prefetch_factor": 2
+  },
+  "augmentation": {
+    "deterministic": true,
+    "enabled": true,
+    "name": "paired_geometric_v1",
+    "operations": [
+      "horizontal_flip",
+      "vertical_flip",
+      "rotate_90",
+      "rotate_180",
+      "rotate_270",
+      "transpose",
+      "anti_transpose"
+    ],
+    "orientation_space": "D4",
+    "train_only": true
+  },
+  "early_stopping": {
+    "enabled": true,
+    "monitor": "validation.mIoU",
+    "mode": "max",
+    "burn_in_epochs": 8,
+    "patience": 5,
+    "min_delta_percentage_points": 0.1,
+    "restore_best_checkpoint": true
+  },
+  "protocol_ref": "F:\\PRQ4\\02_experiment\\reports\\sen12ts_protocol_lock_formal24_augmented_20260824_r2.json"
+}

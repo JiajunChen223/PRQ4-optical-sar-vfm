@@ -1,0 +1,34 @@
+{
+  "artifact_type": "innovation_prior_art_overlap",
+  "schema_version": "prior-art-overlap-v1",
+  "status": "pass",
+  "route_id": "R-EO-CTSP-V19-01",
+  "candidate_ids": ["CTSP-01"],
+  "prior_art_lock_ref": "F:/PRQ4/01_literature/synthesis/v19_ctsp_prior_art_lock_20260901_r1.json",
+  "scoop_check_report_ref": "F:/PRQ4/01_literature/synthesis/v19_ctsp_scoop_check_full_report_20260901.md",
+  "assessments": [
+    {
+      "assessment_id": "CTSP-01-OVERLAP-V19",
+      "candidate_id": "CTSP-01",
+      "nearest_prior_art": "SING classifier range/null invariants; CLEAR cross-modal covariance projection; DOLG orthogonal feature fusion; TokenFusion conditional token admission; robust multimodal fusion; CROMA optical-SAR VFM; and the closed V17 MCOF route.",
+      "overlap_class": "near_overlap_high_risk",
+      "same_mechanism_signature": false,
+      "same_task": true,
+      "same_dataset_or_domain": false,
+      "same_resolution_regime": false,
+      "same_causal_role": false,
+      "same_claim": false,
+      "same_evaluation_protocol": false,
+      "component_reuse_status": "mixed_components_new_coupling",
+      "what_is_not_new": "SVD/pseudoinverse, classifier row/null geometry, tangent decomposition, residual clipping, trust regions, multimodal safety, optical-SAR fusion, CROMA, SEN12TS, CE+Lovasz, pretrained initialization and the 24-epoch protocol.",
+      "new_axis": "At the fixed final post-fusion segmentation interface, CTSP uses the existing shared classifier only as detached global geometry, preserves the classifier-tangent part of an already formed optical-SAR residual, and caps the normalized class-logit-visible part with a train-only calibrated bound.",
+      "novelty_claim_boundary": "Do not claim null-space projection, orthogonal fusion, robust fusion, classifier geometry, optical-SAR fusion or CROMA as new; retain only the narrow bounded residual operation as a hypothesis pending matched seed-0 evidence and controls.",
+      "source_evidence_ids": ["4bffba5ad5dc6ea8", "7f3e2082d0f31b0e", "194d31371ff32cb8", "839c37d39d9d9260", "3f7d680c1b3ebd15", "98ee47b14b96a7dd", "37abd1c1ea8749d9", "2c2fde7b41f20580", "a09fb71ea58bae6b", "4586bd5cafe7048e", "459c06d9122259dc"],
+      "screening_disposition": "retain",
+      "final_novelty_risk": "high"
+    }
+  ],
+  "test_accessed": false,
+  "experiments_started": false,
+  "created_at_utc": "2026-09-01T04:50:00+00:00"
+}

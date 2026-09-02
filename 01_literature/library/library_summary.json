@@ -1,0 +1,28 @@
+{
+  "as_of_date": "2026-08-20",
+  "total_records": 305,
+  "recent36_count": 297,
+  "recent12_count": 89,
+  "recent12_ratio": 0.2997,
+  "exact_date_count": 283,
+  "year_precision_count": 16,
+  "date_conflict_count": 1,
+  "core_exact_date_count": 0,
+  "core_evidence_count": 0,
+  "core_recent36_count": 0,
+  "core_recent12_count": 0,
+  "core_recent12_ratio": null,
+  "classic_context_count": 2,
+  "top_ai_conference_count": 21,
+  "remote_sensing_count": 195,
+  "target_recent36_count": 150,
+  "target_reached": true,
+  "outputs": {
+    "jsonl": "F:\\PRQ4\\01_literature\\library\\literature.jsonl",
+    "csv": "F:\\PRQ4\\01_literature\\library\\literature.csv",
+    "sqlite": "F:\\PRQ4\\01_literature\\library\\literature.sqlite",
+    "evidence_matrix": "F:\\PRQ4\\01_literature\\library\\evidence_matrix.csv"
+  },
+  "invalid_input_record_count": 0,
+  "quarantine_path": null
+}

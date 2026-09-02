@@ -1,0 +1,34 @@
+{
+  "artifact_type": "dataset_license_provenance_evidence",
+  "artifact_version": "2026-08-22.sen12ts-r1",
+  "status": "conditional_noncommercial_research_compatible_pending_provider_terms_audit",
+  "dataset": "sen12ts_worldcover_3region_1200",
+  "sen12ts": {
+    "official_page": "https://source.coop/sen12ts/sen12ts",
+    "advertised_license": "CC-BY-NC-4.0",
+    "doi": "10.34911/rdnt.9qh1mb",
+    "use_boundary": "non-commercial research only; attribution and citation required; no redistribution in the project package",
+    "full_collection": "1.69TB; excluded from the project budget"
+  },
+  "worldcover_labels": {
+    "provenance": "ESA WorldCover 10m 2020 v100, used by SEN12TS for Ethiopia, Uganda and Sumatra",
+    "official_license": "CC-BY-4.0",
+    "doi": "10.5281/zenodo.5571936",
+    "attribution": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data processed by the ESA WorldCover consortium",
+    "label_rights_status": "source product permits attribution-based reuse; exact SEN12TS packaging/derived-label notice must still be preserved"
+  },
+  "decision": {
+    "plan_use": "conditional core candidate",
+    "formal_download": "blocked until provider terms, attribution text, and no-redistribution policy are recorded in the sealed manifest",
+    "commercial_use": "out of scope",
+    "cloud_task": false
+  },
+  "source_urls": [
+    "https://source.coop/sen12ts/sen12ts",
+    "https://data.source.coop/sen12ts/sen12ts/Documentation.pdf",
+    "https://esa-worldcover.org/en/data-access",
+    "https://zenodo.org/records/5571936"
+  ],
+  "download_performed": false,
+  "training_performed": false
+}

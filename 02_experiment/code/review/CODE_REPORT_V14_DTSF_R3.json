@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "artifact_type": "researchpilot_code_report",
+  "status": "PASS",
+  "project_root": "F:\\PRQ4",
+  "code_root": "F:\\PRQ4\\02_experiment\\code",
+  "reviewed_commit_or_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r5.json",
+  "clean_sync_manifest_sha256": "1dc9be7ed923394a2a39b801cecfff7839f92113c109bb9ba3570044e32a2aec",
+  "test_summary": {
+    "status": "pass",
+    "commands": [
+      "pytest F:\\PRQ4\\02_experiment\\code\\tests -q -p no:cacheprovider",
+      "validate_code_project.py --project-root F:\\PRQ4"
+    ],
+    "pytest": "329 passed, 1 warning",
+    "validator": "pass; 137 executable/config files; 0 violations",
+    "synthetic_only": true,
+    "scientific_result": false
+  },
+  "review_summary": {
+    "status": "pass",
+    "review_mode": "coordinator_single_thread_adversarial_repair_review",
+    "independent_review": false,
+    "review_report": "F:\\PRQ4\\02_experiment\\code\\review\\coordinator_v14_dtsf_code_review_r3_20260830.md",
+    "finding_count": 0,
+    "decision": "PASS_FOR_V14_DTSF_R5_CLOUD_SYNC"
+  },
+  "route_id": "R-EO-DTSF-V14-01",
+  "primary_core_candidate_id": "DTSF-01",
+  "dtsf_contract": {
+    "mechanism_set": "dtsf_depth_trajectory_fusion",
+    "depth_layers": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "basis": "hadamard4",
+    "rank": 8,
+    "alpha_zero_start": true,
+    "zero_start_straight_through": true,
+    "late_sar_pre_fusion_insertion": true,
+    "no_full_projection_matrix": true,
+    "matched_controls_registered": [
+      "dtsf_raw_tap_low_rank_control",
+      "dtsf_random_orthogonal_control",
+      "dtsf_tap_permutation_control"
+    ]
+  },
+  "training_object_parity": {
+    "status": "pass",
+    "same_detector_factory": true,
+    "single_internal_mechanism_delta": true,
+    "external_trainable_component_forbidden": true,
+    "config_diff_test": "tests/unit/test_v14_dtsf_config.py::test_v14_dtsf_controls_share_common_protocol",
+    "trainable_parameter_audit_test": "tests/unit/test_dtsf.py::test_dtsf_zero_start_preserves_shared_token_model_output",
+    "same_entry_point": "geotoken3path.models.factory.build_model / build_vfm_segmentation_model"
+  },
+  "coupling_ablation_readiness": {
+    "status": "pass",
+    "enabled_mechanism_set_config": "F:\\PRQ4\\02_experiment\\code\\configs\\experiment\\v14_dtsf_route.yaml",
+    "same_entry_point_test": "tests/unit/test_v14_dtsf_config.py::test_v14_dtsf_controls_share_common_protocol",
+    "matched_protocol_budget_hash": "resolved at formal run from V14 route and r4 clean-sync manifest",
+    "parent_row_config_test": "DTSF controls are explicit and share all common protocol leaves"
+  },
+  "local_data_status": "clean",
+  "local_gpu_probe": "forbidden_not_run",
+  "pretrained_initializer": "audited_cloud_only",
+  "pretrained_audit_ref": "F:\\PRQ4\\02_experiment\\reports\\v14_dtsf_croma_pretrained_weight_audit_20260830_r1.json",
+  "test_seal_guard": "present_and_tested",
+  "repair_delta": {
+    "type": "formal_direction_allowlist_repair",
+    "failed_run": "PRQ4-V14-DTSF-DTSF01-FORMAL24-SEED0-20260830-R1",
+    "root_cause": "run_manifest.py omitted DTSF formal direction IDs",
+    "repaired_ids": [
+      "DTSF-01",
+      "DTSF-C2",
+      "DTSF-C3",
+      "DTSF-C4"
+    ],
+    "scientific_variables_changed": false,
+    "failed_run_scientific_result": false
+  },
+  "packaging_closure": {
+    "status": "pass_local_code_only",
+    "clean_sync_manifest": {
+      "path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest_v14_dtsf_20260830_r5.json",
+      "sha256": "1dc9be7ed923394a2a39b801cecfff7839f92113c109bb9ba3570044e32a2aec",
+      "file_count": 115
+    },
+    "release_package": {
+      "path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_v14_dtsf_20260830_r5.tar.gz",
+      "sha256": "26bbf0410a02d401c17cb2969a024511334320da8d8ae5e18a24d633a076d738",
+      "bytes": 202255,
+      "member_count": 116
+    }
+  },
+  "unresolved_issues": [
+    "DTSF-01 fresh cloud seed-0 24-epoch validation result is pending after r5 synchronization",
+    "DTSF controls remain locked behind the >=+2pp performance gate"
+  ],
+  "handoff_to_experiment": "After r5 guarded sync and environment reattachment, create a fresh DTSF-01 seed-0 full-horizon run ID; do not reuse the invalid R1 run."
+}

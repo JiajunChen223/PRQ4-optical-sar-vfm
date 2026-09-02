@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "connection_mode": "user_provided",
+  "endpoint_source": "user_supplied",
+  "provider": "user_provided_ssh",
+  "remote_shell": "posix",
+  "connection_state": "USER_ENDPOINT_CONFIGURED_PENDING_PROBE",
+  "host": "connect.nmb2.seetacloud.com",
+  "port": 28974,
+  "user": "root",
+  "identity_file": "",
+  "known_hosts_file": "",
+  "strict_host_key_checking": "yes",
+  "ssh_alias": "",
+  "ssh_config_path": "",
+  "cloud_platform": "seetacloud_user_endpoint",
+  "cloud_data_root": "/root/autodl-tmp",
+  "remote_root": "/root/autodl-workspace",
+  "host_key_fingerprint": "",
+  "download_tools": [
+    "aria2c",
+    "curl",
+    "wget"
+  ],
+  "extraction_tools": [
+    "pigz",
+    "zstd",
+    "7z"
+  ],
+  "network_policy": {
+    "connect_timeout_seconds": 15,
+    "max_exact_network_retries": 1,
+    "automatic_endpoint_change": false,
+    "automatic_proxy_node_switch": false,
+    "never_store_password": true,
+    "user_supplied_endpoint_only": true
+  }
+}

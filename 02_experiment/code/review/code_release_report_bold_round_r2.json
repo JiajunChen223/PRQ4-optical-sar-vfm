@@ -1,0 +1,12 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code-release-report.v1",
+  "status": "pass",
+  "scope": "bold_round_03_odd_grid_repair",
+  "clean_sync_manifest": {"path": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json", "sha256": "0f4d7c5458a030bf714372abdf1e78a64f851ed24888dcc2e826be67c696b1d7", "file_count": 59},
+  "release_package": {"path": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_bold_round_r1.tar.gz", "sha256": "3dc11f3311d5c78c917a0c46416fa20c781ca9da9966e0ce33ba415a2ea3fd0a", "bytes": 78868, "file_count": 59},
+  "local_tests": "159 passed",
+  "validator": "pass; 56 executable/config files; 0 violations",
+  "odd_grid_repair": "hierarchical mass transport now pads odd square grids with replicate boundaries and crops back to N",
+  "cloud_sync": {"status": "pending", "data_transfer": false, "weights_transfer": false, "training_started": false, "sealed_test_accessed": false}
+}

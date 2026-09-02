@@ -1,0 +1,113 @@
+dataset_id: sen12ts_worldcover_3region_1200
+source_url: https://source.coop/repositories/sen12ts/sen12ts
+scope: core
+regions: [ethiopia, uganda, sumatra]
+paired_objects: 1200
+modalities:
+  optical:
+    sensor: Sentinel-2
+    channels: 12
+    raw_channels: 14
+    source_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    excluded_indices: [12, 13]
+    excluded_layers: [scene_classification, cloud_mask]
+    band_order: [B01, B02, B03, B04, B05, B06, B07, B08, B8A, B09, B11, B12]
+  sar:
+    sensor: Sentinel-1
+    channels: 2
+    raw_channels: 19
+    source_indices: [1, 0]
+    raw_channel_order: [VH, VV]
+    canonical_channel_order: [VV, VH]
+    excluded_indices: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    excluded_layers: [temporal, insar, local_incidence_angle, srtm_slope, shadow_layover_mask]
+    band_order: [VV, VH]
+patch_size: 120
+parent_shape: [256, 256]
+derived_shape: [120, 120]
+labels: 11
+label_contract:
+  raw_ontology: esa_worldcover_2020_v100
+  raw_values: [10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 100]
+  model_values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  mapping: explicit_raw_worldcover_code_to_contiguous_id
+  ignore_index: 255
+  cloud_task: false
+official_split: parent_first_region_coord_prefix_sha256_rank
+split_contract:
+  parent_first: true
+  crop_after_split: true
+  crop_leakage_rejected: true
+  sealed_test: true
+  region_holdout_axis: secondary
+local_real_data_allowed: false
+cloud_data_root: /root/autodl-tmp/sen12ts_worldcover_3region_1200
+listed_payload_bytes: 8342869280
+active_footprint_estimate_gb: 39.34
+hard_storage_stop_gb: 45
+total_project_ceiling_gb: 50
+license_status: pending_manifest_and_inheritance_audit
+license: CC-BY-NC-4.0
+label_license: CC-BY-4.0
+route_type: method
+selected_route_id: PRQ4-BASELINE-VERIFIED-R2
+primary_core_candidate_id: BASELINE-ALWAYS-FUSE
+primary_task: optical_sar_land_cover_segmentation
+operating_regime: cross_region_sen12ts_worldcover
+central_bottleneck: baseline_always_fuse_only_no_innovation_candidate_bound
+primary_core_mechanism: geotoken_3path
+normalization:
+  scheme: croma_official_dynamic_v1
+  scope: per_micro_batch_per_channel
+  statistics_axes: [0, 2, 3]
+  micro_batch: 16
+  last_batch_policy:
+    training: drop_last
+    validation: pad_repeat_last_and_trim_outputs
+    inference: pad_repeat_last_and_trim_outputs
+  batch_semantics:
+    training: local_micro_batch_stats_on_exactly_16_samples
+    validation: local_micro_batch_stats_with_deterministic_padding
+    inference: local_micro_batch_stats_with_deterministic_padding
+  distributed_statistics: per_rank_micro_batch
+  global_batch_statistics: false
+  clip_sigma: 2.0
+  output_range: [0.0, 1.0]
+  encoding: float32
+  formula: clip((x - (mean_axes_0_2_3 - 2*std_axes_0_2_3)) / (4*std_axes_0_2_3), 0, 1)
+  zero_std_policy: reject_nonfinite_or_nonpositive_std
+  nodata_policy: mask_before_statistics_and_fill_invalid_with_zero
+  fixed_vectors_declared: false
+  source: official_croma_readme
+  source_revision: 59505a6bcadbf36ba20767270154bf9f3067c5e7
+  readme_sha256: c029b9a9f77d283f6290e1071480b1279feaf66885a9fa6a60e858bde77e3295
+  loader_sha256: a38567beed29eb08108a47cdc97fe98aec50fd4be0bd98a5266bcd18aafb7c5b
+  source_evidence_ref: 02_experiment/reports/croma_source_pin_detail_extract_result_20260822_r1.json
+  normalization_locked: false
+test_accessed: false
+test_seal_status: sealed
+mechanism_sets:
+  baseline: always_fuse
+  candidate: always_fuse
+  controls: [always_fuse]
+  same_model_factory: true
+  single_internal_mechanism_delta: true
+screening:
+  epochs: 24
+  seeds: [0]
+  candidate_bank_size: 3
+formal_after_approval:
+  epochs: 24
+  seeds: [0, 1, 2]
+  region_holdout_required: true
+  controlled_registration_grid_required: true
+efficiency_metrics:
+  - peak_vram_mb
+  - samples_per_second
+  - wall_clock_ms
+  - active_token_fraction
+scientific_falsifiers:
+  - always_fuse_or_static_sparse_is_indistinguishable
+  - router_state_collapse
+  - no_measured_latency_or_memory_gain
+  - gains_disappear_under_region_holdout

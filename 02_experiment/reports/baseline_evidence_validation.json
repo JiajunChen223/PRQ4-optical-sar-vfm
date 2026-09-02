@@ -1,0 +1,15 @@
+{
+  "status": "pass",
+  "evidence": "F:\\PRQ4\\02_experiment\\reports\\baseline_evidence.json",
+  "metric_count": 2,
+  "metric_roles": [
+    "primary",
+    "secondary"
+  ],
+  "reference_policy": "comparable_same_type_mainstream_distribution",
+  "baseline_target_type": "acceptable_same_type_mainstream_baseline",
+  "not_innovation_target": true,
+  "not_sota_target": true,
+  "exact_official_configuration_required": false,
+  "problems": []
+}

@@ -1,0 +1,26 @@
+{
+  "artifact_type": "formal_run_failure",
+  "schema_version": "researchpilot.formal_run_failure.v1",
+  "status": "invalid_protocol",
+  "run_id": "PRQ4-BASELINE-STRENGTHENING-SEED0-FORMAL24-AUG-R1",
+  "execution_scale": "strengthening",
+  "mechanism_set": "always_fuse",
+  "seed": 0,
+  "failure_class": "invalid_protocol",
+  "reason": "formal_runner mapped strengthening scale to zero-worker CPU loader, pin_memory=false and AMP=false; the run did not use the measured 3090 pipeline contract.",
+  "stdout_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\outputs\\PRQ4-BASELINE-STRENGTHENING-SEED0-FORMAL24-AUG-R1-20260824T132121934869-38644.out",
+  "stderr_file": "F:\\PRQ4\\02_experiment\\cloud\\commands\\outputs\\PRQ4-BASELINE-STRENGTHENING-SEED0-FORMAL24-AUG-R1-20260824T132121934869-38644.err",
+  "observed_run_manifest_loader": {
+    "num_workers": 0,
+    "pin_memory": false,
+    "persistent_workers": false,
+    "amp": false
+  },
+  "preserved_metrics_not_scientific": true,
+  "test_accessed": false,
+  "sealed_test_status": "sealed",
+  "data_downloaded": false,
+  "weights_downloaded": false,
+  "gpu_probe": false,
+  "next_action": "ordinary guarded code-only synchronization of r2, then rerun the identical baseline strengthening intent with the repaired loader mapping"
+}

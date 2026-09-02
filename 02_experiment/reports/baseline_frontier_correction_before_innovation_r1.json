@@ -1,0 +1,21 @@
+{
+  "artifact_type": "baseline_frontier_correction",
+  "schema_version": "researchpilot.baseline-frontier-correction.v1",
+  "status": "blocked",
+  "issue": "The formal baseline is reproducible but below the frozen same-type mainstream reference band; innovation execution must not be treated as authorized until the baseline is strengthened or the route is explicitly revised.",
+  "from_gate": "INNOVATION_REVIEW",
+  "to_gate": "BASELINE_REPRODUCTION",
+  "baseline_metrics_ref": "F:\\PRQ4\\02_experiment\\reports\\baseline_seed0_pretrained_formal24_augmented_r2_metrics.json",
+  "baseline_comparison_ref": "F:\\PRQ4\\02_experiment\\reports\\baseline_comparison_formal24_augmented_r2.json",
+  "baseline_mIoU_percent": 38.76022926214301,
+  "baseline_OA_percent": 65.90933641975309,
+  "baseline_result_validity": "conditional_validation_only",
+  "mainstream_frontier_claim": "not_reached",
+  "innovation_authorized": false,
+  "candidate_results_consumable": false,
+  "candidate_results_preserved_as_diagnostic": true,
+  "test_accessed": false,
+  "sealed_test_status": "sealed",
+  "scientific_result": false,
+  "next_action": "Strengthen or revise the baseline under a new approved baseline-only protocol; do not run or compose innovation candidates before baseline readiness is re-established."
+}

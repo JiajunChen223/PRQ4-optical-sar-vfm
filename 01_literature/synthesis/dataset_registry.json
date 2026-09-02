@@ -1,0 +1,67 @@
+{
+  "schema_version": "1",
+  "status": "frozen",
+  "datasets": [
+    {
+      "dataset_id": "copernicus_bench_bigearthnet_s1s2_10pct",
+      "version": "Copernicus-Bench BigEarthNet paired multilabel subset",
+      "doi": "",
+      "official_url": "https://github.com/zhu-xlab/Copernicus-FM/tree/main/Copernicus-Bench",
+      "license": "CDLA-Permissive-1.0 reported for BigEarthNet v2.0; benchmark inheritance pending",
+      "compressed_bytes": 11876108982,
+      "unpacked_bytes": 30000000000,
+      "sha256": "pending_not_used",
+      "modalities": [
+        "Sentinel-1 SAR",
+        "Sentinel-2 optical"
+      ],
+      "split_protocol": "official fixed paired-ID multilabel split",
+      "label_type": "19-class multilabel scene labels",
+      "scope": "extension",
+      "notes": "Not used in V17; incompatible with the fixed dense segmentation task and retained only as historical registry context.",
+      "verification_status": "pending",
+      "updated_at_utc": "2026-08-31T00:46:50.708333+00:00"
+    },
+    {
+      "dataset_id": "dfc2020_s1s2_dense_segmentation",
+      "version": "IEEE GRSS Data Fusion Contest 2020 / Copernicus-Bench mirror",
+      "doi": "",
+      "official_url": "https://www.grss-ieee.org/community/technical-committees/2020-ieee-grss-data-fusion-contest/",
+      "license": "PENDING: Copernicus mirror says CC BY 4.0 but original contest terms require IADF/TUM approval and acknowledgement",
+      "compressed_bytes": 8755471893,
+      "unpacked_bytes": 10600000000,
+      "sha256": "pending official hash audit",
+      "modalities": [
+        "Sentinel-1 SAR 2 channels + Sentinel-2 optical 13 channels"
+      ],
+      "split_protocol": "published 3156/986/986 split; geographic/scene grouping; original test sealed",
+      "label_type": "dense land-cover segmentation, 10 classes",
+      "scope": "extension",
+      "notes": "Optional dense segmentation transfer only after written permission and hash/license resolution; not needed for core route handoff.",
+      "verification_status": "pending",
+      "updated_at_utc": "2026-08-19T17:36:07.504850+00:00"
+    },
+    {
+      "dataset_id": "sen12ts_worldcover_3region_1200",
+      "version": "audited 3-region 1200-parent successor; formal_manifest_ssl4eo_excluded_r1",
+      "doi": "",
+      "official_url": "https://dataserv.ub.tum.de/index.php/s/m1554003",
+      "license": "CC-BY-NC-4.0 for SEN12TS with ESA WorldCover attribution; verified before cloud acquisition",
+      "compressed_bytes": 7091439264,
+      "unpacked_bytes": 7091439264,
+      "sha256": "d964a8214fa818dd90cbe9cd5f407e17ebefadf9516eaedc15306abd2e629996",
+      "modalities": [
+        "Sentinel-1 SAR VV/VH",
+        "Sentinel-2 multispectral optical",
+        "ESA WorldCover labels"
+      ],
+      "split_protocol": "parent-first 840 train / 180 validation / 180 sealed-test; crop after split; sealed test objects absent",
+      "label_type": "11-class dense WorldCover semantic segmentation with ignore index 255",
+      "scope": "core",
+      "notes": "Existing cloud-only materialization; 7.091GB active footprint, 3060 active objects, no new V17 download. Scientific logic and leakage audit passed; one administrative completeness item remains non-blocking.",
+      "verification_status": "verified",
+      "updated_at_utc": "2026-08-31T00:46:52.441622+00:00"
+    }
+  ],
+  "frozen_at_utc": "2026-08-31T00:46:53.360709+00:00"
+}

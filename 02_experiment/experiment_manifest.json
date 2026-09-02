@@ -1,0 +1,275 @@
+{
+  "created_at_utc": "2026-08-19T18:08:56.058464+00:00",
+  "project_root": "F:\\PRQ4",
+  "route_type": "method",
+  "plan_ref": "01_literature/synthesis/plan_handoff.json",
+  "research_plan_ref": "01_literature/synthesis/plan_handoff.json",
+  "approved_plan": {
+    "selected_route_id": "R-EO-CTSP-V19-01",
+    "primary_core_candidate_id": "CTSP-01",
+    "core_mechanism": "Classifier-Tangent Selective Projection: a zero-parameter, label-free K-space decomposition of the final multimodal residual by the detached existing shared classifier; preserve classifier-tangent information and cap only normalized class-logit-visible displacement before the unchanged head.",
+    "main_claim": "PLAN hypothesis only: at a fixed EO VFM interface, selectively constraining the classifier-visible component of an already-formed optical-SAR residual may preserve useful complementary information better than either unrestricted fusion or isotropic whole-residual shrinkage.",
+    "dataset_summary_ref": "01_literature/synthesis/plan_handoff.json",
+    "compute_profile": {
+      "target_profile": "1× RTX 3090 24GB; AMP; 120×120; 15×15 grid; micro-batch 16; effective batch 32; one CROMA forward",
+      "local_gpu_probe_forbidden": true,
+      "cloud_preflight_required": true
+    },
+    "data_budget": {
+      "core_ceiling": "<=50GB including data, labels, caches, audited weights and checkpoints; 45GB acquisition hard stop",
+      "extension_policy": "none before CTSP is individually supported and final-core approval is later obtained",
+      "cloud_only": true
+    },
+    "initialization_policy": {
+      "preferred_mode": "pretrained_when_compatible",
+      "source_policy": "same audited official/open CROMA-base checkpoint as verified R2",
+      "cloud_only_weights": true,
+      "cloud_weight_root": "/root/autodl-tmp/weights",
+      "compatibility_audit_required": true,
+      "same_initialization_for_comparisons": true,
+      "target_test_data_exclusion": true,
+      "pretraining_not_claimed_as_innovation": true,
+      "fallback_policy": "document validator-approved random initialization only when no compatible checkpoint exists"
+    },
+    "innovation_candidate_ids": [
+      "CTSP-01"
+    ]
+  },
+  "protocol_version": "sen12ts-geotoken3path-v19.20260901-ctsp-r1",
+  "protocol_file": "F:\\PRQ4\\02_experiment\\protocol\\experiment_protocol.yaml",
+  "cloud_connection_file": "F:\\PRQ4\\02_experiment\\cloud\\cloud_connection.json",
+  "stage": "experiment",
+  "publication_figures_allowed": false,
+  "claim_experiment_ledger": "F:\\PRQ4\\02_experiment\\claims\\claim_experiment_ledger.jsonl",
+  "gate_status": "F:\\PRQ4\\02_experiment\\gate_status.json",
+  "baseline_evidence": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_baseline_reproduction_reattachment_20260901_r1.json",
+  "baseline_frontier_matrix": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_baseline_frontier_matrix_20260901_r1.csv",
+  "baseline_frontier_summary": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_baseline_frontier_reattachment_20260901_r1.json",
+  "rapid_baseline_reference": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_rapid_baseline_reference_reattachment_20260901_r1.json",
+  "innovation_effect_policy": {
+    "path": "02_experiment/reports/v19_ctsp_innovation_effect_policy_20260901_r1.json",
+    "status": "pass_frozen_before_innovation",
+    "frozen_before_innovation": true,
+    "primary_metric": "mIoU",
+    "close_below_delta_pp": 1.0,
+    "meaningful_delta_pp": 2.0,
+    "promotion_threshold_mIoU_percent": 51.78078791964122,
+    "secondary_noninferiority": [
+      "OA",
+      "rare_macro_IoU"
+    ],
+    "test_accessed": false
+  },
+  "fast_screening_bank": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_fast_screening_bank_20260901_r1.json",
+  "fast_screening_results": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_fast_screening_results_20260901_r1.json",
+  "fast_screening_rounds": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_fast_screening_rounds_20260901_r1.json",
+  "prior_art_overlap_report": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_prior_art_overlap_20260901_r1.json",
+  "innovation_coupling_plan": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_coupling_plan_20260901_r1.json",
+  "innovation_composition_report": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_innovation_composition_20260901_r1.json",
+  "innovation_formal_result": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_formal_seed0_result_summary_20260901_r1.json",
+  "innovation_curve_packet": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_innovation_curve_packet_20260901_r1.json",
+  "innovation_curve_validation": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_innovation_curve_validation_20260901_r1.json",
+  "innovation_route_closure": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_route_closure_20260901_r1.json",
+  "hardware_adaptation_report": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_hardware_data_pipeline_adaptation_20260901_r2.json",
+  "pretrained_weight_audit": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_croma_pretrained_weight_audit_20260901_r1.json",
+  "ctsp_tau_calibration": {
+    "local_metadata_ref": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_tau_calibration_20260901_r1.json",
+    "remote_artifact_ref": "/root/autodl-tmp/v19_ctsp_tau_calibration_20260901_r2.json",
+    "remote_artifact_sha256": "a386606f6df405666ec0c2f04f1fe5bed1621764aeddf48b83df4aa86384ade1",
+    "tau": 2.1722421646118164,
+    "parent_count": 256,
+    "split": "train",
+    "shuffle": false,
+    "augmentation": "disabled",
+    "optimizer_step": 0,
+    "test_accessed": false
+  },
+  "effective_policy_ref": "F:\\PRQ4\\00_project\\controls\\effective_project_policy.json",
+  "writing_evidence_handoff": "F:\\PRQ4\\02_experiment\\packaging\\writing_evidence_handoff.json",
+  "strengthening_request_file": "F:\\PRQ4\\02_experiment\\reports\\strengthening_approval_request.json",
+  "final_core_request_file": "F:\\PRQ4\\02_experiment\\reports\\final_core_approval_request.json",
+  "approval_checkpoint_policy": "fixed_checkpoint_automatic",
+  "approval_checkpoints": [
+    "PLAN_APPROVAL",
+    "FINAL_CORE_APPROVAL"
+  ],
+  "default_continuation_reviews": [
+    "STRENGTHENING_RESULT_REVIEW",
+    "FINAL_EVIDENCE_REVIEW"
+  ],
+  "innovation_policy": {
+    "minimum_distinct_screened_directions": 1,
+    "minimum_supported_directions_before_strengthening": 1,
+    "minimum_supported_structural_directions_before_strengthening": 1,
+    "preferred_distinct_screened_directions": "single_route",
+    "fast_screening_round_budget": {
+      "candidate_bank_size": 1,
+      "max_rounds": 1,
+      "max_total_candidates": 1,
+      "minimum_cumulative_survivors": 1
+    },
+    "candidate_count_is_not_supported_count": true,
+    "supported_count_is_not_user_approved_count": true,
+    "composition_round_required_before_multi_seed": false,
+    "coupling_novelty_plan_required_before_composition": false,
+    "central_bottleneck_required_for_final_core": true,
+    "borrowed_component_provenance_required": true,
+    "information_flow_chain_required": true,
+    "matched_budget_ablation_required": true,
+    "simple_stack_without_coupling_evidence_forbidden": true,
+    "same_horizon_comparison_required": true,
+    "external_frontier_not_used_for_rapid_decision": true,
+    "prior_art_overlap_grading_required": true,
+    "fatal_overlap_only_screening_rejection": true,
+    "minimum_final_core_directions_before_confirmation": 1,
+    "minimum_final_structural_directions_before_confirmation": 1,
+    "effect_policy_required_before_screening": true,
+    "minimum_meaningful_effect_required_for_support": true,
+    "curve_effect_policy_required": true,
+    "training_object_parity_required": true,
+    "single_internal_mechanism_delta_required": true,
+    "maximum_calibration_finetuning_candidates": 1,
+    "structural_core_required": true,
+    "structural_innovation_classes": [
+      "architecture",
+      "routing_computation"
+    ],
+    "strengthening_requires_explicit_user_approval": false,
+    "final_core_approval_required_before_confirmation": true
+  },
+  "data_policy": {
+    "local_real_data_allowed": false,
+    "local_real_data_root_allowed": false,
+    "local_synthetic_fixture_allowed": true,
+    "cloud_download_required": true,
+    "cloud_platform": "autodl",
+    "cloud_data_root": "/root/autodl-tmp",
+    "raw_data_must_pass_through_local": false,
+    "cloud_download_tools": [
+      "aria2c",
+      "curl",
+      "wget"
+    ],
+    "cloud_extraction_tools": [
+      "pigz",
+      "zstd",
+      "7z"
+    ]
+  },
+  "initialization_policy": {
+    "preferred_mode": "pretrained_when_compatible",
+    "pretrained_required_by_default": true,
+    "pretrained_search_required": true,
+    "source_policy": "official_or_reproducible_open_release",
+    "cloud_only_weights": true,
+    "cloud_weight_root": "/root/autodl-tmp/weights",
+    "compatibility_audit_required": true,
+    "same_initialization_for_comparisons": true,
+    "target_test_data_exclusion": true,
+    "pretraining_not_claimed_as_innovation": true,
+    "fallback_policy": "document_random_init_only_when_no_compatible_checkpoint_exists",
+    "random_init_exception_requires_search_record": true,
+    "selected_mode": "pretrained",
+    "audit_report": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_croma_pretrained_weight_audit_20260901_r1.json"
+  },
+  "test_seal_policy": {
+    "development_splits": [
+      "train",
+      "validation"
+    ],
+    "sealed_until": [
+      "model_frozen",
+      "configuration_frozen",
+      "accepted_hypotheses_frozen",
+      "checkpoint_selection_rule_frozen"
+    ]
+  },
+  "successor_route_history": [
+    {
+      "route_id": "R-EO-JACK-V18-01",
+      "candidate_id": "JACK-01",
+      "protocol_version": "sen12ts-geotoken3path-v18.20260831-jack-r1",
+      "archived_manifest": "F:\\PRQ4\\02_experiment\\archive\\pre_v19_ctsp_20260901\\experiment_manifest.json",
+      "archived_protocol": "F:\\PRQ4\\02_experiment\\archive\\pre_v19_ctsp_20260901\\experiment_protocol.yaml",
+      "archived_at_utc": "2026-09-01T02:51:03.728600+00:00"
+    }
+  ],
+  "route_id": "R-EO-CTSP-V19-01",
+  "candidate_id": "CTSP-01",
+  "research_plan_sha256": "8569731bd58ffa8bd72da489b1faee03c38827e0a5ac281663d95a84f6b7781f",
+  "code_contract": {
+  "status": "pass_v19_ctsp_code_sync_r4",
+    "code_report": "F:\\PRQ4\\02_experiment\\code\\review\\CODE_REPORT.json",
+    "clean_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\review\\clean_sync_manifest_v19_ctsp_20260901_r1.json",
+    "clean_sync_manifest_sha256": "68cfa3179fddd5b4c13b1f7b1a00a5f55391893909b1ec5f97de63da3fd966f1",
+    "release_package": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_v19_ctsp_20260901_r8.tar.gz",
+    "release_package_sha256": "c5858b7198f0013d774fd29e8ad0dc5370a226558fcf816a504ec7a3d15d0181",
+    "hard_contract_ref": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_synthetic_hard_contract_20260901_r6.json",
+    "hard_contract_status": "pass_local_synthetic",
+    "liveness_ref": "F:\\PRQ4\\02_experiment\\reports\\v19_ctsp_synthetic_hard_contract_20260901_r6.json",
+    "liveness_status": "pass_local_synthetic",
+    "local_gpu_probe": "forbidden_not_run"
+  },
+  "innovation_schedule": {
+    "route_mode": "user_frozen_single_route",
+    "rapid_ranking": false,
+    "first_candidate": "CTSP-01",
+    "screening_seed": 0,
+    "full_horizon_epochs": 24,
+    "controls_locked_until_primary_delta_pp": 2.0,
+    "conditional_controls": [
+      "CTSP-C1",
+      "CTSP-C2",
+      "CTSP-C3"
+    ],
+    "no_tuning_rescue": true,
+    "minimum_supported_directions_before_final_core": 1,
+    "minimum_supported_structural_directions_before_final_core": 1,
+    "formal_training_object_parity_ref": "02_experiment/reports/v19_ctsp_training_object_parity_20260901_r1.json",
+    "training_object_parity": {
+      "same_detector_training_object_required": true,
+      "single_internal_mechanism_delta_required": true,
+      "mechanism_inside_detector_required": true,
+      "end_to_end_training_required": true,
+      "common_parameter_trainability_mask_required": true,
+      "frozen_baseline_wrapper_forbidden": true,
+      "external_trainable_component_forbidden": true
+    }
+  },
+  "claim_ledger": {
+    "path": "02_experiment/claims/claim_experiment_ledger.jsonl",
+    "primary_claim_id": "H-V19-CTSP-01",
+    "supporting_hypothesis_ids": [
+      "H-V19-CTSP-GEOMETRY",
+      "H-V19-CTSP-TANGENT",
+      "H-V19-CTSP-BOUND"
+    ],
+    "falsification_required": true
+  },
+  "metrics": {
+    "primary_metric": "mIoU",
+    "secondary_metrics": [
+      "OA",
+      "frequent_macro_IoU",
+      "rare_macro_IoU",
+      "per_class_IoU"
+    ],
+    "mechanism_telemetry": [
+      "ctsp_tangent_leakage",
+      "ctsp_final_bound_violation",
+      "ctsp_normal_activity",
+      "ctsp_alpha_mean",
+      "ctsp_numerical_rank",
+      "ctsp_gram_pinv_residual",
+      "ctsp_tangent_norm",
+      "ctsp_normal_norm"
+    ],
+    "selection_metric": "validation.mIoU",
+    "reproduction_metric": "validation.mIoU"
+  },
+  "test_seal": {
+    "status": "sealed",
+    "test_access_allowed_only_at": "FINAL_TEST",
+    "test_accessed": false
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "artifact_type": "targeted_evidence_completion_successor",
+  "artifact_version": "2026-08-22.sen12ts-worldcover-3region-1200-r3",
+  "status": "CONDITIONAL_PASS_FOR_PLAN_CORRECTION_ONLY",
+  "formal_plan_handoff_status": "NOT_READY",
+  "formal_data_gate": "CLOUD_DATA_DOWNLOAD_BLOCKED",
+  "route_binding": {
+    "route_id": "R-EO-TRI-FUSE-01",
+    "candidate_id": "CAND-01",
+    "primary_task": "optical-SAR land-cover semantic segmentation",
+    "primary_bottleneck": "cross-modal spatial misregistration",
+    "primary_core_mechanism": "GeoToken-3Path discrete per-token residual routing with optical/SAR exchange",
+    "route_rewrite": false
+  },
+  "scope": {
+    "allowed": "metadata-only plan evidence closure and successor-contract drafting",
+    "forbidden": [
+      "real data download or persistence",
+      "checkpoint download or payload inspection",
+      "pixel-array reads",
+      "GPU probe",
+      "training/evaluation/metrics",
+      "canonical plan_handoff rewrite"
+    ]
+  },
+  "split_license_label": {
+    "decision": "CONDITIONAL_PASS",
+    "manifest": "logs/agent_runs/prq4-sen12ts-split-license-closure-20260822/sen12ts_parent_first_split_manifest_draft.json",
+    "manifest_sha256": "7c6756e360ff82d711e7831b9061cd3084970f14835ce029a8c821c9acf25b45",
+    "rows": 1200,
+    "allocation": {
+      "ethiopia": {"train": 280, "val": 60, "sealed_test": 60},
+      "uganda": {"train": 280, "val": 60, "sealed_test": 60},
+      "sumatra": {"train": 280, "val": 60, "sealed_test": 60},
+      "overall": {"train": 840, "val": 180, "sealed_test": 180}
+    },
+    "grouping": "region/coord_prefix parent-first; SHA256 rank within region; crop only after assignment",
+    "label_provenance": "ESA WorldCover 2020 v100, 11 official codes; contiguous loader mapping is deferred until value audit",
+    "license": "SEN12TS CC-BY-NC-4.0; WorldCover CC-BY-4.0; non-commercial research and attribution only",
+    "closed": ["deterministic parent grouping draft", "counts and disjointness draft", "official label provenance and class list"],
+    "pending": ["raw label values/nodata audit", "supplementary mapping binding", "provider-specific terms and final attribution bundle", "formal sealed-test acceptance"]
+  },
+  "croma_input_and_initialization": {
+    "decision": "CONDITIONAL_PASS_FOR_INPUT_AND_LINEAGE",
+    "official_contract": {"sar_channels": 2, "optical_channels": 12, "image_resolution": 120, "patch_size": 8, "base_dim": 768},
+    "sen12ts_selector": {"s1_raw_indices": [1, 0], "s1_semantics": ["VV", "VH"], "s2_raw_indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "drop_s2_indices": [12, 13]},
+    "normalization": "official README reference recipe: per-sample/per-channel mean±2*std clipping to [0,1], optional uint8 path",
+    "checkpoint_metadata": {"repository": "https://huggingface.co/antofuller/CROMA", "revision": "0dd28e3d633bd6715856ae9890e8c49360040598", "file": "CROMA_base.pt", "size_bytes": 777563846, "sha256": "0238d814b53108f3574bf1ea240e38a0a6edd46173816d9a6962070561893b63", "payload_downloaded": false},
+    "lineage_boundary": "VV/VH and B1..B12 ordering is SSL4EO lineage inference, not a byte-level checkpoint manifest",
+    "pending": ["checkpoint payload/state-dict key-shape audit", "exact checkpoint normalization parity", "byte-level polarization semantics", "SEN12TS pixel scale/nodata closure", "3090 memory preflight"]
+  },
+  "croma_geotoken_bridge": {
+    "decision": "CONDITIONAL_SUCCESSOR_CONTRACT; FORMAL_BRIDGE_BLOCKED",
+    "successor_id": "CROMA-FTB-01",
+    "official_forward": "final SAR/optical/joint encodings and GAP only; no public mid/late list and no native [B,N,4,D] fine-SAR output",
+    "required_adapter": {"call": "croma(SAR_images=sar_120, optical_images=optical_120)", "coarse_tokens": "[B,225,768]", "stage_trace": "post-block residual taps with final-output parity", "fine_source": "explicit same-parent high-resolution SAR input; no interpolation fallback"},
+    "proposed_fine_hypothesis": "240x240 frozen SAR branch grouped 2x2 to [B,225,4,768]; resource/geometry hypothesis only, not validated",
+    "hard_falsifiers": ["final-token parity failure", "missing or ambiguous stage indices", "fine branch derived only from 120 tokens", "unproven parent-to-crop geometry", "3090 memory failure"],
+    "pending": ["pinned checkpoint load", "mid/late trace parity", "fine geometry and raw-input contract", "3090 memory preflight"]
+  },
+  "independent_artifacts": [
+    {"role": "sen12ts_split_license_closure_scout", "report": "logs/agent_runs/prq4-sen12ts-split-license-closure-20260822/report.md", "report_sha256": "4b8f124dc53b9d13f1ca16bf4b5ff8b1522dbe0443f152f731e154280d2ab3fc", "status": "CONDITIONAL_PASS"},
+    {"role": "croma_norm_and_input_contract_auditor", "report": "logs/agent_runs/prq4-croma-norm-audit-20260822/report.md", "report_sha256": "23d73c7eb19f9c8cf240f2b51f1fccc3a3a0d5ac64842ae14689d47ef4937c47", "status": "CONDITIONAL_PASS"},
+    {"role": "croma_feature_bridge_auditor", "report": "logs/agent_runs/prq4-croma-feature-bridge-20260822/report.md", "report_sha256": "01bcefa1e885b2c778f1f228167d12b8341b9bff85555f780eee3cf73f654810", "status": "CONDITIONAL_SUCCESSOR_CONTRACT"}
+  ],
+  "decision": {
+    "accept": ["parent-first split as a deterministic draft", "official CROMA 2+12/120/patch-8 metadata contract", "explicit adapter requirement and fail-closed bridge successor"],
+    "do_not_claim": ["data gate pass", "exact checkpoint compatibility", "native mid/late/fine CROMA outputs", "label-value closure", "3090 feasibility", "experimental support"],
+    "next_protected_step": "a separately controlled cloud-only hash-first checkpoint and feature-parity audit after the remaining data/terms controls are accepted",
+    "current_gate_note": "CLOUD_DATA_DOWNLOAD remains BLOCKED; no downstream gate may advance"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "artifact_type": "baseline_reproduction_metrics",
+  "schema_version": "researchpilot.baseline.metrics.v2",
+  "status": "pass",
+  "run_id": "PRQ4-BASELINE-STRENGTHENING-SEED0-FORMAL24-TAP-CONNECTED-R1",
+  "dataset_id": "sen12ts_worldcover_3region_1200",
+  "split": "validation",
+  "formal_scale": "strengthening",
+  "epochs": 24,
+  "stopped_epoch": 24,
+  "best_epoch": 20,
+  "rapid_horizon_epochs": 5,
+  "mechanism_set": "always_fuse",
+  "seed": 0,
+  "metrics": {
+    "mIoU": {
+      "value": 48.76416616180537,
+      "unit": "percent",
+      "epoch": 20
+    },
+    "OA": {
+      "value": 77.89189814814816,
+      "unit": "percent",
+      "epoch": 20
+    }
+  },
+  "checkpoint_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_tap_connected_r1/always_fuse_seed0.pt",
+  "checkpoint_sha256": "c54cb41c505c7d0c8eb3e9fe6457fa9efc7b610e4a4345e7de141654abd35eab",
+  "checkpoint_bytes": 1525032410,
+  "rapid_checkpoint_ref": "/root/autodl-tmp/runs/baseline_seed0_pretrained_formal24_tap_connected_r1/always_fuse_seed0_rapid_epoch5.pt",
+  "rapid_checkpoint_sha256": "2f2f0bc97b198be33e521ac0cea15b52752fa15daceb459e23acc3e2ba1c067c",
+  "rapid_checkpoint_bytes": 1525027802,
+  "matched_common_protocol_sha256": "9d3187c9a339d802e19d0a652373aad605bdb05efd91ce850273f357407c76dc",
+  "code_sync_manifest_ref": "02_experiment/code/manifests/clean_sync_manifest.json",
+  "test_accessed": false,
+  "test_seal_status": "sealed",
+  "weights_loaded": true,
+  "training_completed": true,
+  "evaluation_completed": true,
+  "scientific_result_boundary": "baseline-only formal validation under tap-connected trainability; innovation remains locked until baseline gate review",
+  "data_pipeline_optimization": {
+    "amp": true,
+    "non_blocking_device_copy": true,
+    "num_workers": 4,
+    "persistent_workers": true,
+    "pin_memory": true,
+    "prefetch_factor": 2
+  },
+  "early_stopping": {
+    "burn_in_epochs": 8,
+    "enabled": true,
+    "min_delta_percentage_points": 0.1,
+    "mode": "max",
+    "monitor": "validation.mIoU",
+    "patience": 5,
+    "restore_best_checkpoint": true
+  },
+  "trainability_policy": {
+    "adapters": "trainable",
+    "backbone_policy": "tap_connected",
+    "decoder": "trainable",
+    "router": "trainable",
+    "trunk": "tap_connected_unfrozen"
+  },
+  "protocol_ref": "F:\\PRQ4\\02_experiment\\reports\\sen12ts_protocol_lock_baseline_tap_connected_20260825_r1.json"
+}

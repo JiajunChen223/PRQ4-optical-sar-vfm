@@ -1,0 +1,20 @@
+{
+  "artifact_type": "researchpilot_code_release_report",
+  "schema_version": "researchpilot.code_release_report.v2",
+  "status": "pass",
+  "scope": "local_code_service_only_code_sync_candidate",
+  "source_clean_sync_manifest": "F:\\PRQ4\\02_experiment\\code\\manifests\\clean_sync_manifest.json",
+  "source_clean_sync_manifest_sha256": "4064ee3c9b8a3bb82280814d7ccfe6cfed48512c9215c6ec4effaa0d44b7769a",
+  "file_count": 59,
+  "package": "F:\\PRQ4\\02_experiment\\artifacts\\geotoken3path_code_formal24_augmented_r2.tar.gz",
+  "package_sha256": "4bf9aa4b034bd78b0817a401826c892c18da3d603accc1afb0bf077192d145ba",
+  "package_bytes": 70407,
+  "payload_scope": "reviewed_code_configs_tests_manifests_only",
+  "local_real_data_included": false,
+  "pretrained_weight_binaries_included": false,
+  "test_seal_status": "sealed",
+  "local_gpu_probe": "forbidden_not_run",
+  "scientific_result": false,
+  "formal_training_performed": false,
+  "loader_contract": "formal scales use four workers, pin/persistent/prefetch, nonblocking and AMP"
+}

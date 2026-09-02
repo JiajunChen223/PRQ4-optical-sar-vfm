@@ -1,0 +1,45 @@
+{
+  "artifact_type": "baseline_comparison",
+  "schema_version": "researchpilot.baseline.comparison.v1",
+  "status": "pass",
+  "metric_comparisons": [
+    {
+      "name": "mIoU",
+      "role": "primary",
+      "reproduced": 48.76416616180537,
+      "mainstream_center": 47.3,
+      "acceptable_band": {
+        "low": 42.57,
+        "high": 52.03
+      },
+      "absolute_diff_to_center": 1.4641661618053732,
+      "status": "within_mainstream_band"
+    },
+    {
+      "name": "OA",
+      "role": "secondary",
+      "reproduced": 77.89189814814816,
+      "mainstream_center": 78.9,
+      "acceptable_band": {
+        "low": 71.01,
+        "high": 86.79
+      },
+      "absolute_diff_to_center": -1.0081018518518476,
+      "status": "within_mainstream_band"
+    }
+  ],
+  "baseline_target_type": "acceptable_same_type_mainstream_baseline",
+  "not_innovation_target": true,
+  "not_sota_target": true,
+  "baseline_qualification": {
+    "mIoU_lower_bound": 42.57,
+    "OA_lower_bound": 71.01,
+    "qualified": true
+  },
+  "reproduced_ref": "F:\\PRQ4\\02_experiment\\reports\\baseline_seed0_pretrained_formal24_tap_connected_r1_metrics.json",
+  "protocol_ref": "F:\\PRQ4\\02_experiment\\reports\\sen12ts_protocol_lock_baseline_tap_connected_20260825_r1.json",
+  "artifact_audit_ref": "F:\\PRQ4\\02_experiment\\reports\\baseline_trainability_pipeline_audit_r3.json",
+  "test_accessed": false,
+  "test_seal_status": "sealed",
+  "scientific_result_boundary": "baseline-only validation; no innovation claim"
+}
