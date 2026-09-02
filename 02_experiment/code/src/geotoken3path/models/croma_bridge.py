@@ -322,7 +322,8 @@ class CromaGeoTokenSegmentation(nn.Module):
         optical, sar, depth_group = self.bridge(optical_image, sar_image)
         # Consume the joint encodings immediately so no batch graph can remain
         # held by the bridge; the native joint field is not used downstream.
-        self.bridge.take_joint_encodings()
+        joint = self.bridge.take_joint_encodings()
+        physical_groups = None
         return self.token_model(
             optical,
             sar,
@@ -331,8 +332,6 @@ class CromaGeoTokenSegmentation(nn.Module):
             physical_groups=physical_groups,
             output_size=tuple(optical_image.shape[-2:]),
             return_aux=return_aux,
-            d2_intervention=d2_intervention,
-            d3_intervention=d3_intervention,
         )
 
     def close(self) -> None:

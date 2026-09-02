@@ -205,7 +205,9 @@ def main() -> int:
             output_dir=args.output_dir, mechanism_set=args.mechanism_set,
             execution_scale=args.formal_scale, epochs=args.epochs, rapid_horizon_epochs=args.rapid_horizon_epochs,
             device=args.device, candidate_direction_id=args.candidate_direction_id,
-            objective_name=args.objective,
+            # The locked baseline objective (CE+Lovasz) comes from the resolved
+            # protocol; the CLI flag must not silently override it.
+            objective_name=None,
         )
         print(result)
         return 0
