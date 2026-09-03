@@ -10,7 +10,7 @@ test_seal_status: sealed
 mechanism_sets:
   baseline: always_fuse
   candidate: always_fuse
-  controls: [always_fuse]
+  controls: [always_fuse, r2_depth_group_inject, r1_low_energy_channel_gain]
   same_model_factory: true
   single_internal_mechanism_delta: true
 screening:

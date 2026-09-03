@@ -29,6 +29,8 @@ from geotoken3path.engine.formal_runner import run_formal_cloud
 
 _APPROVED_MECHANISM_SETS = (
     "always_fuse",
+    "r2_depth_group_inject",
+    "r1_low_energy_channel_gain",
 )
 
 
@@ -180,10 +182,15 @@ def main() -> int:
     parser.add_argument(
         "--objective",
         choices=("pixel_ce", "macro_ce", "ce_lovasz", "macro_ce_lovasz"),
-        default="pixel_ce",
+        default="ce_lovasz",
+        help="Locked baseline objective (CE+Lovasz); resolved config does not declare it",
     )
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--rapid-horizon-epochs", type=int, default=5)
+    parser.add_argument(
+        "--seed", type=int, default=0,
+        help="Screening/formal seed (protocol seeds [0,1,2]); injected into resolved runtime",
+    )
     parser.add_argument("--device", default="cuda:0")
     args = parser.parse_args()
     manifest = {"execution_scale": args.execution_scale, "test_seal_status": "sealed"}
@@ -193,6 +200,8 @@ def main() -> int:
         if not args.data_manifest or not args.audit_report or not args.output_dir:
             raise RuntimeError("formal cloud execution requires --data-manifest, --audit-report and --output-dir")
         resolved = resolve_approved_config(code_root, args.mechanism_set, execution_scale=args.formal_scale)
+        resolved["runtime"] = dict(resolved["runtime"])
+        resolved["runtime"]["seed"] = int(args.seed)
         init_cfg = json.loads(json.dumps({}))
         try:
             import yaml
@@ -205,9 +214,9 @@ def main() -> int:
             output_dir=args.output_dir, mechanism_set=args.mechanism_set,
             execution_scale=args.formal_scale, epochs=args.epochs, rapid_horizon_epochs=args.rapid_horizon_epochs,
             device=args.device, candidate_direction_id=args.candidate_direction_id,
-            # The locked baseline objective (CE+Lovasz) comes from the resolved
-            # protocol; the CLI flag must not silently override it.
-            objective_name=None,
+            # Resolved config does not declare an objective; the CLI flag
+            # carries the locked baseline objective (CE+Lovasz default).
+            objective_name=args.objective,
         )
         print(result)
         return 0

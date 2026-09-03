@@ -23,6 +23,9 @@ import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
 
+from geotoken3path.mechanisms.r2_depth_inject import R2DepthGroupInjector
+from geotoken3path.mechanisms.r1_energy_gain import R1LowEnergyChannelGain
+
 
 class GeoToken3PathFusion(nn.Module):
     """Capacity-constrained per-token hard routing with sparse dispatch."""
@@ -32,6 +35,8 @@ class GeoToken3PathFusion(nn.Module):
     ESCALATION_STATE = 2
     VALID_MECHANISMS = {
         "always_fuse",
+        "r2_depth_group_inject",
+        "r1_low_energy_channel_gain",
     }
 
     def __init__(
@@ -632,6 +637,13 @@ class OpticalSarTokenModel(nn.Module):
             }
         )
         self.classifier = nn.Linear(dim, num_classes)
+        mechanism_id = mechanism_set
+        if mechanism_id == "r2_depth_group_inject":
+            self.router = R2DepthGroupInjector(dim)
+        elif mechanism_id == "r1_low_energy_channel_gain":
+            self.router = R1LowEnergyChannelGain()
+        else:
+            self.router = None
         self.stage_bridge = nn.Sequential(nn.Linear(dim * 2, max(dim // 2, 4)), nn.GELU(), nn.Linear(max(dim // 2, 4), dim))
         nn.init.zeros_(self.stage_bridge[-1].weight)
         nn.init.zeros_(self.stage_bridge[-1].bias)
@@ -722,10 +734,24 @@ class OpticalSarTokenModel(nn.Module):
                 if depth_group is None
                 else self.sar_stem(self._stage_tensor(depth_group, stage, "depth_group"))
             )
+            if (
+                self.mechanism_set == "r2_depth_group_inject"
+                and stage == self.stages[-1]
+                and depth_features is not None
+                and self.router is not None
+            ):
+                sar_stage = self.router(depth_features, sar_stage)
+            # External mechanisms (R2/R1) act outside the fusion boundary; the
+            # fusion layer itself always executes the verified always-fuse path.
+            stage_mechanism = (
+                "always_fuse"
+                if self.mechanism_set in {"r2_depth_group_inject", "r1_low_energy_channel_gain"}
+                else self.mechanism_set
+            )
             fused, one_stage_aux = self.fusions[stage](
                 optical_stage,
                 sar_stage,
-                mechanism_set=self.mechanism_set,
+                mechanism_set=stage_mechanism,
                 depth_group=depth_features,
                 physical_groups=physical_groups,
             )
@@ -743,6 +769,8 @@ class OpticalSarTokenModel(nn.Module):
             device=reference.device,
             dtype=torch.bool,
         )
+        if self.mechanism_set == "r1_low_energy_channel_gain" and self.router is not None:
+            fused = self.router(fused)
         logits = self.classifier(fused)
         if output_size is not None:
             side = math.isqrt(logits.shape[1])

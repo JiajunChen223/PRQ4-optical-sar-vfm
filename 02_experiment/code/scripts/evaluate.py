@@ -24,7 +24,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--mechanism-set",
-        choices=("always_fuse",),
+        choices=("always_fuse", "r2_depth_group_inject", "r1_low_energy_channel_gain"),
         default="always_fuse",
     )
     parser.add_argument("--execution-scale", choices=("smoke", "cloud"), default="smoke")

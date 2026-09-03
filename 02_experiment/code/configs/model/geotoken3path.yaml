@@ -46,6 +46,8 @@ mechanism:
   generic_graph_network_claim_forbidden: true
 matched_controls:
   - always_fuse
+  - r2_depth_group_inject
+  - r1_low_energy_channel_gain
 input:
   optical_channels: 12
   sar_channels: 2

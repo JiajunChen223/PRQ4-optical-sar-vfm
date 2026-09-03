@@ -1,0 +1,66 @@
+{
+ "artifact_type": "v20_stage_closure",
+ "schema_version": "researchpilot.v20.close.v1",
+ "status": "closed_scientific_failure",
+ "created_at_utc": "2026-09-03T03:03:29.776292+00:00",
+ "baseline": {
+  "best_mIoU": 49.7807879,
+  "epoch24_mIoU": 49.7661391,
+  "protocol": "24-epoch CE+Lovasz frozen"
+ },
+ "candidates": {
+  "R1-r1_low_energy_channel_gain": {
+   "seed0": {
+    "best": 49.3698,
+    "delta_best_pp": -0.411,
+    "delta_end_pp": -1.1753
+   },
+   "decision": "closed",
+   "reason": "best < +0.5pp and negative endpoint"
+  },
+  "R2-r2_depth_group_inject": {
+   "seeds": {
+    "s0": {
+     "delta_best_pp": 0.6318,
+     "delta_end_pp": 0.0953
+    },
+    "s1": {
+     "delta_best_pp": 1.6903,
+     "delta_end_pp": 0.7139
+    },
+    "s2": {
+     "delta_best_pp": 1.1168,
+     "delta_end_pp": 0.8331
+    },
+    "s3": {
+     "delta_best_pp": -0.0051,
+     "delta_end_pp": -0.6608
+    },
+    "s4": {
+     "delta_best_pp": 0.7508,
+     "delta_end_pp": 0.4106
+    }
+   },
+   "n5_stats": {
+    "best_mean_pp": 0.8369,
+    "best_sd_pp": 0.6255,
+    "best_95ci_pp": [
+     0.06,
+     1.613
+    ],
+    "endpoint_mean_pp": 0.2784,
+    "endpoint_95ci_pp": [
+     -0.464,
+     1.021
+    ],
+    "rare_mean_delta_pp": 1.93,
+    "rare_all_seeds_positive": true
+   },
+   "decision": "closed",
+   "reason": "preregistered unlock line not met (CI lower bound +0.06 < +0.5; mean +0.84 < +1.0)",
+   "reusable_observation": "stable rare-class gain +1.93pp across 5/5 seeds; no mid-peak/endpoint-reversal pattern"
+  }
+ },
+ "next_action": "plan_b_diagnostic_paper_or_user_route_decision",
+ "test_sealed": true
+}

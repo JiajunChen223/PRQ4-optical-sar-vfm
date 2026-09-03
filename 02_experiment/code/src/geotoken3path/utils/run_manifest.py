@@ -15,6 +15,8 @@ from .test_seal import assert_test_access_allowed
 _SHA256_LENGTH = 64
 _APPROVED_MECHANISMS = {
     "always_fuse",
+    "r2_depth_group_inject",
+    "r1_low_energy_channel_gain",
 }
 
 _EXECUTION_SCALES = {
