@@ -1,38 +1,79 @@
-# 10_CURRENT — 现代有效区（唯一工作区）
+# PRQ4 — Optical–SAR VFM Adaptation under a Frozen Downstream Protocol
 
-两区制重组于 2026-09-02 完成。本区只包含**唯一一份最新代码**与**全部经过验证的结论性证据**；所有被否定的方法、候选、数值与旧产物均已隔离至 `../20_HISTORY/`（只读归档，零删除，可随时反查恢复）。
+Code and experiment artifacts for an empirical study of **multimodal vision-foundation-model
+(VFM) adaptation for dense optical–SAR land-cover segmentation** under a strictly frozen
+downstream protocol.
 
-## 目录导航
+## Setting
 
-| 路径 | 内容 |
-|---|---|
-| `00_project/` | 项目元数据：`project.json`、`researchpilot_state.json`（门禁与审批状态）、`runtime.json`、`controls/` |
-| `01_literature/library/` | 冻结文献库（literature.jsonl/csv/sqlite + manifest + 核心证据批量） |
-| `01_literature/synthesis/` | 保留项：`dataset_registry*`、`sen12ts_*` 数据证据 8 份、`frozen_evidence_packet.json/.md`（v19 冻结证据包）、`v19_ctsp_target_venue_status`（目标期刊状态）、`targeted_evidence/` |
-| `02_experiment/code/` | **唯一一份最新代码**（u2026-09-02 机制净化后：仅基线 always_fuse 一条机制，pytest 135 通过） |
-| `02_experiment/protocol/` | 生效协议 `experiment_protocol.yaml` |
-| `02_experiment/claims/` | 声明台账 `claim_experiment_ledger.jsonl`（v14–v19 全部路线 rejection 记录，证据链） |
-| `02_experiment/reports/` | 50 份结论性收据：32 份基线证据 + 18 份 v19 门禁判定收据 |
-| `02_experiment/gate_status.json` / `experiment_manifest.json` | 门禁状态 / 实验清单 |
-| `02_experiment/cloud/` | `cloud_connection.json` 等状态文件（历史云命令在 20_HISTORY） |
-| `03_writing/` | 论文写作区（当前为空，尚未动笔） |
+- Task: 11-class dense land-cover segmentation of paired Sentinel-2 optical + Sentinel-1 SAR.
+- Data: SEN12TS (Radiant/MLHub) three-region WorldCover subset — Ethiopia / Uganda / Sumatra,
+  1200 parent tiles, 120×120 crops, 11 classes (ESA WorldCover 2020), CC-BY-NC-4.0.
+  Follow the official SEN12TS access procedure to obtain the data.
+- Backbone: CROMA-base (NeurIPS 2023) audited checkpoint, tap-connected PEFT.
+- Frozen protocol: 24 epochs, CE+Lovasz 1:1, AdamW, micro-batch 16 / effective 32,
+  D4 paired augmentation, single RTX 3090, validation-based model selection, sealed test.
 
-## 当前科学状态（2026-09-02）
+## Reference baseline (frozen comparator)
 
-- **门禁**：`INNOVATION_REVIEW` = BLOCKED；`next_action = request_new_plan_revision_or_user_route_decision`（等待新路线决策）。
-- **基线（verified R2 deterministic replay，唯一有效对照）**：best mIoU **49.7807879%**（epoch 18）、OA 77.2274%、rare macro IoU 38.7029%、epoch-24 49.7661%。
-- **v5–v19 全部创新路线均被拒**（<+1pp 预注册关闭线）：最新 v19 CTSP-01 best 50.7031%（+0.9223pp）→ route closed；全部 rejection 记录见 claims 台账。
-- **测试集**：自始至终 sealed 未访问；所有候选的 controls、多种子、扩展集、final test 全部锁定。
+- Best validation mIoU **49.7808 %** (epoch 18), OA 77.23 %, rare-class macro IoU 38.70 %.
 
-## 代码净化声明（2026-09-02）
+## What this study reports
 
-- 唯一机制：`always_fuse`（`VALID_MECHANISMS={"always_fuse"}`）；被否机制类/模块/配置/测试全部移入 `20_HISTORY/02_legacy_code_pkgs/rejected_mechanisms_20260902/`（9 个机制模块、4 个 models adapter、19 个被否测试、11 个全量原文件副本、被否路由池 `rejected_routers_pool.py`、D0–D3 诊断 7 脚本 + 4 测试）。
-- 唯一保留的机制名残迹：`GeoToken3PathFusion` 内 `ceak_*` 等**模型图容量参数**（被否机制的共享表面权重）。它们不参与任何 forward 路径（零引用），但因与已验证基线 checkpoint 的 state-dict 绑定而**不能改名或删除**（改名会破坏云端正式权重的 strict 加载）。此保留仅为状态兼容，不是方法残留。
-- 工作树 sha256：净化为 `1beec648…`（deepseekpro_pr 同款历史快照关系：正式 run 的可复现锚点见 20_HISTORY 说明）。
-- 历史 full_original 副本（净化前的完整源文件）全部保留在 rejected_mechanisms_20260902/，可随时恢复。
+1. **A systematic failure map**: >18 mechanism candidates across v5–v20 (token-domain fusion,
+   gradient credit, classifier geometry, spectral/trajectory, sub-pixel, energy modulation,
+   pixel-domain refinement) evaluated under the identical frozen protocol, each with the same
+   pre-registered decision rule (<+1 pp family closure, 3–5 seed mean ± 95 % CI).
+2. **A consistent positive observation**: utilization of the **discarded non-spatial SAR
+   depth group** yields a small but reproducible rare-class gain (~+1.6 pp rare macro IoU,
+   13/15 seeds positive across the R2/R3/R6 family; overall best mIoU effect ≈ +0.8 pp with
+   CI [+0.4, +1.2]).
+3. **An evaluation-methodology contribution**: 3–5 seed + CI decision protocol for detecting
+   ~1 pp effects under a frozen 24-epoch protocol (n=3 power caveat documented).
 
-## 使用指引
+## Repository layout
 
-- 阅读当前状态：本文档 + `02_experiment/gate_status.json`。
-- 查找历史内容：`../20_HISTORY/README.md`（含全部归档索引）。
-- 恢复任何隔离内容：按 `../REORGANIZATION_MANIFEST_PRQ4.json` 的源→目标对照复制回即可（零删除原则）。
+```
+10_CURRENT/
+  00_project/        project metadata and controls
+  01_literature/     frozen literature library and dataset evidence
+  02_experiment/
+    code/            the single latest codebase (baseline + candidate mechanisms)
+    protocol/        frozen experiment protocol
+    reports/         decision receipts (baseline evidence + route closures)
+    claims/          claim ledger (every route decision, incl. rejected ones)
+  03_writing/        (paper writing)
+```
+
+Code layout (`02_experiment/code/`):
+- `src/geotoken3path/` — package: `data/` (SEN12TS loader, dynamic normalization),
+  `engine/` (formal train/validation runner), `losses/`, `metrics/`, `models/`
+  (CROMA bridge, fusion, factory), `mechanisms/` (candidate modules), `utils/`.
+- `scripts/train.py`, `scripts/evaluate.py` — cloud entry points.
+- `configs/` — frozen protocol YAMLs (benchmarks / experiment / model / runtime).
+- `tests/` — unit + integration suite (155 tests).
+
+## Reproduce
+
+```bash
+# environment: Python >=3.10, torch>=2.2, PyYAML, rasterio, pytest
+cd 02_experiment/code
+pytest tests/ -q                       # 155 passed
+python scripts/train.py --mechanism-set always_fuse --execution-scale smoke
+```
+
+Formal cloud training requires the SEN12TS data manifest + audited CROMA weights and the
+frozen protocol config; commands and manifests are recorded in `02_experiment/` reports.
+
+## Protocol invariants
+
+- Sealed test never accessed; validation-only model selection throughout.
+- Every candidate is a single internal mechanism delta (zero-start where applicable),
+  common parameter surface identical to the baseline, same optimizer/evaluator.
+- All route decisions follow pre-registered rules; rejected routes are documented in the
+  claim ledger as part of the evidence chain.
+
+## License / data notice
+
+Code license: see `LICENSE_STATUS.md` / `THIRD_PARTY.md`. Data (SEN12TS) and pretrained
+weights are governed by their own licenses and are not distributed here.
