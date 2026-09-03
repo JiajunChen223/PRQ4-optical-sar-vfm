@@ -272,3 +272,83 @@ def test_r6_parameters_and_gradient() -> None:
     out_sar.mean().backward()
     assert m.router.sel_proj["late"].weight.grad is not None
     assert m.router.layer_proj["late"].weight.grad is not None
+
+
+# ---------- R7：零起步残差学习上采样 ----------
+
+def test_r7_zero_start_identity_and_parity() -> None:
+    g = torch.Generator().manual_seed(3)
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    cand = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r7_residual_learned_upsample", stages=("mid", "late"))
+    assert cand.router is not None
+    shared = {k: v for k, v in base.state_dict().items() if k in cand.state_dict()}
+    cand.load_state_dict(shared, strict=False)
+    base.eval(); cand.eval()
+    optical = torch.randn(2, 49, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    with torch.no_grad():
+        lb, _ = base(optical, sar, depth_group=None, output_size=(7, 7), return_aux=True)
+        lc, _ = cand(optical, sar, depth_group=None, output_size=(7, 7), return_aux=True)
+    assert torch.equal(lb, lc), "zero-start R7 must equal baseline exactly"
+    # 残差生效：填充权重后 logits 变化
+    with torch.no_grad():
+        cand.router.upsample_conv.weight.fill_(0.01)
+    with torch.no_grad():
+        lc2, _ = cand(optical, sar, depth_group=None, output_size=(7, 7), return_aux=True)
+    assert not torch.equal(lb, lc2)
+
+
+def test_r7_parameters_and_gradient() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r7_residual_learned_upsample", stages=("mid", "late"))
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    bn = sorted(n for n, _ in base.named_parameters() if not n.startswith("router."))
+    cn = sorted(n for n, _ in m.named_parameters() if not n.startswith("router."))
+    assert bn == cn
+    rn = [n for n, _ in m.named_parameters() if n.startswith("router.")]
+    assert rn == ["router.upsample_conv.weight"]
+    g = torch.Generator().manual_seed(5)
+    out, _ = m(torch.randn(2, 49, 16, generator=g), torch.randn(2, 49, 16, generator=g),
+               depth_group=None, output_size=(7, 7), return_aux=True)
+    assert tuple(out.shape) == (2, 8, 7, 7)
+    out.mean().backward()
+    assert m.router.upsample_conv.weight.grad is not None
+
+
+# ---------- R8：组合机制（R3 注入 + R7 上采样残差） ----------
+
+def test_r8_zero_start_identity_and_parity() -> None:
+    g = torch.Generator().manual_seed(21)
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    cand = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r8_depth_inject_plus_upsample", stages=("mid", "late"))
+    assert cand.router is not None
+    shared = {k: v for k, v in base.state_dict().items() if k in cand.state_dict()}
+    cand.load_state_dict(shared, strict=False)
+    base.eval(); cand.eval()
+    optical = torch.randn(2, 49, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    depth = torch.randn(2, 49, 4, 16, generator=g)
+    with torch.no_grad():
+        lb, _ = base(optical, sar, depth_group=depth, output_size=(7, 7), return_aux=True)
+        lc, _ = cand(optical, sar, depth_group=depth, output_size=(7, 7), return_aux=True)
+    assert torch.equal(lb, lc), "zero-start R8 composition must equal baseline exactly"
+
+
+def test_r8_both_components_active_and_gradient() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r8_depth_inject_plus_upsample", stages=("mid", "late"))
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    bn = sorted(n for n, _ in base.named_parameters() if not n.startswith("router."))
+    cn = sorted(n for n, _ in m.named_parameters() if not n.startswith("router."))
+    assert bn == cn
+    # 两组件均存在
+    assert m.router.depth_select is not None and m.router.upsample is not None
+    with torch.no_grad():
+        for stage in ("mid", "late"):
+            m.router.depth_select.layer_proj[stage].weight.fill_(0.01)
+        m.router.upsample.upsample_conv.weight.fill_(0.01)
+    g = torch.Generator().manual_seed(23)
+    out, _ = m(torch.randn(2, 49, 16, generator=g), torch.randn(2, 49, 16, generator=g),
+               depth_group=torch.randn(2, 49, 4, 16, generator=g), output_size=(7, 7), return_aux=True)
+    assert tuple(out.shape) == (2, 8, 7, 7)
+    out.mean().backward()
+    assert m.router.depth_select.layer_proj["late"].weight.grad is not None
+    assert m.router.upsample.upsample_conv.weight.grad is not None

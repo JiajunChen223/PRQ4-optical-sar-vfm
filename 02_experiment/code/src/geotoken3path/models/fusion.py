@@ -27,6 +27,8 @@ from geotoken3path.mechanisms.r2_depth_inject import R2DepthGroupInjector
 from geotoken3path.mechanisms.r1_energy_gain import R1LowEnergyChannelGain
 from geotoken3path.mechanisms.r3_conditional_depth_select import R3OpticalConditionalDepthSelect
 from geotoken3path.mechanisms.r6_dual_channel_inject import R6DualChannelDepthInject
+from geotoken3path.mechanisms.r7_residual_upsample import R7ResidualUpsample
+from geotoken3path.mechanisms.r8_depth_inject_plus_upsample import R8DepthInjectPlusUpsample
 
 
 class GeoToken3PathFusion(nn.Module):
@@ -41,6 +43,8 @@ class GeoToken3PathFusion(nn.Module):
         "r1_low_energy_channel_gain",
         "r3_optical_conditional_depth_select",
         "r6_depth_dual_channel_inject",
+        "r7_residual_learned_upsample",
+        "r8_depth_inject_plus_upsample",
     }
 
     def __init__(
@@ -650,6 +654,10 @@ class OpticalSarTokenModel(nn.Module):
             self.router = R3OpticalConditionalDepthSelect(dim, tuple(self.stages))
         elif mechanism_id == "r6_depth_dual_channel_inject":
             self.router = R6DualChannelDepthInject(dim, tuple(self.stages))
+        elif mechanism_id == "r7_residual_learned_upsample":
+            self.router = R7ResidualUpsample(num_classes)
+        elif mechanism_id == "r8_depth_inject_plus_upsample":
+            self.router = R8DepthInjectPlusUpsample(dim, num_classes, tuple(self.stages))
         else:
             self.router = None
         self.stage_bridge = nn.Sequential(nn.Linear(dim * 2, max(dim // 2, 4)), nn.GELU(), nn.Linear(max(dim // 2, 4), dim))
@@ -749,12 +757,14 @@ class OpticalSarTokenModel(nn.Module):
                 and self.router is not None
             ):
                 sar_stage = self.router(depth_features, sar_stage)
+            if self.mechanism_set == "r3_optical_conditional_depth_select" and depth_features is not None and self.router is not None:
+                sar_stage = self.router(depth_features, sar_stage, optical_stage, stage)
             if (
-                self.mechanism_set == "r3_optical_conditional_depth_select"
+                self.mechanism_set == "r8_depth_inject_plus_upsample"
                 and depth_features is not None
                 and self.router is not None
             ):
-                sar_stage = self.router(depth_features, sar_stage, optical_stage, stage)
+                sar_stage = self.router.inject_depth(depth_features, sar_stage, optical_stage, stage)
             if (
                 self.mechanism_set == "r6_depth_dual_channel_inject"
                 and depth_features is not None
@@ -769,7 +779,8 @@ class OpticalSarTokenModel(nn.Module):
                 "always_fuse"
                 if self.mechanism_set
                 in {"r2_depth_group_inject", "r1_low_energy_channel_gain",
-                    "r3_optical_conditional_depth_select", "r6_depth_dual_channel_inject"}
+                    "r3_optical_conditional_depth_select", "r6_depth_dual_channel_inject",
+                    "r7_residual_learned_upsample", "r8_depth_inject_plus_upsample"}
                 else self.mechanism_set
             )
             fused, one_stage_aux = self.fusions[stage](
@@ -802,6 +813,10 @@ class OpticalSarTokenModel(nn.Module):
                 raise ValueError("dense segmentation output requires a square token grid")
             logits = logits.transpose(1, 2).reshape(logits.shape[0], self.num_classes, side, side)
             logits = F.interpolate(logits, size=output_size, mode="bilinear", align_corners=False)
+            if self.mechanism_set == "r7_residual_learned_upsample" and self.router is not None:
+                logits = self.router(logits)
+            if self.mechanism_set == "r8_depth_inject_plus_upsample" and self.router is not None:
+                logits = self.router.refine_logits(logits)
         if return_aux:
             return logits, aux
         return logits
