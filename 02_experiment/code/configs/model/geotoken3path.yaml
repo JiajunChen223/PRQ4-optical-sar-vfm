@@ -48,6 +48,8 @@ matched_controls:
   - always_fuse
   - r2_depth_group_inject
   - r1_low_energy_channel_gain
+  - r3_optical_conditional_depth_select
+  - r6_depth_dual_channel_inject
 input:
   optical_channels: 12
   sar_channels: 2

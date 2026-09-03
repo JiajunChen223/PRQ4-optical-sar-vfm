@@ -25,6 +25,8 @@ from torch.nn import functional as F
 
 from geotoken3path.mechanisms.r2_depth_inject import R2DepthGroupInjector
 from geotoken3path.mechanisms.r1_energy_gain import R1LowEnergyChannelGain
+from geotoken3path.mechanisms.r3_conditional_depth_select import R3OpticalConditionalDepthSelect
+from geotoken3path.mechanisms.r6_dual_channel_inject import R6DualChannelDepthInject
 
 
 class GeoToken3PathFusion(nn.Module):
@@ -37,6 +39,8 @@ class GeoToken3PathFusion(nn.Module):
         "always_fuse",
         "r2_depth_group_inject",
         "r1_low_energy_channel_gain",
+        "r3_optical_conditional_depth_select",
+        "r6_depth_dual_channel_inject",
     }
 
     def __init__(
@@ -642,6 +646,10 @@ class OpticalSarTokenModel(nn.Module):
             self.router = R2DepthGroupInjector(dim)
         elif mechanism_id == "r1_low_energy_channel_gain":
             self.router = R1LowEnergyChannelGain()
+        elif mechanism_id == "r3_optical_conditional_depth_select":
+            self.router = R3OpticalConditionalDepthSelect(dim, tuple(self.stages))
+        elif mechanism_id == "r6_depth_dual_channel_inject":
+            self.router = R6DualChannelDepthInject(dim, tuple(self.stages))
         else:
             self.router = None
         self.stage_bridge = nn.Sequential(nn.Linear(dim * 2, max(dim // 2, 4)), nn.GELU(), nn.Linear(max(dim // 2, 4), dim))
@@ -741,11 +749,27 @@ class OpticalSarTokenModel(nn.Module):
                 and self.router is not None
             ):
                 sar_stage = self.router(depth_features, sar_stage)
+            if (
+                self.mechanism_set == "r3_optical_conditional_depth_select"
+                and depth_features is not None
+                and self.router is not None
+            ):
+                sar_stage = self.router(depth_features, sar_stage, optical_stage, stage)
+            if (
+                self.mechanism_set == "r6_depth_dual_channel_inject"
+                and depth_features is not None
+                and self.router is not None
+            ):
+                optical_stage, sar_stage = self.router(
+                    depth_features, optical_stage, sar_stage, stage
+                )
             # External mechanisms (R2/R1) act outside the fusion boundary; the
             # fusion layer itself always executes the verified always-fuse path.
             stage_mechanism = (
                 "always_fuse"
-                if self.mechanism_set in {"r2_depth_group_inject", "r1_low_energy_channel_gain"}
+                if self.mechanism_set
+                in {"r2_depth_group_inject", "r1_low_energy_channel_gain",
+                    "r3_optical_conditional_depth_select", "r6_depth_dual_channel_inject"}
                 else self.mechanism_set
             )
             fused, one_stage_aux = self.fusions[stage](

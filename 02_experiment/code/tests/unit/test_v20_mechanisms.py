@@ -149,3 +149,126 @@ def test_v20_mechanisms_declared_valid_and_router_only_parameters() -> None:
         bn = sorted(n for n, _ in base.named_parameters() if not n.startswith("router."))
         cn = sorted(n for n, _ in m.named_parameters() if not n.startswith("router."))
         assert bn == cn, "common parameter surface must be identical"
+
+# ---------- R3：光学条件化深度组选择注入 ----------
+
+def test_r3_zero_start_is_exact_identity() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r3_optical_conditional_depth_select", stages=("mid", "late"))
+    assert m.router is not None
+    g = torch.Generator().manual_seed(2)
+    depth = torch.randn(2, 49, 4, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    opt = torch.randn(2, 49, 16, generator=g)
+    out = m.router(depth, sar, opt, "mid")
+    assert torch.equal(out, sar)  # layer_proj 零起步 -> 注入恒零
+    # sel logits 零 -> 均匀选择
+    a = torch.softmax(m.router.sel_proj["mid"](opt), dim=-1)
+    assert torch.allclose(a, torch.full((2, 49, 4), 0.25), atol=1e-6)
+
+
+def test_r3_forward_parity_with_baseline() -> None:
+    g = torch.Generator().manual_seed(4)
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    cand = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r3_optical_conditional_depth_select", stages=("mid", "late"))
+    shared = {k: v for k, v in base.state_dict().items() if k in cand.state_dict()}
+    cand.load_state_dict(shared, strict=False)
+    base.eval(); cand.eval()
+    optical = torch.randn(2, 49, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    depth = torch.randn(2, 49, 4, 16, generator=g)
+    with torch.no_grad():
+        lb, _ = base(optical, sar, depth_group=depth, output_size=(7, 7), return_aux=True)
+        lc, _ = cand(optical, sar, depth_group=depth, output_size=(7, 7), return_aux=True)
+    assert torch.equal(lb, lc), "zero-start R3 must be exactly identical to baseline"
+
+
+def test_r3_selection_and_gradient_liveness() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r3_optical_conditional_depth_select", stages=("mid", "late"))
+    g = torch.Generator().manual_seed(6)
+    depth = torch.randn(2, 49, 4, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    opt = torch.randn(2, 49, 16, generator=g)
+    out = m.router(depth, sar, opt, "late")
+    assert out.shape == sar.shape
+    out.mean().backward()
+    assert m.router.sel_proj["late"].weight.grad is not None
+    assert m.router.layer_proj["late"].weight.grad is not None
+    # 条件化生效验证：把 sel 权重推向第 0 层优先（ones 输入下 logits 有偏）
+    with torch.no_grad():
+        m.router.sel_proj["late"].weight.zero_()
+        m.router.sel_proj["late"].weight[0] = 1.0  # 第 0 层行权重 = 1
+    a2 = torch.softmax(m.router.sel_proj["late"](torch.ones(2, 49, 16)), dim=-1)
+    assert a2[:, :, 0].mean() > 0.5  # 第一层选择明显占优
+    assert a2[:, :, 1].mean() < 0.25
+
+
+def test_r3_common_parameter_surface() -> None:
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    cand = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r3_optical_conditional_depth_select", stages=("mid", "late"))
+    bn = sorted(n for n, _ in base.named_parameters() if not n.startswith("router."))
+    cn = sorted(n for n, _ in cand.named_parameters() if not n.startswith("router."))
+    assert bn == cn
+    rn = [n for n, _ in cand.named_parameters() if n.startswith("router.")]
+    assert sorted(rn) == sorted([
+        "router.sel_proj.mid.weight", "router.sel_proj.late.weight",
+        "router.layer_proj.mid.weight", "router.layer_proj.late.weight",
+    ])
+
+
+# ---------- R6：双通道定向深度组注入 ----------
+
+def test_r6_zero_start_identity_and_routing() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r6_depth_dual_channel_inject", stages=("mid", "late"))
+    assert m.router is not None
+    g = torch.Generator().manual_seed(9)
+    depth = torch.randn(2, 49, 4, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    opt = torch.randn(2, 49, 16, generator=g)
+    # 零起步：mid 注入光学、late 注入 SAR，都为零
+    opt_out, sar_out = m.router(depth, opt, sar, "mid")
+    assert torch.equal(opt_out, opt)
+    assert torch.equal(sar_out, sar)
+    opt_out2, sar_out2 = m.router(depth, opt, sar, "late")
+    assert torch.equal(opt_out2, opt)
+    assert torch.equal(sar_out2, sar)
+    # 路由逻辑：mid 只改光学、late 只改 SAR（激活投影后）
+    with torch.no_grad():
+        m.router.layer_proj["mid"].weight.fill_(0.01)
+        m.router.layer_proj["late"].weight.fill_(0.01)
+    o3, s3 = m.router(depth, opt, sar, "mid")
+    assert not torch.equal(o3, opt) and torch.equal(s3, sar)
+    o4, s4 = m.router(depth, opt, sar, "late")
+    assert torch.equal(o4, opt) and not torch.equal(s4, sar)
+
+
+def test_r6_forward_parity_with_baseline() -> None:
+    g = torch.Generator().manual_seed(10)
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    cand = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r6_depth_dual_channel_inject", stages=("mid", "late"))
+    shared = {k: v for k, v in base.state_dict().items() if k in cand.state_dict()}
+    cand.load_state_dict(shared, strict=False)
+    base.eval(); cand.eval()
+    optical = torch.randn(2, 49, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    depth = torch.randn(2, 49, 4, 16, generator=g)
+    with torch.no_grad():
+        lb, _ = base(optical, sar, depth_group=depth, output_size=(7, 7), return_aux=True)
+        lc, _ = cand(optical, sar, depth_group=depth, output_size=(7, 7), return_aux=True)
+    assert torch.equal(lb, lc)
+
+
+def test_r6_parameters_and_gradient() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r6_depth_dual_channel_inject", stages=("mid", "late"))
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    bn = sorted(n for n, _ in base.named_parameters() if not n.startswith("router."))
+    cn = sorted(n for n, _ in m.named_parameters() if not n.startswith("router."))
+    assert bn == cn
+    g = torch.Generator().manual_seed(12)
+    depth = torch.randn(2, 49, 4, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    opt = torch.randn(2, 49, 16, generator=g)
+    # late 分支注入 SAR 载体 -> 取第二个返回值做 backward
+    _, out_sar = m.router(depth, opt, sar, "late")
+    out_sar.mean().backward()
+    assert m.router.sel_proj["late"].weight.grad is not None
+    assert m.router.layer_proj["late"].weight.grad is not None
