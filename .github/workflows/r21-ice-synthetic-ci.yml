@@ -1,6 +1,7 @@
 name: R21 ICE synthetic CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [r21-ice-vfm-exact]
   pull_request:
