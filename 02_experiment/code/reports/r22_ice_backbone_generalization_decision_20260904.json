@@ -1,0 +1,46 @@
+{
+  "schema_version": "prq4.r22_backbone_generalization_decision.v1",
+  "route": "R22-ICE-Backbone-Generalization",
+  "date": "2026-09-04",
+  "status": "structural_boundary",
+  "scientific_question": "Under a frozen-backbone, fixed-task (SEN12TS-like), fixed-data protocol with only the backbone changed, can ICE derive a task-necessary execution subgraph from a structurally different multisensor foundation model and reduce real compute without changing predictions?",
+  "protocol": {
+    "task": "optical-SAR land-cover segmentation (official dense receiver contract)",
+    "data": "SEN12TS-like s1(3ch incl ratio) + s2(10ch), T=1 single timestep, 64px@10m",
+    "backbone": "AnySat-base (CVPR 2025 Highlight, gastruc/AnySat, MIT)",
+    "weights": "HuggingFace g-astruc/AnySat models/AnySat.pth (pure encoder, 125.9M params, no pretraining task head in release graph)",
+    "receiver_contract": "official AnySat dense usage: concat(final fusion-stack patch tokens, per-modality subpatch)",
+    "method_rule": "no artificial deletable layers; receiver built per official usage; ICE must be allowed to return 0% removable compute"
+  },
+  "preregistered_gates": {
+    "strong_positive": ">=30% latency reduction with 100% prediction agreement",
+    "supportive": "10-30% latency reduction with 100% prediction agreement",
+    "structural_boundary": "<10% or 0% removable compute; recorded as ICE structural boundary, not tampered with to chase numbers"
+  },
+  "evidence": {
+    "probe_report": "reports/r22_anysat_redundancy_probe_20260904.json",
+    "probe_method": "zero-output forward-hook perturbation per executed transformer block; dense output sensitivity threshold 1e-6",
+    "executed_blocks": 13,
+    "necessary_blocks": 13,
+    "removable_blocks": 0,
+    "removable_fraction": 0.0,
+    "max_abs_delta_range": {"global_blocks": [0.7209, 1.249], "per_modality_blocks": [5.019, 7.411]},
+    "weight_sha256": "ce1246527a28bade624048c448a1fa473ca85791b998f562ce2bcc3dcac93d4f"
+  },
+  "result_tier": "structural_boundary",
+  "conclusion": "ICE derives the full graph for AnySat under the official dense contract: 0% of the 13 executed transformer blocks are removable. This is a certified fail-closed outcome, not a pruning failure. AnySat's shared shallow encoder (per-modality 6 layers + global 6+1 fusion) assembles its dense segmentation feature only after the full fusion stack; there is no deep suffix or pretraining head left unread by official downstream usage, unlike CROMA whose 53% savings come from an unread optical deep suffix plus pretraining GAP/joint branches.",
+  "interpretation_for_paper": {
+    "positive_example": "CROMA: 53.3% latency reduction, exact (R21 certificates)",
+    "negative_example": "AnySat: 0% removable under official dense contract",
+    "claim": "ICE efficiency gains are determined by (downstream contract x backbone computation graph), not imposed by ICE. A backbone with no structurally unread compute yields 0% reduction by design; this fail-closed behavior is the method's integrity evidence, distinguishing it from aggressive pruning methods that force a ratio.",
+    "cross_backbone_support": "The CROMA/AnySat contrast already supports the paper's core claim that ICE is a dependency compiler rather than a CROMA-specific optimization. A third backbone with a deep suffix or pretraining head (e.g. SkySense-class) would add a second positive data point if pursued.",
+    "caveat": "AnySat alone does not provide a second positive efficiency data point; the scientific value here is the structural-boundary negative example plus the architecture-generality of the ICE mechanism (probe + topology layer, P0)."
+  },
+  "artifacts": {
+    "probe_script": "scripts/anysat_redundancy_probe.py",
+    "topology_data_layer": "src/geotoken3path/execution/topology.py (P0, pure additive, 193 tests green, 2-agent verified)",
+    "vendor": "vendor/ (AnySat official repo + weights; gitignored, never committed)",
+    "commit": "a2f8121"
+  },
+  "next_step_decision": "Awaiting user direction on whether to pursue a third backbone (e.g. SkySense-class with deep suffix/pretraining head) as a second positive data point, or to proceed with paper writing using CROMA 53% + AnySat 0% as the generality evidence."
+}
