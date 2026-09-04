@@ -1,6 +1,6 @@
 """Cloud-side certification for R21 ICE-Exact.
 
-The certifier never accesses the sealed test split.  It builds two models from
+The certifier never accesses the sealed test split. It builds two models from
 independently audited CROMA instances, loads the same verified downstream
 checkpoint into both, and compares full execution with ICE exact at five
 levels: state surface, retained taps, FP32 logits, trainable gradients, and the
@@ -81,21 +81,35 @@ def _state_surface_equal(full: nn.Module, ice: nn.Module) -> tuple[bool, list[st
     if list(full_state) != list(ice_state):
         names = sorted(set(full_state) ^ set(ice_state))
         return False, names
-    unequal = [name for name in full_state if not torch.equal(full_state[name].cpu(), ice_state[name].cpu())]
+    unequal = [
+        name
+        for name in full_state
+        if not torch.equal(full_state[name].cpu(), ice_state[name].cpu())
+    ]
     return not unequal, unequal
 
 
-def _capture_paths(model: nn.Module, paths: tuple[str, ...]) -> tuple[dict[str, Tensor], list[Any]]:
+def _capture_paths(
+    model: nn.Module, paths: tuple[str, ...]
+) -> tuple[dict[str, Tensor], list[Any]]:
     raw_backbone = model.bridge.backbone.backbone
     captures: dict[str, Tensor] = {}
     handles = []
     for path in paths:
         module = raw_backbone.get_submodule(path)
 
-        def _capture(_module: nn.Module, _inputs: tuple[Any, ...], output: Any, *, name: str = path) -> None:
+        def _capture(
+            _module: nn.Module,
+            _inputs: tuple[Any, ...],
+            output: Any,
+            *,
+            name: str = path,
+        ) -> None:
             if not isinstance(output, Tensor):
                 raise IceCertificationError(f"retained tap {name} did not return a tensor")
-            captures[name] = output.detach().clone()
+            # Certification only needs the value. Move the clone off-GPU so
+            # retained-tap evidence does not compete with the later gradient run.
+            captures[name] = output.detach().cpu().clone()
 
         handles.append(module.register_forward_hook(_capture))
     return captures, handles
@@ -118,7 +132,8 @@ def build_ice_certification_pair(
     checkpoint_path = Path(checkpoint)
     if not checkpoint_path.is_absolute():
         raise IceCertificationError("checkpoint must be an absolute cloud path")
-    if str(resolved.get("model", {}).get("mechanism_set", "")) != "always_fuse":
+    model_cfg = resolved.get("model")
+    if not isinstance(model_cfg, Mapping) or str(model_cfg.get("mechanism_set", "")) != "always_fuse":
         raise IceCertificationError("ICE certification requires the verified always_fuse mechanism")
 
     full_backbone, full_load_report = load_croma_backbone(
@@ -166,7 +181,9 @@ def build_ice_certification_pair(
     return full_model, ice_model, metadata
 
 
-def _prepare_batch(batch: Mapping[str, Tensor], device: torch.device) -> tuple[Tensor, Tensor, Tensor]:
+def _prepare_batch(
+    batch: Mapping[str, Tensor], device: torch.device
+) -> tuple[Tensor, Tensor, Tensor]:
     normalized = croma_dynamic_normalize_batch(batch)
     return (
         normalized["optical"].to(device, non_blocking=True),
@@ -188,7 +205,7 @@ def run_ice_exact_certification(
     objective_name: str = "ce_lovasz",
     expected_miou_percent: float | None = None,
 ) -> dict[str, Any]:
-    """Run R21 certification without opening the sealed test split."""
+    """Run R21 equivalence certification without opening the sealed test split."""
 
     assert_test_access_allowed(
         {"execution_scale": execution_scale, "test_seal_status": "sealed"},
@@ -227,12 +244,15 @@ def run_ice_exact_certification(
         "seed": seed,
     }
     validation_loader, _ = build_sen12ts_loader(
-        data_manifest, split="validation", augmentation=None, **loader_kwargs
+        data_manifest,
+        split="validation",
+        augmentation=None,
+        **loader_kwargs,
     )
     train_loader, _ = build_sen12ts_loader(
         data_manifest,
         split="train",
-        augmentation=runtime.get("augmentation") if isinstance(runtime, Mapping) else None,
+        augmentation=runtime.get("augmentation"),
         **loader_kwargs,
     )
 
@@ -259,8 +279,10 @@ def run_ice_exact_certification(
         for path in paths
     }
     fp32_logit_result = _comparison_payload(compare_tensors(full_logits_fp32, ice_logits_fp32))
+    del full_captures, ice_captures, full_logits_fp32, ice_logits_fp32, optical, sar
+    torch.cuda.empty_cache()
 
-    # --- Gradient certificate on one fixed train batch.  Restore RNG before ICE
+    # --- Gradient certificate on one fixed train batch. Restore RNG before ICE
     # so any stochasticity in the retained graph cannot create a false mismatch.
     torch.manual_seed(seed)
     train_batch = next(iter(train_loader))
@@ -271,21 +293,38 @@ def run_ice_exact_certification(
     full_model.train()
     full_model.zero_grad(set_to_none=True)
     full_logits = full_model(train_optical, train_sar)
-    full_loss, _ = segmentation_objective(full_logits, train_target, objective_name=objective_name)
+    full_loss, _ = segmentation_objective(
+        full_logits,
+        train_target,
+        objective_name=objective_name,
+    )
     full_loss.backward()
     full_gradients = named_trainable_gradients(full_model)
+    full_loss_value = float(full_loss.detach().cpu())
+    full_model.zero_grad(set_to_none=True)
+    del full_logits, full_loss
+    torch.cuda.empty_cache()
 
     torch.set_rng_state(cpu_rng)
     torch.cuda.set_rng_state_all(cuda_rng)
     ice_model.train()
     ice_model.zero_grad(set_to_none=True)
     ice_logits = ice_model(train_optical, train_sar)
-    ice_loss, _ = segmentation_objective(ice_logits, train_target, objective_name=objective_name)
+    ice_loss, _ = segmentation_objective(
+        ice_logits,
+        train_target,
+        objective_name=objective_name,
+    )
     ice_loss.backward()
     ice_gradients = named_trainable_gradients(ice_model)
+    ice_loss_value = float(ice_loss.detach().cpu())
+    ice_model.zero_grad(set_to_none=True)
+    del ice_logits, ice_loss, train_optical, train_sar, train_target
+    torch.cuda.empty_cache()
+
     gradient_result = compare_gradients(full_gradients, ice_gradients)
-    gradient_result["full_loss"] = float(full_loss.detach().cpu())
-    gradient_result["ice_loss"] = float(ice_loss.detach().cpu())
+    gradient_result["full_loss"] = full_loss_value
+    gradient_result["ice_loss"] = ice_loss_value
 
     # --- Complete validation under the protocol AMP setting.
     full_model.eval()
@@ -302,11 +341,18 @@ def run_ice_exact_certification(
     with torch.no_grad():
         for batch in validation_loader:
             optical, sar, target = _prepare_batch(batch, target_device)
-            with torch.autocast(device_type="cuda", dtype=torch.float16, enabled=amp_enabled):
+            with torch.autocast(
+                device_type="cuda",
+                dtype=torch.float16,
+                enabled=amp_enabled,
+            ):
                 full_logits = full_model(optical, sar)
                 ice_logits = ice_model(optical, sar)
             comparison = compare_tensors(full_logits, ice_logits)
-            validation_logit_max_abs = max(validation_logit_max_abs, comparison.max_abs_error)
+            validation_logit_max_abs = max(
+                validation_logit_max_abs,
+                comparison.max_abs_error,
+            )
             validation_logit_exact_batches += int(comparison.torch_equal)
             validation_batches += 1
             full_pred = full_logits.argmax(dim=1)
@@ -338,7 +384,7 @@ def run_ice_exact_certification(
     gradient_gate = (
         not gradient_result["missing_gradient_names"]
         and float(gradient_result["max_gradient_abs_error"]) <= 1e-6
-        and abs(float(gradient_result["full_loss"]) - float(gradient_result["ice_loss"])) <= 1e-6
+        and abs(full_loss_value - ice_loss_value) <= 1e-6
     )
     validation_gate = (
         all_predictions_equal
@@ -347,7 +393,17 @@ def run_ice_exact_certification(
         and abs(full_miou - ice_miou) <= 1e-12
     )
     state_gate = bool(metadata["state_surface_equal"])
-    status = "pass" if all((state_gate, tap_gate, fp32_gate, gradient_gate, validation_gate, expected_ok)) else "fail"
+    equivalence_pass = all(
+        (
+            state_gate,
+            tap_gate,
+            fp32_gate,
+            gradient_gate,
+            validation_gate,
+            expected_ok,
+        )
+    )
+    status = "pass" if equivalence_pass else "fail"
 
     source_sha = None
     constructor_kwargs = initialization.get("constructor_kwargs")
@@ -357,12 +413,18 @@ def run_ice_exact_certification(
         "schema_version": "prq4.ice_exact_certificate.v1",
         "route": "R21-ICE-VFM-01",
         "status": status,
-        "scientific_result": status == "pass",
+        "equivalence_certified": equivalence_pass,
+        # Equivalence alone is not route-level scientific support. The separate
+        # certificate-gated profiling stage must still clear the >=20% latency gate.
+        "scientific_route_supported": False,
+        "efficiency_evaluated": False,
         "test_accessed": False,
         "backbone_execution_comparison": ["full", "ice_exact"],
         "mechanism_set": "always_fuse",
         "objective_name": objective_name,
         "micro_batch": micro_batch,
+        "matched_common_protocol_sha256": resolved.get("matched_common_protocol_sha256"),
+        "code_sync_manifest_sha256": resolved.get("code_sync_manifest_sha256"),
         "croma_source_sha256": source_sha,
         **metadata,
         "tap_equivalence": tap_results,
