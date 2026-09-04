@@ -42,12 +42,21 @@ def _load_certificate(path: Path, checkpoint: Path) -> dict[str, object]:
     return payload
 
 
-def _profile_peak_allocated(fn) -> int:
+def _profile_memory(fn) -> dict[str, int]:
+    """Measure incremental forward allocation above the two-model resident base."""
+
     torch.cuda.empty_cache()
+    torch.cuda.synchronize()
+    resident = int(torch.cuda.memory_allocated())
     torch.cuda.reset_peak_memory_stats()
     fn()
     torch.cuda.synchronize()
-    return int(torch.cuda.max_memory_allocated())
+    peak = int(torch.cuda.max_memory_allocated())
+    return {
+        "resident_before_forward_bytes": resident,
+        "absolute_peak_allocated_bytes": peak,
+        "incremental_forward_peak_bytes": max(0, peak - resident),
+    }
 
 
 def _summary_dict(summary, *, batch_size: int) -> dict[str, float | int]:
@@ -99,6 +108,15 @@ def main() -> int:
         audit_report=validated["audit_report"],
         checkpoint=checkpoint_path,
     )
+    certificate_plan = certificate.get("execution_plan")
+    current_plan = metadata.get("execution_plan")
+    if (
+        not isinstance(certificate_plan, dict)
+        or not isinstance(current_plan, dict)
+        or certificate_plan.get("plan_sha256") != current_plan.get("plan_sha256")
+    ):
+        parser.error("certificate execution plan differs from the current ICE plan")
+
     device = torch.device(args.device)
     if device.type != "cuda" or not torch.cuda.is_available():
         parser.error("R21 profiling requires CUDA")
@@ -124,7 +142,7 @@ def main() -> int:
     normalized = croma_dynamic_normalize_batch(batch)
     optical16 = normalized["optical"].to(device, non_blocking=True)
     sar16 = normalized["sar"].to(device, non_blocking=True)
-    # B=1 is deployment-reference model latency only.  The tensor is sliced
+    # B=1 is deployment-reference model latency only. The tensor is sliced
     # after the frozen, protocol-legal B=16 normalization; raw B=1 normalization
     # is intentionally not performed or claimed.
     optical1 = optical16[:1]
@@ -138,7 +156,7 @@ def main() -> int:
                     return model(optical, sar)
         return _fn
 
-    rows: dict[str, object] = {}
+    rows: dict[str, dict[str, object]] = {}
     for label, optical, sar, batch_size, protocol_role in (
         ("batch16", optical16, sar16, 16, "protocol_aligned_network_forward"),
         ("batch1", optical1, sar1, 1, "deployment_reference_after_microbatch16_normalization"),
@@ -151,18 +169,23 @@ def main() -> int:
             warmup=args.warmup,
             iterations_per_mode=args.iterations,
         )
-        full_peak = _profile_peak_allocated(full_fn)
-        ice_peak = _profile_peak_allocated(ice_fn)
+        full_memory = _profile_memory(full_fn)
+        ice_memory = _profile_memory(ice_fn)
         speedup_fraction = 1.0 - ice_summary.median_ms / full_summary.median_ms
+        activation_reduction = (
+            int(full_memory["incremental_forward_peak_bytes"])
+            - int(ice_memory["incremental_forward_peak_bytes"])
+        )
         rows[label] = {
             "protocol_role": protocol_role,
             "batch_size": batch_size,
             "full": _summary_dict(full_summary, batch_size=batch_size),
             "ice_exact": _summary_dict(ice_summary, batch_size=batch_size),
             "median_latency_reduction_fraction": float(speedup_fraction),
-            "full_peak_allocated_bytes_with_both_models_resident": full_peak,
-            "ice_peak_allocated_bytes_with_both_models_resident": ice_peak,
-            "peak_allocated_reduction_bytes": int(full_peak - ice_peak),
+            "memory_scope": "both_full_parameter_sets_resident; report incremental forward allocation",
+            "full_memory": full_memory,
+            "ice_exact_memory": ice_memory,
+            "incremental_forward_peak_reduction_bytes": activation_reduction,
         }
 
     raw = full_model.bridge.backbone.backbone
@@ -185,7 +208,7 @@ def main() -> int:
         "route": "R21-ICE-VFM-01",
         "test_accessed": False,
         "certificate_path": str(Path(args.certificate)),
-        "certificate_plan_sha256": certificate.get("execution_plan", {}).get("plan_sha256") if isinstance(certificate.get("execution_plan"), dict) else None,
+        "certificate_plan_sha256": certificate_plan["plan_sha256"],
         "checkpoint_sha256": metadata["checkpoint_sha256"],
         "amp_enabled": amp_enabled,
         "warmup": args.warmup,
