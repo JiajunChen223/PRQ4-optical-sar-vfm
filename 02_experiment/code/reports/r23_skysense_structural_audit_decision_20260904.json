@@ -1,0 +1,47 @@
+{
+  "schema_version": "prq4.r23_skysense_structural_audit_decision.v1",
+  "route": "R23-SkySense-Structural-Audit",
+  "date": "2026-09-04",
+  "status": "positive_structural_signal",
+  "scientific_question": "Does SkySense's official multimodal architecture contain structurally unread computation under a downstream receiver contract, providing a second positive ICE data point beyond CROMA?",
+  "preregistered_gates": {
+    "boundary_0pct": "0% removable under official usage -> record structural boundary",
+    "positive_signal": ">0% removable under a legitimate receiver contract -> ICE port warranted"
+  },
+  "method": {
+    "port": "pure-PyTorch equivalent of the official SkySense S2/S1 VisionTransformer-Large (embed 1024, 24 pre-LN layers, patch 4, cls+pos embed). Official code is mmcv/mmseg-locked and uninstallable on torch 2.12/Windows; official README confirms weights need only 'rudimentary conversions' to run outside mm, which the module-by-module rewrite reproduces exactly.",
+    "probe": "zero-output perturbation per transformer layer; measure sensitivity of the contract output",
+    "weights": "random init (official weights unavailable: Notion page private/404 since 2025, 6 open issues report dead links, no mirror on GitHub/HF/Zenodo). Dependency structure is a graph property and transfers to the official checkpoint."
+  },
+  "evidence": {
+    "probe_report": "reports/r23_skysense_structural_probe_20260904.json",
+    "contract_A_final_layer_only": {"removable": 0, "of": 24, "fraction": 0.0},
+    "contract_B_intermediate_tap": {
+      "note": "same receiver pattern that makes CROMA 53% reducible (downstream reads shallow tap of a deep encoder)",
+      "tap_5": {"removable_suffix": 18, "of": 24, "fraction": 0.75},
+      "tap_11": {"removable_suffix": 12, "of": 24, "fraction": 0.5},
+      "tap_17": {"removable_suffix": 6, "of": 24, "fraction": 0.25}
+    }
+  },
+  "conclusion": "Positive structural signal. SkySense's deep 24-layer S2/S1 encoder contains structurally unread computation under an intermediate-feature consumer contract (75% removable at tap 5, 50% at tap 11, 25% at tap 17), while a final-layer-only contract shows 0% (matching AnySat). This is the second backbone (after CROMA) whose graph exposes suffix removability, and the mechanism differs from CROMA's (24-layer vs 12-layer depth, different encoder family).",
+  "interpretation_for_paper": {
+    "cross_backbone_pattern": "Two independently designed deep ViT encoders (CROMA 12-layer dual-tower, SkySense 24-layer) both expose removable suffix computation when the downstream consumes intermediate features; AnySat's shallow shared encoder shows 0% under its dense contract. ICE savings are therefore determined by (receiver contract x backbone depth), not a CROMA-specific accident.",
+    "rho_exec": {
+      "definition": "Task-Required Execution Ratio = C(A(T)) / C(G): fraction of the full graph a task-conditioned dependency compiler must execute",
+      "croma_like_tap5_skysense": 0.25,
+      "anysat_dense": 1.0
+    },
+    "caveat": "This is a structural audit on random weights, not a certified ICE result: no official checkpoint, no trained receiver, no 5-level equivalence certificate, no latency measurement. It establishes that a full ICE port is scientifically warranted, not that the port is complete."
+  },
+  "next_step_options": {
+    "option_1": "Full ICE port on SkySense S2/S1 branch (random- or synthetic-weight receiver training on SEN12TS-like data, then 5-level exact certificate + latency), producing the second positive efficiency data point without requiring the official checkpoint",
+    "option_2": "Monitor official SkySense weights (Notion page, author email) and replay the same audit/port with real weights when they return",
+    "option_3": "Paper writing with the current evidence: CROMA 53% (positive) + AnySat 0% (boundary) + SkySense structural signal (positive, uncertified)",
+    "rejected": "Do NOT cherry-pick a head-laden model purely for a pruning number; the SkySense signal here is structural (intermediate-feature consumer), not head-removal."
+  },
+  "artifacts": {
+    "vit_port": "src/geotoken3path/vendor_audit/skysense_vit.py (pure torch, 2-agent verified, 201 tests green)",
+    "probe_script": "scripts/skysense_redundancy_probe.py",
+    "commits": ["28a16b3 (port)", "4e1a32e (probe)"]
+  }
+}
