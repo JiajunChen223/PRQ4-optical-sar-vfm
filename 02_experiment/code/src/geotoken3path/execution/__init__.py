@@ -12,7 +12,7 @@ from .croma_executor import (
     install_ice_exact_forward,
 )
 from .croma_plan import CromaExecutionPlan, compile_croma_execution_plan
-from .profiling import LatencySummary, profile_cuda_callable
+from .profiling import LatencySummary, profile_cuda_callable, profile_cuda_pair_abba
 
 __all__ = [
     "BackboneFeatureContract",
@@ -27,4 +27,5 @@ __all__ = [
     "install_ice_exact_forward",
     "named_trainable_gradients",
     "profile_cuda_callable",
+    "profile_cuda_pair_abba",
 ]
