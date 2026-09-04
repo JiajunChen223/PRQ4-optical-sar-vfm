@@ -1,0 +1,101 @@
+{
+  "amp_enabled": true,
+  "certificate_path": "/root/autodl-tmp/r24/cert_a/skysensepp_ice_exact_certificate.json",
+  "certificate_plan_sha256": "08342c304d1e42c12c22b707918898385ecf295c47d08905e46a7573610de9c8",
+  "equivalence_certified": true,
+  "executed_backbone_layers": {
+    "eliminated": 0,
+    "full": 24,
+    "ice_exact": 24
+  },
+  "formal_efficiency_gate": {
+    "batch1_observed": -0.001681012135047677,
+    "metric": "batch16_network_forward_median_latency_reduction_fraction",
+    "observed": -5.829243003629969e-06,
+    "threshold_strong": 0.3,
+    "threshold_supportive": 0.2,
+    "tier": "weak"
+  },
+  "head_checkpoint_sha256": "95548a149df11b9599bdf10628e94cf122317b1289f6fedd7bd96cb47a86d833",
+  "iterations_per_mode": 200,
+  "latency": {
+    "batch1": {
+      "batch_size": 1,
+      "full": {
+        "images_per_second": 27.360439906242817,
+        "iterations": 200,
+        "mean_ms": 36.564264793396,
+        "median_ms": 36.54911994934082,
+        "p10_ms": 36.413031005859374,
+        "p90_ms": 36.7534065246582,
+        "std_ms": 0.14844211573253407
+      },
+      "full_memory": {
+        "absolute_peak_allocated_bytes": 2797400064,
+        "incremental_forward_peak_bytes": 347015168,
+        "resident_before_forward_bytes": 2450384896
+      },
+      "ice_exact": {
+        "images_per_second": 27.31452386017082,
+        "iterations": 200,
+        "mean_ms": 36.618357543945315,
+        "median_ms": 36.61055946350098,
+        "p10_ms": 36.47866973876953,
+        "p90_ms": 36.79436683654785,
+        "std_ms": 0.11824046341724197
+      },
+      "ice_exact_memory": {
+        "absolute_peak_allocated_bytes": 2797400064,
+        "incremental_forward_peak_bytes": 347015168,
+        "resident_before_forward_bytes": 2450384896
+      },
+      "incremental_forward_peak_reduction_bytes": 0,
+      "median_latency_reduction_fraction": -0.001681012135047677,
+      "memory_scope": "both_full_parameter_sets_resident; report incremental forward allocation",
+      "protocol_role": "deployment_reference_after_microbatch16_normalization"
+    },
+    "batch16": {
+      "batch_size": 16,
+      "full": {
+        "images_per_second": 30.259427285532194,
+        "iterations": 200,
+        "mean_ms": 528.5576177978515,
+        "median_ms": 528.7608337402344,
+        "p10_ms": 526.5792114257813,
+        "p90_ms": 530.054443359375,
+        "std_ms": 1.3477025017784903
+      },
+      "full_memory": {
+        "absolute_peak_allocated_bytes": 7987357696,
+        "incremental_forward_peak_bytes": 5536972800,
+        "resident_before_forward_bytes": 2450384896
+      },
+      "ice_exact": {
+        "images_per_second": 30.25925089700561,
+        "iterations": 200,
+        "mean_ms": 528.5834579467773,
+        "median_ms": 528.763916015625,
+        "p10_ms": 526.9098449707031,
+        "p90_ms": 530.0934509277344,
+        "std_ms": 1.3837134341062098
+      },
+      "ice_exact_memory": {
+        "absolute_peak_allocated_bytes": 7987357696,
+        "incremental_forward_peak_bytes": 5536972800,
+        "resident_before_forward_bytes": 2450384896
+      },
+      "incremental_forward_peak_reduction_bytes": 0,
+      "median_latency_reduction_fraction": -5.829243003629969e-06,
+      "memory_scope": "both_full_parameter_sets_resident; report incremental forward allocation",
+      "protocol_role": "protocol_aligned_network_forward"
+    }
+  },
+  "latency_tier": "weak",
+  "measurement_order": "repeated_ABBA",
+  "route": "R24-SKYSENSEPP-S2-ICE-01",
+  "safetensors_sha256": "27f2a40bdad5ffc10598d808ec7b5d481f9848c6d6a63155fb4f4f113480c3e5",
+  "schema_version": "prq4.skysensepp_ice_exact_profile.v1",
+  "scientific_route_supported": false,
+  "test_accessed": false,
+  "warmup": 50
+}

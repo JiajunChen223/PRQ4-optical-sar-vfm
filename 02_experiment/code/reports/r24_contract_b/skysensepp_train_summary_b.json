@@ -1,0 +1,179 @@
+{
+  "best_val_mIoU_percent": 20.854048160730166,
+  "checkpoints": {
+    "best": "/root/autodl-tmp/r24/contract_b_gt/best_skysensepp_b_checkpoint.pt",
+    "last": "/root/autodl-tmp/r24/contract_b_gt/last_skysensepp_b_checkpoint.pt"
+  },
+  "history": [
+    {
+      "epoch": 1.0,
+      "peak_vram_mb": 6463.7666015625,
+      "train_loss": 3.094060764862941,
+      "val_mIoU_percent": 4.774421296296296
+    },
+    {
+      "epoch": 2.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 2.3181825509438148,
+      "val_mIoU_percent": 9.760539434188187
+    },
+    {
+      "epoch": 3.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 2.0851213794488173,
+      "val_mIoU_percent": 9.116530353796602
+    },
+    {
+      "epoch": 4.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.9622231378005102,
+      "val_mIoU_percent": 12.757284597271596
+    },
+    {
+      "epoch": 5.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.8687577912440667,
+      "val_mIoU_percent": 15.839490563491609
+    },
+    {
+      "epoch": 6.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.810066234606963,
+      "val_mIoU_percent": 15.518341203121045
+    },
+    {
+      "epoch": 7.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.7424818048110375,
+      "val_mIoU_percent": 14.22190004632022
+    },
+    {
+      "epoch": 8.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.6978809902301202,
+      "val_mIoU_percent": 15.671671279039511
+    },
+    {
+      "epoch": 9.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.669566246179434,
+      "val_mIoU_percent": 15.698776355745606
+    },
+    {
+      "epoch": 10.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.6284456780323615,
+      "val_mIoU_percent": 16.613279254995817
+    },
+    {
+      "epoch": 11.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.6029159128665924,
+      "val_mIoU_percent": 17.179341694333754
+    },
+    {
+      "epoch": 12.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.588676319672511,
+      "val_mIoU_percent": 19.38424308496043
+    },
+    {
+      "epoch": 13.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.5770274859208326,
+      "val_mIoU_percent": 18.35373592138764
+    },
+    {
+      "epoch": 14.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.5521533672626202,
+      "val_mIoU_percent": 18.874868947931624
+    },
+    {
+      "epoch": 15.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.545546653179022,
+      "val_mIoU_percent": 19.418970316735628
+    },
+    {
+      "epoch": 16.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.5519536252205188,
+      "val_mIoU_percent": 20.30232390303017
+    },
+    {
+      "epoch": 17.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.535656227515294,
+      "val_mIoU_percent": 20.067942034326443
+    },
+    {
+      "epoch": 18.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.5253269580694346,
+      "val_mIoU_percent": 20.47356804691977
+    },
+    {
+      "epoch": 19.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.5154126722079058,
+      "val_mIoU_percent": 20.52432940658462
+    },
+    {
+      "epoch": 20.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.5045237862146819,
+      "val_mIoU_percent": 20.562915635152645
+    },
+    {
+      "epoch": 21.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.507954322374784,
+      "val_mIoU_percent": 20.818058629363414
+    },
+    {
+      "epoch": 22.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.509816655745873,
+      "val_mIoU_percent": 20.854048160730166
+    },
+    {
+      "epoch": 23.0,
+      "peak_vram_mb": 6466.03125,
+      "train_loss": 1.4950287021123445,
+      "val_mIoU_percent": 20.841832481006072
+    },
+    {
+      "epoch": 24.0,
+      "peak_vram_mb": 6465.4296875,
+      "train_loss": 1.4979069118316357,
+      "val_mIoU_percent": 20.82697052892046
+    }
+  ],
+  "metadata": {
+    "annotation": "gt",
+    "annotation_note": "gt_worldcover_leakage_documented",
+    "contract": "b",
+    "effective_batch_samples": 16,
+    "epoch": 24,
+    "epochs": 24,
+    "grad_accum": 1,
+    "gradient_clip_norm": 1.0,
+    "head_seed": 0,
+    "learning_rate": 0.0001,
+    "micro_batch": 16,
+    "model": "skysensepp_s2_full",
+    "num_classes": 11,
+    "objective": "ce_lovasz_1to1",
+    "optimizer": "adamw",
+    "resolution": 120,
+    "scheduler": "cosine_with_warmup",
+    "seed": 0,
+    "val_mIoU_percent": 20.82697052892046,
+    "warmup_fraction": 0.05,
+    "weight_decay": 0.05,
+    "weights_path": "/root/autodl-tmp/weights/skysensepp_s2_full/model.safetensors",
+    "weights_sha256": "27f2a40bdad5ffc10598d808ec7b5d481f9848c6d6a63155fb4f4f113480c3e5"
+  },
+  "status": "complete"
+}

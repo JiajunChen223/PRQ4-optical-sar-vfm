@@ -1,0 +1,49 @@
+{
+  "annotation_source": "gt_worldcover_leakage_documented",
+  "artifact_type": "task_specific_export_certificate",
+  "contract": "a",
+  "device": "cuda:0",
+  "fp32_first_batch_logits": {
+    "device_type_equal": true,
+    "dtype_equal": true,
+    "max_abs_error": 0.0,
+    "max_relative_error": 0.0,
+    "mean_abs_error": 0.0,
+    "shape_equal": true,
+    "torch_equal": true
+  },
+  "head_checkpoint_sha256": "95548a149df11b9599bdf10628e94cf122317b1289f6fedd7bd96cb47a86d833",
+  "reduction": {
+    "export_parameter_count": 303620123,
+    "full_parameter_count": 303620123,
+    "removed_module_paths": [],
+    "removed_parameter_count": 0,
+    "removed_parameter_fraction": 0.0
+  },
+  "route": "R24-SKYSENSEPP-S2-ICE-01",
+  "safetensors_sha256": "27f2a40bdad5ffc10598d808ec7b5d481f9848c6d6a63155fb4f4f113480c3e5",
+  "schema_version": "prq4.skysensepp_ice_export_certificate.v1",
+  "scope": {
+    "artifact": "inference_only",
+    "note": "Training-path equivalence is covered by the R24 ICE certification pair gradient certificate.",
+    "training_claim": "not_claimed"
+  },
+  "state_subset": {
+    "export_keys": 305,
+    "full_keys": 305,
+    "removed_keys": [],
+    "retained_keys_bitwise_identical": true
+  },
+  "status": "pass",
+  "test_accessed": false,
+  "validation": {
+    "batches": 12,
+    "confusion_matrix_identical": true,
+    "export_mIoU_percent": 30.880982253356397,
+    "full_mIoU_percent": 30.880982253356397,
+    "identical_prediction_pixels": 2764800,
+    "max_abs_logit_error": 0.0,
+    "prediction_identical": true,
+    "prediction_pixels": 2764800
+  }
+}
