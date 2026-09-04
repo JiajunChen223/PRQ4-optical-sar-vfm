@@ -205,11 +205,13 @@ class Conv1x1SegmentationHead(nn.Module):
             )
             self.fuse = nn.Conv2d(256, self.num_classes, kernel_size=1)
 
-        generator = torch.Generator().manual_seed(int(seed))
-
         def _reinit(module: nn.Module) -> None:
             if isinstance(module, nn.Conv2d):
-                nn.init.kaiming_uniform_(module.weight, a=math.sqrt(5), generator=generator)
+                # torch 2.1 (cloud host) does not accept generator= in
+                # kaiming_uniform_; reseed the global RNG for deterministic
+                # head initialization instead.
+                torch.manual_seed(int(seed))
+                nn.init.kaiming_uniform_(module.weight, a=math.sqrt(5))
                 if module.bias is not None:
                     nn.init.zeros_(module.bias)
 

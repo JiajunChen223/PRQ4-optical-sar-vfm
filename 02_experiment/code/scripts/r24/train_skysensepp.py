@@ -65,9 +65,12 @@ def _windows(batch: dict[str, torch.Tensor], micro_batch: int):
         )
     for start in range(0, sample_count, micro_batch):
         end = start + micro_batch
+        window_valid = int(batch["valid_count"].item()) - start
+        window_valid = max(0, min(micro_batch, window_valid))
         yield {
             "optical": batch["optical"][start:end].contiguous(),
             "target": batch["target"][start:end].contiguous(),
+            "valid_count": torch.tensor(window_valid, dtype=torch.int64),
         }
 
 

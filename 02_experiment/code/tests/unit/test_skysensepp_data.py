@@ -179,12 +179,14 @@ def test_skysensepp_loader_delegates_to_sen12ts_loader(monkeypatch) -> None:
 
     def fake_loader(
         manifest_path, *, split, batch_size, num_workers, execution_scale,
-        pin_memory=False, augmentation=None, seed=0,
+        pin_memory=False, persistent_workers=False, prefetch_factor=2,
+        augmentation=None, seed=0,
     ):
         captured.update(
             manifest_path=manifest_path, split=split, batch_size=batch_size,
             num_workers=num_workers, execution_scale=execution_scale,
-            pin_memory=pin_memory, augmentation=augmentation, seed=seed,
+            pin_memory=pin_memory, persistent_workers=persistent_workers,
+            prefetch_factor=prefetch_factor, augmentation=augmentation, seed=seed,
         )
         return (object(), {"dataset_id": "fixture", "test_accessed": False})
 

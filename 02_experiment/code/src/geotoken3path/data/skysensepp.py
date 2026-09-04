@@ -116,6 +116,8 @@ def build_skysensepp_loader(
     num_workers: int,
     execution_scale: str,
     pin_memory: bool = False,
+    persistent_workers: bool = False,
+    prefetch_factor: int = 2,
     augmentation: Mapping[str, Any] | None = None,
     seed: int = 0,
 ) -> tuple[DataLoader[dict[str, Tensor]], dict[str, Any]]:
@@ -134,6 +136,8 @@ def build_skysensepp_loader(
         num_workers=num_workers,
         execution_scale=execution_scale,
         pin_memory=pin_memory,
+        persistent_workers=persistent_workers,
+        prefetch_factor=prefetch_factor,
         augmentation=augmentation,
         seed=seed,
     )
