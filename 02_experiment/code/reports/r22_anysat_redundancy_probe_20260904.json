@@ -8,6 +8,7 @@
     "blocks.3",
     "blocks.4",
     "blocks.5",
+    "blocks.6 (CrossBlockMulti, fusion output; invoked via forward_release so not visible to forward hooks, verified separately: executes 1x under dense, zeroing changes dense output by 0.555)",
     "spatial_encoder.predictor_blocks.0",
     "spatial_encoder.predictor_blocks.1",
     "spatial_encoder.predictor_blocks.2",
@@ -38,7 +39,15 @@
         7.411
       ]
     },
-    "method": "zero-output forward hook per block; dense output sensitivity",
+    "executed_block_count": 13,
+    "count_explanation": "blocks.0-5 (6) + spatial_encoder.predictor_blocks.0-5 (6) are visible to forward hooks; blocks.6 (CrossBlockMulti) is invoked via AnyModule.forward_release directly (bypassing nn.Module.__call__) so it is invisible to forward hooks, and is therefore verified separately (executes once under dense; zeroing its output changes dense output by max|delta|=0.555 > 1e-6, hence necessary). Total 13 executed transformer blocks.",
+    "crossblock_verification": {
+      "method": "wrap blocks[-1].forward_release to count calls and zero output",
+      "executes_under_dense": true,
+      "max_abs_delta_when_zeroed": 0.5554884672164917,
+      "necessary": true
+    },
+    "method": "zero-output forward hook per block (plus explicit forward_release wrap for blocks.6); dense output sensitivity",
     "necessary_blocks": [
       "blocks.0",
       "blocks.1",
@@ -46,6 +55,7 @@
       "blocks.3",
       "blocks.4",
       "blocks.5",
+      "blocks.6 (CrossBlockMulti)",
       "spatial_encoder.predictor_blocks.0",
       "spatial_encoder.predictor_blocks.1",
       "spatial_encoder.predictor_blocks.2",

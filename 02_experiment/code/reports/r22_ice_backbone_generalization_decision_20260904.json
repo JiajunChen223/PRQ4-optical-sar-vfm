@@ -21,6 +21,7 @@
     "probe_report": "reports/r22_anysat_redundancy_probe_20260904.json",
     "probe_method": "zero-output forward-hook perturbation per executed transformer block; dense output sensitivity threshold 1e-6",
     "executed_blocks": 13,
+    "executed_blocks_detail": "blocks.0-5 (6) + spatial_encoder.predictor_blocks.0-5 (6), verified via forward hooks; blocks.6 (CrossBlockMulti) invoked via forward_release (invisible to hooks), verified separately: executes once under dense, zeroing changes dense output by 0.555 > 1e-6, hence necessary. Total 13.",
     "necessary_blocks": 13,
     "removable_blocks": 0,
     "removable_fraction": 0.0,

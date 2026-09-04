@@ -121,13 +121,43 @@ def main() -> None:
         finally:
             handle.remove()
 
+    # ---- blocks.6 (CrossBlockMulti) is invoked via AnyModule.forward_release
+    # directly, bypassing nn.Module.__call__, so forward hooks never see it.
+    # Verify it explicitly: count calls and test necessity by zeroing its output.
+    print("\n== explicit blocks.6 (CrossBlockMulti) verification ==")
+    cross_block = model.model.blocks[-1]
+    orig_fr = cross_block.forward_release
+    calls = {"n": 0}
+
+    def _counting(*args, **kwargs):
+        calls["n"] += 1
+        return orig_fr(*args, **kwargs)
+
+    cross_block.forward_release = _counting
+    with torch.no_grad():
+        _ = model(x, patch_size=10, output="dense")
+    print(f"  blocks.6 forward_release calls under dense: {calls['n']}")
+    dependency["blocks.6 (CrossBlockMulti)"] = None
+
+    def _zeroing(*args, **kwargs):
+        out = orig_fr(*args, **kwargs)
+        return torch.zeros_like(out)
+
+    cross_block.forward_release = _zeroing
+    with torch.no_grad():
+        dense_pert = model(x, patch_size=10, output="dense")
+    delta = (dense_ref - dense_pert).abs().max().item()
+    dependency["blocks.6 (CrossBlockMulti)"] = delta > 1e-6
+    print(f"  blocks.6 sensitive={delta > 1e-6} (max|delta|={delta:.3e})")
+    cross_block.forward_release = orig_fr
+
     print("\n== summary ==")
     removable = [k for k, v in dependency.items() if v is False]
     necessary = [k for k, v in dependency.items() if v is True]
-    print(f"necessary blocks: {necessary}")
+    print(f"necessary blocks ({len(necessary)}): {necessary}")
     print(f"removable blocks (not on dense dependency path): {removable}")
-    if removable:
-        print(f"=> {len(removable)}/{len(dependency)} transformer blocks removable under dense contract")
+    print(f"=> {len(necessary)}/{len(dependency)} transformer blocks necessary under dense contract")
+    print(f"=> {len(removable)} removable ({len(removable)/len(dependency)*100:.1f}%)")
 
     for h in handles:
         h.remove()
