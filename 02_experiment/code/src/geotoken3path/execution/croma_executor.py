@@ -5,7 +5,6 @@ from __future__ import annotations
 from collections.abc import Mapping
 from types import MethodType
 
-from einops import rearrange
 from torch import Tensor, nn
 
 from .contracts import CromaExecutionContractError
@@ -121,6 +120,26 @@ class InterfaceCertifiedCromaExecutor:
         self.validate_installation(backbone)
 
     @staticmethod
+    def _patchify_like_official_croma(encoder: nn.Module, images: Tensor) -> Tensor:
+        """Match ``b c (h i) (w j) -> b (h w) (c i j)`` without einops."""
+
+        patch_size = getattr(encoder, "patch_size", None)
+        if not isinstance(patch_size, int) or patch_size <= 0:
+            raise CromaExecutionContractError("CROMA encoder patch_size is invalid")
+        if images.ndim != 4:
+            raise CromaExecutionContractError("CROMA encoder images must be BCHW")
+        batch, channels, height, width = images.shape
+        if height % patch_size != 0 or width % patch_size != 0:
+            raise CromaExecutionContractError("CROMA image shape is not divisible by patch_size")
+        grid_h = height // patch_size
+        grid_w = width // patch_size
+        return (
+            images.reshape(batch, channels, grid_h, patch_size, grid_w, patch_size)
+            .permute(0, 2, 4, 1, 3, 5)
+            .reshape(batch, grid_h * grid_w, channels * patch_size * patch_size)
+        )
+
+    @staticmethod
     def _run_encoder_prefix(
         encoder: nn.Module,
         images: Tensor,
@@ -131,15 +150,7 @@ class InterfaceCertifiedCromaExecutor:
     ) -> Tensor | None:
         if last_layer is None:
             return None
-        patch_size = getattr(encoder, "patch_size", None)
-        if not isinstance(patch_size, int) or patch_size <= 0:
-            raise CromaExecutionContractError("CROMA encoder patch_size is invalid")
-        x = rearrange(
-            images,
-            "b c (h i) (w j) -> b (h w) (c i j)",
-            i=patch_size,
-            j=patch_size,
-        )
+        x = InterfaceCertifiedCromaExecutor._patchify_like_official_croma(encoder, images)
         x = encoder.linear_input(x)
         layers = encoder.transformer.layers
         if last_layer < 0 or last_layer >= len(layers):
