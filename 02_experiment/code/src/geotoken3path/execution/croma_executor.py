@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any
+from types import MethodType
 
 from einops import rearrange
 import torch
@@ -207,3 +207,40 @@ class InterfaceCertifiedCromaExecutor:
             outputs["joint_encodings"] = joint
             outputs["joint_GAP"] = joint.mean(dim=1)
         return outputs
+
+
+def install_ice_exact_forward(
+    backbone: nn.Module,
+    executor: InterfaceCertifiedCromaExecutor,
+) -> nn.Module:
+    """Install ICE as a zero-state execution backend on one fresh CROMA instance.
+
+    The patch changes only the Python ``forward`` dispatch.  It registers no
+    modules, parameters, or buffers, so state-dict keys and trainability masks
+    remain identical to the verified full-execution model.  Factory construction
+    uses a fresh audited backbone per model; double installation is rejected.
+    """
+
+    if not isinstance(backbone, nn.Module):
+        raise CromaExecutionContractError("ICE exact can only patch a torch module")
+    if not isinstance(executor, InterfaceCertifiedCromaExecutor):
+        raise TypeError("executor must be InterfaceCertifiedCromaExecutor")
+    if getattr(backbone, "_ice_execution_mode", None) is not None:
+        raise CromaExecutionContractError("audited backbone already has an ICE execution patch")
+    executor.validate(backbone)
+
+    def _ice_forward(
+        self: nn.Module,
+        SAR_images: Tensor | None = None,
+        optical_images: Tensor | None = None,
+    ) -> Mapping[str, Tensor]:
+        return executor.execute(
+            self,
+            SAR_images=SAR_images,
+            optical_images=optical_images,
+        )
+
+    backbone.forward = MethodType(_ice_forward, backbone)
+    backbone._ice_execution_mode = "ice_exact"
+    backbone._ice_execution_plan_sha256 = executor.plan.plan_sha256
+    return backbone
