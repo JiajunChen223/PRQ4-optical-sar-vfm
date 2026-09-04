@@ -6,7 +6,6 @@ from collections.abc import Mapping
 from types import MethodType
 
 from einops import rearrange
-import torch
 from torch import Tensor, nn
 
 from .contracts import CromaExecutionContractError
@@ -35,9 +34,13 @@ _UNSAFE_DYNAMIC_ATTRS = (
 class InterfaceCertifiedCromaExecutor:
     """Execute only CROMA nodes certified necessary by a compiled tap plan.
 
-    The executor intentionally owns no modules or parameters.  It invokes the
+    The executor intentionally owns no modules or parameters. It invokes the
     exact module objects from the audited backbone so existing FFN forward hooks
     retain their original semantics and the model state-dict is unchanged.
+
+    Expensive structural checks are performed once when the backend is
+    installed. Per-forward guards are limited to dynamic side-channel state so
+    the certification machinery itself is not charged to every ICE inference.
     """
 
     def __init__(self, plan: CromaExecutionPlan) -> None:
@@ -87,7 +90,7 @@ class InterfaceCertifiedCromaExecutor:
                         f"ICE exact refuses stochastic Dropout under eliminated module {path}"
                     )
 
-    def validate(self, backbone: nn.Module) -> None:
+    def validate_installation(self, backbone: nn.Module) -> None:
         """Fail closed unless the audited backbone matches the exact plan contract."""
 
         if not isinstance(backbone, nn.Module):
@@ -112,6 +115,10 @@ class InterfaceCertifiedCromaExecutor:
             raise CromaExecutionContractError("audited backbone attn_bias tensor is missing")
         self._validate_no_active_side_channels(backbone)
         self._validate_eliminated_modules(backbone)
+
+    # Backward-compatible spelling used by focused unit tests.
+    def validate(self, backbone: nn.Module) -> None:
+        self.validate_installation(backbone)
 
     @staticmethod
     def _run_encoder_prefix(
@@ -140,7 +147,7 @@ class InterfaceCertifiedCromaExecutor:
         for index in range(last_layer + 1):
             self_attn, ffn = layers[index]
             x = self_attn(x, attn_bias) + x
-            # Call the exact FFN module object.  Existing hooks on ``.1`` fire
+            # Call the exact FFN module object. Existing hooks on ``.1`` fire
             # here and therefore capture the same pre-residual FFN output as
             # the verified full CROMA forward.
             ffn_output = ffn(x)
@@ -161,7 +168,10 @@ class InterfaceCertifiedCromaExecutor:
     ) -> Mapping[str, Tensor]:
         """Execute the certified exact graph and return official-style side outputs."""
 
-        self.validate(backbone)
+        # Structural/stochastic checks have already passed at installation.
+        # Dynamic historical residual tensors are the only state that may appear
+        # later and therefore remain a per-forward fail-closed guard.
+        self._validate_no_active_side_channels(backbone)
         if SAR_images is None or optical_images is None:
             raise CromaExecutionContractError("ICE exact requires paired SAR and optical images")
         if SAR_images.ndim != 4 or optical_images.ndim != 4:
@@ -169,11 +179,10 @@ class InterfaceCertifiedCromaExecutor:
         if SAR_images.shape[0] != optical_images.shape[0] or SAR_images.shape[-2:] != optical_images.shape[-2:]:
             raise CromaExecutionContractError("ICE exact paired inputs must share batch/spatial shape")
 
-        attn_bias = backbone.attn_bias.to(SAR_images.device)
         sar_encodings = self._run_encoder_prefix(
             backbone.s1_encoder,
             SAR_images,
-            attn_bias,
+            backbone.attn_bias.to(SAR_images.device),
             last_layer=self.plan.s1_last_layer,
             final_norm=self.plan.require_s1_final_norm,
         )
@@ -215,9 +224,9 @@ def install_ice_exact_forward(
 ) -> nn.Module:
     """Install ICE as a zero-state execution backend on one fresh CROMA instance.
 
-    The patch changes only the Python ``forward`` dispatch.  It registers no
+    The patch changes only the Python ``forward`` dispatch. It registers no
     modules, parameters, or buffers, so state-dict keys and trainability masks
-    remain identical to the verified full-execution model.  Factory construction
+    remain identical to the verified full-execution model. Factory construction
     uses a fresh audited backbone per model; double installation is rejected.
     """
 
@@ -227,7 +236,7 @@ def install_ice_exact_forward(
         raise TypeError("executor must be InterfaceCertifiedCromaExecutor")
     if getattr(backbone, "_ice_execution_mode", None) is not None:
         raise CromaExecutionContractError("audited backbone already has an ICE execution patch")
-    executor.validate(backbone)
+    executor.validate_installation(backbone)
 
     def _ice_forward(
         self: nn.Module,
