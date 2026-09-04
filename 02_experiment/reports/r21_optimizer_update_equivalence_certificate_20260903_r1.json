@@ -1,0 +1,83 @@
+{
+  "artifact_type": "optimizer_update_equivalence_certificate",
+  "schema_version": "researchpilot.r21.optimizer_cert.v1",
+  "device": "cuda:0",
+  "status": "pass",
+  "route": "R21-ICE-VFM-01",
+  "mechanism_set": "always_fuse",
+  "objective": "ce_lovasz",
+  "seed": 0,
+  "steps": 3,
+  "trainable_parameter_count": 320,
+  "threshold_max_abs_error": 1e-05,
+  "step_records": [
+    {
+      "step": 0,
+      "loss": {
+        "full": 3.6505463123321533,
+        "ice": 3.6505463123321533,
+        "abs_error": 0.0
+      },
+      "max_grad_abs_error": 3.725290298461914e-09,
+      "max_param_abs_error": 5.718320608139038e-07,
+      "max_exp_avg_abs_error": 4.656612873077393e-10,
+      "max_exp_avg_sq_abs_error": 1.7053025658242404e-13,
+      "grad_snapshot": "post_clip",
+      "state_snapshot": "post_step",
+      "all_finite": true
+    },
+    {
+      "step": 1,
+      "loss": {
+        "full": 2.7187366485595703,
+        "ice": 2.7187366485595703,
+        "abs_error": 0.0
+      },
+      "max_grad_abs_error": 3.073364496231079e-08,
+      "max_param_abs_error": 5.718320608139038e-07,
+      "max_exp_avg_abs_error": 3.026798367500305e-09,
+      "max_exp_avg_sq_abs_error": 8.100187187665142e-13,
+      "grad_snapshot": "post_clip",
+      "state_snapshot": "post_step",
+      "all_finite": true
+    },
+    {
+      "step": 2,
+      "loss": {
+        "full": 2.7293293476104736,
+        "ice": 2.7293291091918945,
+        "abs_error": 2.384185791015625e-07
+      },
+      "max_grad_abs_error": 2.7153873816132545e-08,
+      "max_param_abs_error": 5.718320608139038e-07,
+      "max_exp_avg_abs_error": 2.3283064365386963e-09,
+      "max_exp_avg_sq_abs_error": 1.1368683772161603e-12,
+      "grad_snapshot": "post_clip",
+      "state_snapshot": "post_step",
+      "all_finite": true
+    }
+  ],
+  "summary": {
+    "max_loss_abs_error": 2.384185791015625e-07,
+    "max_grad_abs_error": 3.073364496231079e-08,
+    "max_param_abs_error": 5.718320608139038e-07,
+    "max_exp_avg_abs_error": 3.026798367500305e-09,
+    "max_exp_avg_sq_abs_error": 1.1368683772161603e-12,
+    "init_state_max_abs_error": 5.718320608139038e-07
+  },
+  "scope": {
+    "precision": "fp32",
+    "optimizer_step_semantics": "per_micro_batch_bs16_no_accumulation",
+    "accumulation_in_formal_protocol": 2,
+    "formal_effective_batch": 32,
+    "batch_source": "first_N_train_batches_no_shuffle",
+    "augmentation": "none_applied",
+    "scheduler_warmup": "not_applied",
+    "formal_backbone_init": "audited CROMA",
+    "execution_backends": [
+      "full_official_forward",
+      "ice_exact_minimal_execution"
+    ]
+  },
+  "test_accessed": false
+}
