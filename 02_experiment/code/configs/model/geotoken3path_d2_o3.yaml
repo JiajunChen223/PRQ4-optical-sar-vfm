@@ -1,0 +1,58 @@
+route_id: PRQ4-DEPTH-2-OPTICAL-3
+candidate_id: DEPTH-2-ALWAYS-FUSE
+backbone_family: croma_radar_optical_vit_b
+initialization_ref: configs/model/pretrained_audit_successor.json
+backbone:
+  token_dim: 768
+  feature_contract: croma_depth_tapped_token_groups
+  depth_group_size: 4
+  depth_taps:
+    stage:
+      optical:
+        mid: s2_encoder.transformer.layers.2.1
+        late: s2_encoder.transformer.layers.3.1
+      sar:
+        mid: s1_encoder.transformer.layers.2.1
+        late: s1_encoder.transformer.layers.5.1
+    sar_depth_group:
+      mid:
+        - s1_encoder.transformer.layers.0.1
+        - s1_encoder.transformer.layers.1.1
+        - s1_encoder.transformer.layers.2.1
+        - s1_encoder.transformer.layers.3.1
+      late:
+        - s1_encoder.transformer.layers.2.1
+        - s1_encoder.transformer.layers.3.1
+        - s1_encoder.transformer.layers.4.1
+        - s1_encoder.transformer.layers.5.1
+decoder:
+  type: token_segmentation_decoder
+  num_classes_from_benchmark: true
+  ignore_index: 255
+trainability:
+  trunk: tap_connected_unfrozen
+  backbone_policy: tap_connected
+  router: trainable
+  adapters: trainable
+  decoder: trainable
+mechanism:
+  name: geotoken_3path
+  states: [optical_bypass, local_exchange, depth_escalation]
+  stages: [mid, late]
+  local_window_tokens: 49
+  expected_active_fraction_budget: 1.0
+  identity_residual_required: true
+  external_router_forbidden: true
+  generic_graph_network_claim_forbidden: true
+matched_controls:
+  - always_fuse
+  - r2_depth_group_inject
+  - r1_low_energy_channel_gain
+  - r3_optical_conditional_depth_select
+  - r6_depth_dual_channel_inject
+  - r7_residual_learned_upsample
+  - r8_depth_inject_plus_upsample
+input:
+  optical_channels: 12
+  sar_channels: 2
+  patch_size: 120
