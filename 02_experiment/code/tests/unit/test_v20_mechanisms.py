@@ -388,18 +388,41 @@ def test_r9_router_only_parameters_and_gradient() -> None:
     assert m.router.down.weight.grad is not None
 
 
-def test_r9_residual_becomes_active_after_training() -> None:
+def test_r9_gradients_nonzero_after_first_step() -> None:
+    """Zero-start must not deadlock: after one backward, up must have a non-zero
+    gradient so training can move the mechanism away from identity."""
     m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r9_optical_semantic_recovery", stages=("mid", "late"))
     g = torch.Generator().manual_seed(35)
     optical = torch.randn(2, 49, 16, generator=g)
-    # 零起步：残差为零
+    sar = torch.randn(2, 49, 16, generator=g)
+    # 零起步：残差为零（恒等）
     with torch.no_grad():
         out0 = m.router(optical)
     assert torch.equal(out0, optical)
-    # 激活后：残差非零（down 初始非零；需激活 up 与 hid 中间层，否则 hidden=0）
-    with torch.no_grad():
-        m.router.up.weight.fill_(0.01)
-        m.router.hid[2].weight.fill_(0.01)
-        m.router.hid[4].weight.fill_(0.01)
-    out1 = m.router(optical)
-    assert not torch.equal(out1, optical)
+    # 一次真实 forward+backward：up 必须收到非零梯度
+    out, _ = m(optical, sar, depth_group=None, output_size=(7, 7), return_aux=True)
+    out.mean().backward()
+    assert m.router.up.weight.grad is not None
+    assert int((m.router.up.weight.grad != 0).sum()) > 0, "up must receive non-zero gradient"
+    # down may be zero at step 0 (up weight is zero so the residual path is
+    # cut); up moving first unlocks the rest, matching the zero-start family.
+
+
+def test_r9_training_moves_router_weights() -> None:
+    """A few AdamW steps must change the router weights (no permanent identity)."""
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r9_optical_semantic_recovery", stages=("mid", "late"))
+    opt = torch.optim.AdamW((p for p in m.parameters() if p.requires_grad), lr=1e-3)
+    g = torch.Generator().manual_seed(37)
+    optical = torch.randn(2, 49, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    target = torch.randint(0, 8, (2, 7, 7))
+    from geotoken3path.losses import segmentation_objective
+    before = sum(p.abs().sum().item() for p in m.router.parameters())
+    for _ in range(3):
+        opt.zero_grad()
+        logits, _ = m(optical, sar, depth_group=None, output_size=(7, 7), return_aux=True)
+        loss, _ = segmentation_objective(logits, target, objective_name="ce_lovasz")
+        loss.backward()
+        opt.step()
+    after = sum(p.abs().sum().item() for p in m.router.parameters())
+    assert abs(after - before) > 1e-6, "router weights must move under training"

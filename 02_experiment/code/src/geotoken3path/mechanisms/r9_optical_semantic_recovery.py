@@ -9,8 +9,9 @@ Contract (V21 design, 2026-09-04):
 - Input: the late-stage optical carrier z3 (after the optical stem, before
   the fusion call). Output: an additive residual injected into that carrier.
 - Architecture: down 768->r (r=128 default), two hidden rank-r MLP blocks with
-  GELU, up r->768; zero-start (only the first down projection is non-zero
-  initialized) so the composed model equals the D2 row at optimizer step 0.
+  GELU, up r->768; zero-start (only the outermost up projection is zero
+  initialized) so the composed model equals the D2 row at optimizer step 0
+  while keeping non-zero gradients through up.
 - Invariants: no attention, no new tap (ICE plan unchanged), no second CROMA
   forward, no label/argmax, training and inference identical; parameters live
   in the router.* namespace.
@@ -41,11 +42,12 @@ class R9OpticalSemanticRecovery(nn.Module):
             nn.Linear(rank, rank, bias=False),
         )
         self.up = nn.Linear(rank, dim, bias=False)
-        # Zero-start: only the down projection is active at step 0; everything
-        # after it is zero-initialized so the residual is exactly zero and the
-        # mechanism row equals the D2 baseline.
-        for module in (self.hid[2], self.hid[4], self.up):
-            nn.init.zeros_(module.weight)
+        # Zero-start: only the outermost up projection is zero-initialized.
+        # The residual is exactly zero at step 0 (up(anything)=0), so the
+        # mechanism row equals the D2 baseline; but up receives a non-zero
+        # gradient (downstream gradient x non-zero hidden), so training can
+        # move the mechanism away from identity.
+        nn.init.zeros_(self.up.weight)
 
     def forward(self, optical_stage: Tensor) -> Tensor:
         if optical_stage.ndim != 3:
