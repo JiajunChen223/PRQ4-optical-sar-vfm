@@ -33,6 +33,7 @@ class CromaExecutionPlan:
     require_s2_gap: bool
     eliminated_nodes: tuple[str, ...]
     plan_sha256: str
+    ablation_tier: str = "exact"
 
     def payload(self) -> dict[str, Any]:
         return asdict(self)
@@ -99,6 +100,7 @@ def compile_croma_execution_plan(
     model_cfg: Mapping[str, Any],
     receiver_contract: BackboneFeatureContract,
     audited_backbone: nn.Module,
+    ablation: str = "exact",
 ) -> CromaExecutionPlan:
     """Derive the minimum exact CROMA prefix from declared receiver taps.
 
@@ -106,6 +108,21 @@ def compile_croma_execution_plan(
     compiles the exact FFN hook paths used by the verified baseline.  Native
     joint consumption forces full S1/S2 encoders because the official joint
     encoder consumes their final normalized outputs.
+
+    ``ablation`` selects the execution-cost attribution tier for the paper's
+    cost-attribution study.  It does not change the receiver contract; it
+    changes only which nodes are retained/eliminated so that each tier's
+    marginal cost can be measured.  Tiers (all measured with the same
+    checkpoint, all prediction-equal for the always-fuse receiver because
+    GAP/joint/optical-suffix are not consumed downstream):
+      - "full":      everything (both encoders full depth + norms + GAP + joint);
+      - "no_gap":    full depth + joint, but GAP heads eliminated;
+      - "no_joint":  full tap-derived depth (no suffix), GAP heads eliminated,
+                     joint/cross eliminated  (== current exact for late=5);
+      - "exact":     minimum tap-derived plan (== current default behaviour).
+    The receiver contract flags remain the source of truth for which outputs
+    the caller declares; ablation only widens the executed graph for cost
+    attribution and never narrows below the contract.
     """
 
     if not isinstance(model_cfg, Mapping):
@@ -161,6 +178,25 @@ def compile_croma_execution_plan(
     require_s1_gap = receiver_contract.global_sar
     require_s2_gap = receiver_contract.global_optical
 
+    tier = str(ablation).strip().casefold()
+    if tier not in {"full", "no_gap", "no_joint", "exact"}:
+        raise CromaExecutionContractError(f"unknown ablation tier: {ablation}")
+    if tier == "full":
+        # Widened attribution graph: everything executed. Never narrows below
+        # the receiver contract (the contract may itself request joint/GAP).
+        require_joint = True
+        require_s1_gap = True
+        require_s2_gap = True
+    elif tier == "no_gap":
+        require_joint = True
+        require_s1_gap = False
+        require_s2_gap = False
+    elif tier == "no_joint":
+        require_joint = False
+        require_s1_gap = False
+        require_s2_gap = False
+    # tier == "exact": keep contract-derived flags (current behaviour).
+
     if require_joint:
         s1_last = s1_depth - 1
         s2_last = s2_depth - 1
@@ -203,6 +239,7 @@ def compile_croma_execution_plan(
         eliminated.append("joint_GAP")
 
     core = {
+        "ablation_tier": tier,
         "required_taps": tuple(sorted(required)),
         "s1_last_layer": s1_last,
         "s2_last_layer": s2_last,
