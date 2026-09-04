@@ -1,0 +1,39 @@
+# R24 SkySense++ S2 ICE-Exact: synthetic-only CPU smoke lane.
+# Never produces science evidence (no real weights, no real data, CPU AMP).
+target_gpu: RTX_3090_24GB
+local_gpu_probe_allowed: false
+cloud_preflight_required: true
+precision: amp
+micro_batch: 16
+effective_batch: 16
+gradient_accumulation: 1
+num_workers: 0
+checkpointing: disabled
+real_data_allowed: false
+real_weights_allowed: false
+execution_scale: smoke
+test_seal_status: sealed
+seed: 0
+contract: b
+resolution: 120
+num_classes: 11
+head_seed: 0
+annotation: gt
+epochs: 1
+optimizer:
+  name: adamw
+  learning_rate: 0.0001
+  weight_decay: 0.05
+  betas: [0.9, 0.999]
+scheduler:
+  name: cosine_with_warmup
+  warmup_fraction: 0.05
+gradient_clip_norm: 1.0
+objective_name: ce_lovasz
+augmentation:
+  name: paired_geometric_v1
+  enabled: true
+  train_only: true
+  deterministic: true
+  orientation_space: D4
+  operations: [horizontal_flip, vertical_flip, rotate_90, rotate_180, rotate_270, transpose, anti_transpose]
