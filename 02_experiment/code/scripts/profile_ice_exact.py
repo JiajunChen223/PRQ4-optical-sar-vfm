@@ -35,6 +35,8 @@ def _load_certificate(path: Path, checkpoint: Path) -> dict[str, object]:
         raise ValueError("certificate must contain a JSON object")
     if payload.get("route") != "R21-ICE-VFM-01" or payload.get("status") != "pass":
         raise ValueError("profiling requires a passing R21 ICE certificate")
+    if payload.get("equivalence_certified") is not True:
+        raise ValueError("profiling requires equivalence_certified=true")
     if payload.get("test_accessed") is not False:
         raise ValueError("profiling refuses a certificate that accessed the sealed test split")
     if payload.get("checkpoint_sha256") != _sha256(checkpoint):
@@ -63,6 +65,27 @@ def _summary_dict(summary, *, batch_size: int) -> dict[str, float | int]:
     value = dict(summary.__dict__)
     value["images_per_second"] = float(batch_size * 1000.0 / summary.median_ms)
     return value
+
+
+def _analytical_transformer_flops(
+    *,
+    tokens: int,
+    dim: int,
+    modality_blocks: int,
+    cross_blocks: int,
+) -> int:
+    """Count multiply-add style FLOPs for transformer blocks only.
+
+    A modality self-attention block uses 4ND^2 for QKV/output projection,
+    8ND^2 for the MLP, and 2N^2D for attention score/value products.
+    A CROMA cross block adds another 4ND^2 + 2N^2D cross-attention term.
+    Patch projection, normalization, GAP heads, decoder and data movement are
+    deliberately excluded and the report labels this scope explicitly.
+    """
+
+    self_block = 12 * tokens * dim * dim + 2 * tokens * tokens * dim
+    cross_block = 16 * tokens * dim * dim + 4 * tokens * tokens * dim
+    return int(modality_blocks * self_block + cross_blocks * cross_block)
 
 
 def main() -> int:
@@ -200,13 +223,42 @@ def main() -> int:
         "s2_blocks": 0 if plan.s2_last_layer is None else plan.s2_last_layer + 1,
         "joint_blocks": len(raw.cross_encoder.layers) if plan.require_joint_encoder else 0,
     }
-    full_total = sum(full_counts.values())
-    ice_total = sum(ice_counts.values())
+    full_modality_blocks = full_counts["s1_blocks"] + full_counts["s2_blocks"]
+    ice_modality_blocks = ice_counts["s1_blocks"] + ice_counts["s2_blocks"]
+    full_total = full_modality_blocks + full_counts["joint_blocks"]
+    ice_total = ice_modality_blocks + ice_counts["joint_blocks"]
+
+    tokens = int(raw.attn_bias.shape[-1])
+    dim = int(getattr(raw.s1_encoder, "dim", raw.s1_encoder.linear_input.out_features))
+    full_flops = _analytical_transformer_flops(
+        tokens=tokens,
+        dim=dim,
+        modality_blocks=full_modality_blocks,
+        cross_blocks=full_counts["joint_blocks"],
+    )
+    ice_flops = _analytical_transformer_flops(
+        tokens=tokens,
+        dim=dim,
+        modality_blocks=ice_modality_blocks,
+        cross_blocks=ice_counts["joint_blocks"],
+    )
+
     batch16_reduction = float(rows["batch16"]["median_latency_reduction_fraction"])
+    efficiency_pass = batch16_reduction >= 0.20
+    if efficiency_pass:
+        route_decision = "supported"
+    elif batch16_reduction >= 0.10:
+        route_decision = "marginal_efficiency_component_only"
+    else:
+        route_decision = "close_main_route"
+
     result = {
         "schema_version": "prq4.ice_exact_profile.v1",
         "route": "R21-ICE-VFM-01",
         "test_accessed": False,
+        "equivalence_certified": True,
+        "scientific_route_supported": efficiency_pass,
+        "route_decision": route_decision,
         "certificate_path": str(Path(args.certificate)),
         "certificate_plan_sha256": certificate_plan["plan_sha256"],
         "checkpoint_sha256": metadata["checkpoint_sha256"],
@@ -222,19 +274,37 @@ def main() -> int:
             "ice_total": ice_total,
             "reduction_fraction": float(1.0 - ice_total / full_total),
         },
+        "analytical_transformer_block_flops": {
+            "scope": "self/cross-attention and FFN transformer blocks only; excludes patch projection, norms, GAP heads, decoder and data movement",
+            "tokens": tokens,
+            "dim": dim,
+            "full": full_flops,
+            "ice_exact": ice_flops,
+            "reduction_fraction": float(1.0 - ice_flops / full_flops),
+        },
         "parameter_reduction_claimed": False,
         "checkpoint_reduction_claimed": False,
         "formal_efficiency_gate": {
             "metric": "batch16_network_forward_median_latency_reduction_fraction",
             "threshold": 0.20,
             "observed": batch16_reduction,
-            "pass": batch16_reduction >= 0.20,
+            "pass": efficiency_pass,
         },
     }
     output = Path(validated["output_dir"]) / "ice_exact_profile.json"
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, indent=2, sort_keys=True, allow_nan=False), encoding="utf-8")
-    print({"status": "complete", "profile": str(output), "efficiency_gate": result["formal_efficiency_gate"]})
+    output.write_text(
+        json.dumps(result, indent=2, sort_keys=True, allow_nan=False),
+        encoding="utf-8",
+    )
+    print(
+        {
+            "status": "complete",
+            "profile": str(output),
+            "route_decision": route_decision,
+            "efficiency_gate": result["formal_efficiency_gate"],
+        }
+    )
     return 0
 
 
