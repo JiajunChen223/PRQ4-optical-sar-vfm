@@ -1,0 +1,28 @@
+{
+ "artifact_type": "v21_r9_recovery_decision",
+ "schema_version": "prq4.r9_recovery_decision.v1",
+ "status": "fail",
+ "candidate": "r9_optical_semantic_recovery",
+ "config": "geotoken3path_d2_o3.yaml (D2 depth row)",
+ "seed": 0,
+ "anchors": {
+  "d0_best": 49.7808,
+  "d2_best": 49.2027,
+  "d2_end": 48.5493,
+  "delta_best_pp": 0.5781
+ },
+ "r9_result": {
+  "best": 49.1893,
+  "endpoint": 48.4141,
+  "delta_vs_d2_pp": -0.0134
+ },
+ "gates": {
+  "recover_70pct (>=49.6074)": false,
+  "plus_0p5pp_OR (>=49.7027)": false,
+  "endpoint_anti_reversal (>=48.5493)": false
+ },
+ "decision": "closed",
+ "reason": "recovery failed all preregistered gates; r9 best below D2 (no recovery of the 0.578pp depth loss).",
+ "next_action": "depth-family second-stage claim closed; D2 documented as shallow-VFM capacity limit; paper reports Depth as lossy Pareto point only.",
+ "test_accessed": false
+}
