@@ -339,11 +339,14 @@ def run_formal_cloud(
     croma_constructor: Callable[[], nn.Module] | None = None,
     allow_injected_fixture: bool = False,
     objective_name: str | None = None,
+    backbone_execution: str = "full",
 ) -> dict[str, Any]:
     """Run one matched baseline/candidate row; test remains sealed."""
 
     if execution_scale not in {"baseline", "screening", "strengthening", "confirmation", "acceptance", "extension"}:
         raise FormalRunnerError("formal runner requires a non-test approved execution scale")
+    if str(backbone_execution).strip().casefold() not in {"full", "ice_exact"}:
+        raise FormalRunnerError("backbone_execution must be full or ice_exact")
     _validate_formal_horizon(execution_scale=execution_scale, epochs=epochs, rapid_horizon_epochs=rapid_horizon_epochs)
     assert_test_access_allowed({"execution_scale": execution_scale, "test_seal_status": "sealed"}, "validation")
     data_path = _cloud_artifact(data_manifest, "data_manifest")
@@ -436,7 +439,11 @@ def run_formal_cloud(
             constructor_ref=str(initialization.get("constructor_ref", "")),
             constructor=croma_constructor,
         )
-        model = build_vfm_segmentation_model(resolved, audited_croma_backbone=backbone)
+        model = build_vfm_segmentation_model(
+            resolved,
+            audited_croma_backbone=backbone,
+            backbone_execution=backbone_execution,
+        )
     else:
         load_report = {"injected_model": True}
     target_device = torch.device(device)
@@ -602,6 +609,7 @@ def run_formal_cloud(
         _atomic_jsonl(telemetry_path, telemetry_rows)
         telemetry_identity = _file_identity(telemetry_path)
     resolved_snapshot = json.loads(json.dumps(dict(resolved), sort_keys=True))
+    resolved_snapshot["backbone_execution"] = str(backbone_execution)
     resolved_snapshot.setdefault("runtime", {})["data_loader"] = loader_contract
     resolved_snapshot["runtime"]["rapid_horizon_epochs"] = rapid_horizon_epochs
     run_manifest = build_run_manifest(

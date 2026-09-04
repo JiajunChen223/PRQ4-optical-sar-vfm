@@ -201,6 +201,12 @@ def main() -> int:
         help="Screening/formal seed (protocol seeds [0,1,2]); injected into resolved runtime",
     )
     parser.add_argument("--device", default="cuda:0")
+    parser.add_argument(
+        "--backbone-execution",
+        choices=("full", "ice_exact"),
+        default="full",
+        help="full = official CROMA forward; ice_exact = certified minimal execution (R21)",
+    )
     args = parser.parse_args()
     manifest = {"execution_scale": args.execution_scale, "test_seal_status": "sealed"}
     assert_test_access_allowed(manifest, "validation")
@@ -229,6 +235,7 @@ def main() -> int:
             # Resolved config does not declare an objective; the CLI flag
             # carries the locked baseline objective (CE+Lovasz default).
             objective_name=args.objective,
+            backbone_execution=args.backbone_execution,
         )
         print(result)
         return 0
