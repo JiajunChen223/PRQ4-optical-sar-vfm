@@ -107,14 +107,14 @@ def main() -> int:
         m.load_state_dict(state, strict=True)
         m.to(device).eval()
         if tier == "full":
-            return m
+            return m, None
         plan = compile_croma_execution_plan(
             model_cfg=model_cfg, receiver_contract=contract,
             audited_backbone=bb, ablation=tier,
         )
         executor = InterfaceCertifiedCromaExecutor(plan)
         install_ice_exact_forward(bb, executor)
-        return m
+        return m, plan
 
     results = {}
 
@@ -128,7 +128,7 @@ def main() -> int:
         full_logits = _forward(full_model, optical_b, sar_b)
     # Independent full reference instance (own backbone build) so equality is a
     # genuine cross-instance check, not a self-comparison.
-    full_ref = tier_model("full")
+    full_ref, _ = tier_model("full")
     with torch.no_grad():
         full_ref_logits = _forward(full_ref, optical_b, sar_b)
         full_self_equal = bool(torch.equal(full_logits, full_ref_logits))
@@ -141,7 +141,7 @@ def main() -> int:
     torch.cuda.empty_cache()
 
     for tier in _TIERS:
-        m = tier_model(tier)
+        m, plan = tier_model(tier)
         logits = _forward(m, optical_b, sar_b)
         max_abs_error = float((logits.float() - full_logits.float()).abs().max())
         eq = bool(torch.equal(logits, full_logits))
@@ -160,7 +160,6 @@ def main() -> int:
                    "std_ms": lat_b1.std_ms, "p10_ms": lat_b1.p10_ms, "p90_ms": lat_b1.p90_ms,
                    "images_per_second": 1000.0 / lat_b1.median_ms},
         }
-        plan = getattr(m, "_ice_execution_plan", None)
         if plan is not None:
             results[tier]["executed_blocks"] = {
                 "s1": plan.s1_last_layer + 1 if plan.s1_last_layer is not None else 0,
