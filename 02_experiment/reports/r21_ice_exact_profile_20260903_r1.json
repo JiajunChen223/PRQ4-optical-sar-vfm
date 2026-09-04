@@ -1,0 +1,118 @@
+{
+  "amp_enabled": true,
+  "analytical_transformer_block_flops": {
+    "dim": 768,
+    "full": 43738444800,
+    "ice_exact": 20043417600,
+    "reduction_fraction": 0.5417437064428958,
+    "scope": "self/cross-attention and FFN transformer blocks only; excludes patch projection, norms, GAP heads, decoder and data movement",
+    "tokens": 225
+  },
+  "certificate_path": "/root/autodl-tmp/ice_cert/ice_exact_equivalence_certificate.json",
+  "certificate_plan_sha256": "831250155723ed032e32321fa803df52b7ff0dc7e75480ef2d711f91f3594e3d",
+  "checkpoint_reduction_claimed": false,
+  "checkpoint_sha256": "45308835524c71696ebffd3fb3637ea1b468d38d0313343193dec0ab76e740e9",
+  "equivalence_certified": true,
+  "executed_transformer_blocks": {
+    "full": {
+      "joint_blocks": 6,
+      "s1_blocks": 6,
+      "s2_blocks": 12
+    },
+    "full_total": 24,
+    "ice_exact": {
+      "joint_blocks": 0,
+      "s1_blocks": 6,
+      "s2_blocks": 6
+    },
+    "ice_total": 12,
+    "reduction_fraction": 0.5
+  },
+  "formal_efficiency_gate": {
+    "metric": "batch16_network_forward_median_latency_reduction_fraction",
+    "observed": 0.5331046991780644,
+    "pass": true,
+    "threshold": 0.2
+  },
+  "iterations_per_mode": 200,
+  "latency": {
+    "batch1": {
+      "batch_size": 1,
+      "full": {
+        "images_per_second": 45.81466708477257,
+        "iterations": 200,
+        "mean_ms": 22.05472774505615,
+        "median_ms": 21.82707118988037,
+        "p10_ms": 21.753754234313966,
+        "p90_ms": 22.165606880187987,
+        "std_ms": 0.8506126794087059
+      },
+      "full_memory": {
+        "absolute_peak_allocated_bytes": 2151250944,
+        "incremental_forward_peak_bytes": 203055104,
+        "resident_before_forward_bytes": 1948195840
+      },
+      "ice_exact": {
+        "images_per_second": 88.34072092429795,
+        "iterations": 200,
+        "mean_ms": 11.404718065261841,
+        "median_ms": 11.319808006286621,
+        "p10_ms": 11.277209854125978,
+        "p90_ms": 11.466444396972657,
+        "std_ms": 0.43569086626774944
+      },
+      "ice_exact_memory": {
+        "absolute_peak_allocated_bytes": 2152617472,
+        "incremental_forward_peak_bytes": 204421632,
+        "resident_before_forward_bytes": 1948195840
+      },
+      "incremental_forward_peak_reduction_bytes": -1366528,
+      "median_latency_reduction_fraction": 0.4813867647284352,
+      "memory_scope": "both_full_parameter_sets_resident; report incremental forward allocation",
+      "protocol_role": "deployment_reference_after_microbatch16_normalization"
+    },
+    "batch16": {
+      "batch_size": 16,
+      "full": {
+        "images_per_second": 272.02771031174586,
+        "iterations": 200,
+        "mean_ms": 58.850693244934085,
+        "median_ms": 58.81753730773926,
+        "p10_ms": 58.56931915283203,
+        "p90_ms": 59.08992004394531,
+        "std_ms": 0.3177845925340755
+      },
+      "full_memory": {
+        "absolute_peak_allocated_bytes": 2448125952,
+        "incremental_forward_peak_bytes": 413175808,
+        "resident_before_forward_bytes": 2034950144
+      },
+      "ice_exact": {
+        "images_per_second": 582.631073460925,
+        "iterations": 200,
+        "mean_ms": 27.493181438446044,
+        "median_ms": 27.461631774902344,
+        "p10_ms": 27.33670425415039,
+        "p90_ms": 27.662643432617188,
+        "std_ms": 0.2008336005575135
+      },
+      "ice_exact_memory": {
+        "absolute_peak_allocated_bytes": 2393922048,
+        "incremental_forward_peak_bytes": 358160896,
+        "resident_before_forward_bytes": 2035761152
+      },
+      "incremental_forward_peak_reduction_bytes": 55014912,
+      "median_latency_reduction_fraction": 0.5331046991780644,
+      "memory_scope": "both_full_parameter_sets_resident; report incremental forward allocation",
+      "protocol_role": "protocol_aligned_network_forward"
+    }
+  },
+  "measurement_order": "repeated_ABBA",
+  "parameter_reduction_claimed": false,
+  "route": "R21-ICE-VFM-01",
+  "route_decision": "supported",
+  "schema_version": "prq4.ice_exact_profile.v1",
+  "scientific_route_supported": true,
+  "test_accessed": false,
+  "warmup": 50
+}
