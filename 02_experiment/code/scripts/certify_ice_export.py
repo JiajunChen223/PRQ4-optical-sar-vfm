@@ -32,6 +32,7 @@ from geotoken3path.execution.certification import compare_tensors
 from geotoken3path.execution.croma_export import build_export_backbone
 from geotoken3path.models.croma_loader import load_croma_backbone
 from geotoken3path.models.factory import build_vfm_segmentation_model
+from geotoken3path.metrics import confusion_matrix as cm_fn, mean_iou
 from geotoken3path.utils.config import resolve_approved_config
 
 
@@ -88,7 +89,12 @@ def main() -> int:
     export_state_keys = set(export_model.state_dict().keys())
     missing_in_export = full_state_keys - export_state_keys
     export_state = {k: state[k] for k in export_state_keys if k in state}
-    export_model.load_state_dict(export_state, strict=True)
+    incompatible = export_model.load_state_dict(export_state, strict=True)
+    if incompatible.missing_keys or incompatible.unexpected_keys:
+        raise RuntimeError(
+            "export strict load failed: "
+            f"missing={incompatible.missing_keys[:5]} unexpected={incompatible.unexpected_keys[:5]}"
+        )
     export_model.to(device).eval()
 
     # Whole-validation agreement.
@@ -103,10 +109,13 @@ def main() -> int:
     identical_pixels = 0
     max_logit_error = 0.0
     batch_count = 0
+    full_matrix = None
+    export_matrix = None
     with torch.no_grad():
         for batch in validation_loader:
-            optical = croma_dynamic_normalize_batch(batch)["optical"].to(device)
-            sar = croma_dynamic_normalize_batch(batch)["sar"].to(device)
+            normalized = croma_dynamic_normalize_batch(batch)
+            optical = normalized["optical"].to(device)
+            sar = normalized["sar"].to(device)
             target = batch["target"].to(device)
             with torch.autocast(device_type="cuda", dtype=torch.float16, enabled=True):
                 full_logits = full_model(optical, sar)
@@ -114,7 +123,15 @@ def main() -> int:
             max_logit_error = max(max_logit_error, float((full_logits.float() - export_logits.float()).abs().max()))
             total_pixels += target.numel()
             identical_pixels += int((full_logits.argmax(1) == export_logits.argmax(1)).sum())
+            classes = int(full_logits.shape[1])
+            full_matrix = (cm_fn(full_logits, target, classes).cpu() if full_matrix is None
+                           else full_matrix + cm_fn(full_logits, target, classes).cpu())
+            export_matrix = (cm_fn(export_logits, target, classes).cpu() if export_matrix is None
+                             else export_matrix + cm_fn(export_logits, target, classes).cpu())
             batch_count += 1
+    matrix_identical = bool(torch.equal(full_matrix, export_matrix)) if full_matrix is not None else False
+    full_miou = float(mean_iou(full_matrix)) if full_matrix is not None else float("nan")
+    export_miou = float(mean_iou(export_matrix)) if export_matrix is not None else float("nan")
 
     retained_keys_bitwise = all(
         torch.equal(full_model.state_dict()[k], export_model.state_dict()[k])
@@ -136,6 +153,9 @@ def main() -> int:
             "identical_prediction_pixels": identical_pixels,
             "prediction_identical": identical_pixels == total_pixels,
             "max_abs_logit_error": max_logit_error,
+            "confusion_matrix_identical": matrix_identical,
+            "full_mIoU_percent": full_miou * 100.0,
+            "export_mIoU_percent": export_miou * 100.0,
         },
         "state_subset": {
             "full_keys": len(full_state_keys),
@@ -143,6 +163,12 @@ def main() -> int:
             "removed_keys": sorted(missing_in_export),
             "retained_keys_bitwise_identical": retained_keys_bitwise,
         },
+        "export_state_bytes_estimate": sum(
+            v.numel() * v.element_size() for v in export_model.state_dict().values()
+        ),
+        "full_state_bytes_estimate": sum(
+            v.numel() * v.element_size() for v in full_model.state_dict().values()
+        ),
         "reduction": {
             "full_parameter_count": stats.full_parameter_count,
             "export_parameter_count": stats.export_parameter_count,
