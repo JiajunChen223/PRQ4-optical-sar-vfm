@@ -35,6 +35,7 @@ _APPROVED_MECHANISM_SETS = (
     "r6_depth_dual_channel_inject",
     "r7_residual_learned_upsample",
     "r8_depth_inject_plus_upsample",
+    "r9_optical_semantic_recovery",
 )
 
 

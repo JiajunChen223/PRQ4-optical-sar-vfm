@@ -52,6 +52,7 @@ matched_controls:
   - r6_depth_dual_channel_inject
   - r7_residual_learned_upsample
   - r8_depth_inject_plus_upsample
+  - r9_optical_semantic_recovery
 input:
   optical_channels: 12
   sar_channels: 2

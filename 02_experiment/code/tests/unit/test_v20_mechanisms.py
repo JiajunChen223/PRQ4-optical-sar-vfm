@@ -352,3 +352,54 @@ def test_r8_both_components_active_and_gradient() -> None:
     out.mean().backward()
     assert m.router.depth_select.layer_proj["late"].weight.grad is not None
     assert m.router.upsample.upsample_conv.weight.grad is not None
+
+
+# ---------- R9：光学语义恢复（D2 recovery） ----------
+
+def test_r9_zero_start_identity_and_parity() -> None:
+    g = torch.Generator().manual_seed(31)
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    cand = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r9_optical_semantic_recovery", stages=("mid", "late"))
+    assert cand.router is not None
+    shared = {k: v for k, v in base.state_dict().items() if k in cand.state_dict()}
+    cand.load_state_dict(shared, strict=False)
+    base.eval(); cand.eval()
+    optical = torch.randn(2, 49, 16, generator=g)
+    sar = torch.randn(2, 49, 16, generator=g)
+    with torch.no_grad():
+        lb, _ = base(optical, sar, depth_group=None, output_size=(7, 7), return_aux=True)
+        lc, _ = cand(optical, sar, depth_group=None, output_size=(7, 7), return_aux=True)
+    assert torch.equal(lb, lc), "zero-start r9 must equal baseline exactly"
+
+
+def test_r9_router_only_parameters_and_gradient() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r9_optical_semantic_recovery", stages=("mid", "late"))
+    base = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="always_fuse", stages=("mid", "late"))
+    bn = sorted(n for n, _ in base.named_parameters() if not n.startswith("router."))
+    cn = sorted(n for n, _ in m.named_parameters() if not n.startswith("router."))
+    assert bn == cn
+    rn = [n for n, _ in m.named_parameters() if n.startswith("router.")]
+    assert "router.up.weight" in rn and "router.down.weight" in rn
+    g = torch.Generator().manual_seed(33)
+    out, _ = m(torch.randn(2, 49, 16, generator=g), torch.randn(2, 49, 16, generator=g),
+               depth_group=None, output_size=(7, 7), return_aux=True)
+    out.mean().backward()
+    assert m.router.up.weight.grad is not None
+    assert m.router.down.weight.grad is not None
+
+
+def test_r9_residual_becomes_active_after_training() -> None:
+    m = OpticalSarTokenModel(dim=16, num_classes=8, mechanism_set="r9_optical_semantic_recovery", stages=("mid", "late"))
+    g = torch.Generator().manual_seed(35)
+    optical = torch.randn(2, 49, 16, generator=g)
+    # 零起步：残差为零
+    with torch.no_grad():
+        out0 = m.router(optical)
+    assert torch.equal(out0, optical)
+    # 激活后：残差非零（down 初始非零；需激活 up 与 hid 中间层，否则 hidden=0）
+    with torch.no_grad():
+        m.router.up.weight.fill_(0.01)
+        m.router.hid[2].weight.fill_(0.01)
+        m.router.hid[4].weight.fill_(0.01)
+    out1 = m.router(optical)
+    assert not torch.equal(out1, optical)

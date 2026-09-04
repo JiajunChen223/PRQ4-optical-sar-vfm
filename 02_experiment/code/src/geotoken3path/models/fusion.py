@@ -29,6 +29,7 @@ from geotoken3path.mechanisms.r3_conditional_depth_select import R3OpticalCondit
 from geotoken3path.mechanisms.r6_dual_channel_inject import R6DualChannelDepthInject
 from geotoken3path.mechanisms.r7_residual_upsample import R7ResidualUpsample
 from geotoken3path.mechanisms.r8_depth_inject_plus_upsample import R8DepthInjectPlusUpsample
+from geotoken3path.mechanisms.r9_optical_semantic_recovery import R9OpticalSemanticRecovery
 
 
 class GeoToken3PathFusion(nn.Module):
@@ -45,6 +46,7 @@ class GeoToken3PathFusion(nn.Module):
         "r6_depth_dual_channel_inject",
         "r7_residual_learned_upsample",
         "r8_depth_inject_plus_upsample",
+        "r9_optical_semantic_recovery",
     }
 
     def __init__(
@@ -658,6 +660,8 @@ class OpticalSarTokenModel(nn.Module):
             self.router = R7ResidualUpsample(num_classes)
         elif mechanism_id == "r8_depth_inject_plus_upsample":
             self.router = R8DepthInjectPlusUpsample(dim, num_classes, tuple(self.stages))
+        elif mechanism_id == "r9_optical_semantic_recovery":
+            self.router = R9OpticalSemanticRecovery(dim)
         else:
             self.router = None
         self.stage_bridge = nn.Sequential(nn.Linear(dim * 2, max(dim // 2, 4)), nn.GELU(), nn.Linear(max(dim // 2, 4), dim))
@@ -773,6 +777,12 @@ class OpticalSarTokenModel(nn.Module):
                 optical_stage, sar_stage = self.router(
                     depth_features, optical_stage, sar_stage, stage
                 )
+            if (
+                self.mechanism_set == "r9_optical_semantic_recovery"
+                and stage == self.stages[-1]
+                and self.router is not None
+            ):
+                optical_stage = self.router(optical_stage)
             # External mechanisms (R2/R1) act outside the fusion boundary; the
             # fusion layer itself always executes the verified always-fuse path.
             stage_mechanism = (
@@ -780,7 +790,8 @@ class OpticalSarTokenModel(nn.Module):
                 if self.mechanism_set
                 in {"r2_depth_group_inject", "r1_low_energy_channel_gain",
                     "r3_optical_conditional_depth_select", "r6_depth_dual_channel_inject",
-                    "r7_residual_learned_upsample", "r8_depth_inject_plus_upsample"}
+                    "r7_residual_learned_upsample", "r8_depth_inject_plus_upsample",
+                    "r9_optical_semantic_recovery"}
                 else self.mechanism_set
             )
             fused, one_stage_aux = self.fusions[stage](
