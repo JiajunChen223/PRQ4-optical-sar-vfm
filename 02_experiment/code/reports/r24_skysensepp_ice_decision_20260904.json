@@ -1,0 +1,67 @@
+{
+  "schema_version": "prq4.r24_skysensepp_ice_decision.v1",
+  "route": "R24-ICE-SKYSENSEPP-S2",
+  "date": "2026-09-04",
+  "status": "second_positive_backbone_confirmed",
+  "scientific_question": "On a real pretrained, architecturally different foundation model (SkySense++ S2, semantic-enhanced 24-layer ViT-L), does ICE deliver a certified exact efficiency gain under a matched intermediate-feature receiver, and is the gain receiver-determined rather than forced?",
+  "setup": {
+    "backbone": "SkySense++ S2 ViT-L (302.6M, 24-layer pre-LN, semantic-enhanced merge_stage=4, real pretrained weights via BiliSakura HF Apache-2.0 conversion of skysensepp_release_s2.pth)",
+    "data": "SEN12TS WorldCover 11-class, 120x120, train 840 / val 180, frozen micro_batch 16 per-batch dynamic normalization on the 10-band S2 subset",
+    "training": "frozen backbone + trainable conv1x1 head only, CE+Lovasz 1:1, AdamW, 24 epochs, seed 0, AMP validation",
+    "annotation": "GT WorldCover labels as semantic-vocabulary indices (leakage documented) or empty constant-zero map (control)",
+    "contracts": {
+      "A_full_depth_control": "receiver reads official outputs at layers 5/11/17/23 (mirrors official UPerNet-style usage)",
+      "B_matched_intermediate": "receiver reads layer 11 only; ICE executes layers 0-11, eliminates 12-23 (12/24 layers)"
+    }
+  },
+  "preregistered_gates": {
+    "gate1_exactness": "100% validation prediction agreement + retained feature maps FP32 + logits FP32 + gradients + confusion matrix (hard)",
+    "gate2_latency": ">=30% strong_positive / 20-30% supportive / 10-20% marginal / <10% weak",
+    "gate3_export": "physical parameter removal with whole-validation prediction identity"
+  },
+  "results_matrix": {
+    "contract_A_gt": {
+      "mIoU_percent": 30.88, "exact_certificate": "pass", "pixels_identical": "2764800/2764800",
+      "latency_reduction": 0.0, "latency_tier": "weak", "export_removed_fraction": 0.0,
+      "role": "full-depth control - ICE correctly finds no removable compute when the receiver reads the final layer"
+    },
+    "contract_A_empty": {
+      "mIoU_percent": 13.93, "exact_certificate": "pass", "pixels_identical": "2764800/2764800",
+      "latency_reduction": 0.0, "latency_tier": "weak", "export_removed_fraction": 0.0,
+      "role": "leakage control for A (GT leakage contribution ~16.9pp at full depth)"
+    },
+    "contract_B_gt": {
+      "mIoU_percent": 20.85, "exact_certificate": "pass", "pixels_identical": "2764800/2764800",
+      "latency_reduction": 0.387, "latency_tier": "strong_positive", "export_removed_fraction": 0.499,
+      "role": "matched intermediate receiver (layer 11) - the second positive backbone result"
+    },
+    "contract_B_empty": {
+      "mIoU_percent": 12.99, "exact_certificate": "pass", "pixels_identical": "2764800/2764800",
+      "latency_reduction": 0.347, "latency_tier": "strong_positive", "export_removed_fraction": 0.499,
+      "role": "leakage control for B (GT leakage contribution ~7.9pp at layer 11); proves exactness/latency are independent of mIoU and annotation"
+    }
+  },
+  "conclusions": {
+    "second_positive_backbone": "Confirmed. SkySense++ S2 (24-layer semantic-enhanced, architecturally distinct from CROMA's dual-tower 12-layer + cross-encoder) delivers 38.7% latency reduction (batch16) / 41.9% (batch1) with 100% prediction identity, 49.9% physical parameter removal, all under a matched intermediate-feature receiver with real pretrained weights.",
+    "receiver_determined_not_forced": "The A/B contract pair on the same backbone and same weights gives 0% vs 38.7% latency reduction - ICE savings are determined by the downstream receiver contract, not imposed by ICE. Contract A (official full-depth usage) correctly returns ~0% removable compute (fail-closed).",
+    "leakage_quantified": "GT annotation contributes ~7.9pp (B) to ~16.9pp (A) over the empty control, but the empty control still reaches 12.9-13.9% (above the ~9% random baseline), and - critically - ICE exactness and latency reduction are unchanged between GT and empty runs, proving they are pure structural properties.",
+    "cross_backbone_evidence": {
+      "CROMA": "53.3% latency reduction, exact, real pretrained (R21)",
+      "SkySense++": "38.7% latency reduction, exact, real pretrained (R24)",
+      "AnySat": "0% removable under its official dense contract (fail-closed boundary, R22)",
+      "statement": "Two independent real pretrained positive backbones of different architectures plus one fail-closed boundary establish ICE as a dependency compiler whose savings are determined by (receiver contract x backbone graph), generalizing beyond any single model."
+    }
+  },
+  "artifacts": {
+    "certificates": "reports/r24_contract_{a,b,a_empty,b_empty}/skysensepp_ice_exact_{certificate,profile,export}.json",
+    "train_summaries": "reports/r24_contract_{a,b,a_empty,b_empty}/skysensepp_train_summary*.json",
+    "code": "src/geotoken3path/{data/skysensepp.py,models/skysensepp_seg.py,models/skysensepp_executor.py,execution/skysensepp_{plan,export}.py,engine/ice_certifier_r24.py} + scripts/r24/*",
+    "commits": "1345be0 (code), c941752 (cloud fixes), 6d02559 (A/B GT certs), d13f3cf (B empty), pending (A empty + decision)"
+  },
+  "caveats": {
+    "annotation_leakage": "GT annotation is fed to the semantic-enhanced backbone (its native input contract); mIoU numbers are GT-guided and not comparable to leakage-free segmentation; the empty control quantifies the leakage contribution.",
+    "resolution": "120x120 input (pos_embed bicubic-resized from the 16x16 pretraining grid) - reported as a known boundary.",
+    "mIoU_levels": "Absolute mIoU (20.85% B-GT) is below the CROMA baseline (49.8%) because the 1x1 head on frozen features is a linear probe, not a tuned decoder; R24's scientific claim is ICE exactness/efficiency, not mIoU superiority.",
+    "weights_origin": "Official SkySense++ weights are distributed via a dead Notion link; the BiliSakura HF conversion (Apache-2.0) of skysensepp_release_s2.pth was used (missing=0/unexpected=0)."
+  }
+}
