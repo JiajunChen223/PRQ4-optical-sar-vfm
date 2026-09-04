@@ -1,0 +1,64 @@
+{
+  "backbone": "AnySat-base (CVPR 2025, gastruc/AnySat, MIT)",
+  "conclusion": "0% removable compute under the official dense receiver contract. All 13 executed transformer blocks are on the dense dependency path. ICE would compile the full graph; this is a fail-closed structural boundary result, not a pruning failure.",
+  "executed_transformer_blocks": [
+    "blocks.0",
+    "blocks.1",
+    "blocks.2",
+    "blocks.3",
+    "blocks.4",
+    "blocks.5",
+    "spatial_encoder.predictor_blocks.0",
+    "spatial_encoder.predictor_blocks.1",
+    "spatial_encoder.predictor_blocks.2",
+    "spatial_encoder.predictor_blocks.3",
+    "spatial_encoder.predictor_blocks.4",
+    "spatial_encoder.predictor_blocks.5"
+  ],
+  "input_protocol": {
+    "T": 1,
+    "modalities": [
+      "s1",
+      "s2"
+    ],
+    "patch_size_m": 10,
+    "s1_channels": 3,
+    "s2_channels": 10,
+    "size_px": 64
+  },
+  "interpretation": "AnySat is a shared shallow encoder whose dense segmentation feature is assembled only after the full fusion stack; there is no deep suffix or pretraining head left unread by the official downstream usage. Efficiency gains of ICE are therefore determined by (downstream contract x backbone graph), not imposed by ICE.",
+  "perturbation_probe": {
+    "max_abs_delta_range": {
+      "global_blocks": [
+        0.7209,
+        1.249
+      ],
+      "per_modality_blocks": [
+        5.019,
+        7.411
+      ]
+    },
+    "method": "zero-output forward hook per block; dense output sensitivity",
+    "necessary_blocks": [
+      "blocks.0",
+      "blocks.1",
+      "blocks.2",
+      "blocks.3",
+      "blocks.4",
+      "blocks.5",
+      "spatial_encoder.predictor_blocks.0",
+      "spatial_encoder.predictor_blocks.1",
+      "spatial_encoder.predictor_blocks.2",
+      "spatial_encoder.predictor_blocks.3",
+      "spatial_encoder.predictor_blocks.4",
+      "spatial_encoder.predictor_blocks.5"
+    ],
+    "removable_blocks": [],
+    "threshold": 1e-06
+  },
+  "receiver_contract": "official dense: concat(final patch token, per-modality subpatch)",
+  "route": "R22-ICE-Backbone-Generalization",
+  "schema_version": "prq4.r22_anysat_redundancy_probe.v1",
+  "weight_sha256": "ce1246527a28bade624048c448a1fa473ca85791b998f562ce2bcc3dcac93d4f",
+  "weight_source": "HuggingFace g-astruc/AnySat models/AnySat.pth"
+}

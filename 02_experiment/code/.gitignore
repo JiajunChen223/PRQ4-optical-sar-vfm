@@ -17,3 +17,6 @@ outputs/
 *.zarr
 .env
 credentials*
+
+# R22: third-party AnySat code + weights (never committed)
+vendor/
