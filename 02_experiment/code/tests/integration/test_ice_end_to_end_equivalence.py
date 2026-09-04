@@ -178,6 +178,6 @@ def test_full_and_ice_match_end_to_end_logits_and_trainable_gradients() -> None:
     gradients = compare_gradients(
         named_trainable_gradients(full), named_trainable_gradients(ice)
     )
-    assert float(full_loss) == float(ice_loss)
+    assert float(full_loss.detach()) == float(ice_loss.detach())
     assert gradients["missing_gradient_names"] == []
     assert gradients["max_gradient_abs_error"] == 0.0

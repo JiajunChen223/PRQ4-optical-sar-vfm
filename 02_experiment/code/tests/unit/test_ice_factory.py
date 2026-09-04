@@ -86,9 +86,15 @@ def test_full_and_ice_factory_models_have_identical_state_surfaces() -> None:
     torch.manual_seed(7)
     ice_backbone = _Backbone()
     config = _config()
+    # Reseed before each build: building the full model consumes global RNG
+    # (token_model initialization), so without a reseed the ice model would
+    # initialize its token model on a different random stream and the state
+    # comparison below would compare two legitimately different initializations.
+    torch.manual_seed(7)
     full = build_vfm_segmentation_model(
         config, audited_croma_backbone=full_backbone, backbone_execution="full"
     )
+    torch.manual_seed(7)
     ice = build_vfm_segmentation_model(
         config, audited_croma_backbone=ice_backbone, backbone_execution="ice_exact"
     )
