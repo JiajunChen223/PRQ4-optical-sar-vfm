@@ -49,6 +49,10 @@ def main() -> int:
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--device", default="cuda:0")
+    parser.add_argument(
+        "--model-config", default="geotoken3path.yaml",
+        help="Model YAML under configs/model (task-depth rows: geotoken3path_d1_o4.yaml etc.)",
+    )
     parser.add_argument("--warmup", type=int, default=50)
     parser.add_argument("--iterations", type=int, default=200)
     args = parser.parse_args()
@@ -58,7 +62,9 @@ def main() -> int:
         checkpoint=args.checkpoint, output_dir=args.output_dir, execution_scale="acceptance",
     )
     code_root = Path(__file__).resolve().parents[1]
-    resolved = resolve_approved_config(code_root, "always_fuse", execution_scale="acceptance")
+    resolved = resolve_approved_config(
+        code_root, "always_fuse", execution_scale="acceptance", model_config_name=args.model_config,
+    )
     init_doc = yaml.safe_load((code_root / "configs/model/initialization.yaml").read_text(encoding="utf-8"))
     initialization = init_doc["initialization"]
     device = args.device

@@ -1,0 +1,108 @@
+{
+  "full_reference": {
+    "self_equal": true,
+    "self_max_abs_error": 0.0
+  },
+  "full": {
+    "prediction_equal_to_full": true,
+    "max_abs_logit_error": 0.0,
+    "amp_enabled": true,
+    "b16": {
+      "median_ms": 60.29107093811035,
+      "mean_ms": 60.31968254089355,
+      "std_ms": 0.3888859881189657,
+      "p10_ms": 60.0011791229248,
+      "p90_ms": 60.51850090026855,
+      "images_per_second": 265.3792634803955
+    },
+    "b1": {
+      "median_ms": 22.391807556152344,
+      "mean_ms": 22.36492799758911,
+      "std_ms": 0.4081504565623356,
+      "p10_ms": 21.756620979309083,
+      "p90_ms": 22.83458480834961,
+      "images_per_second": 44.65919053172826
+    }
+  },
+  "no_gap": {
+    "prediction_equal_to_full": true,
+    "max_abs_logit_error": 0.0,
+    "amp_enabled": true,
+    "b16": {
+      "median_ms": 60.44723129272461,
+      "mean_ms": 60.44708351135254,
+      "std_ms": 0.35469778163994764,
+      "p10_ms": 60.061490249633785,
+      "p90_ms": 60.741733169555665,
+      "images_per_second": 264.6936784005482
+    },
+    "b1": {
+      "median_ms": 22.451711654663086,
+      "mean_ms": 22.421119966506957,
+      "std_ms": 0.4820244853505795,
+      "p10_ms": 21.775359344482425,
+      "p90_ms": 22.88547840118408,
+      "images_per_second": 44.5400339796501
+    },
+    "executed_blocks": {
+      "s1": 6,
+      "s2": 12
+    },
+    "plan_sha256": "642b8c25f7a0026889d9f5ec33f3286ae44bd1e6034678e3139684f94aed27c7",
+    "ablation_tier": "no_gap"
+  },
+  "no_joint": {
+    "prediction_equal_to_full": true,
+    "max_abs_logit_error": 0.0,
+    "amp_enabled": true,
+    "b16": {
+      "median_ms": 26.22105598449707,
+      "mean_ms": 26.21974513053894,
+      "std_ms": 0.3258381257229673,
+      "p10_ms": 25.861017799377443,
+      "p90_ms": 26.565017318725587,
+      "images_per_second": 610.196630122747
+    },
+    "b1": {
+      "median_ms": 10.758143901824951,
+      "mean_ms": 10.813833799362182,
+      "std_ms": 0.33478303068199644,
+      "p10_ms": 10.508185958862304,
+      "p90_ms": 11.112521839141845,
+      "images_per_second": 92.95283732265058
+    },
+    "executed_blocks": {
+      "s1": 6,
+      "s2": 5
+    },
+    "plan_sha256": "de9f4cbbc50602b506979fe107adf64929035bd5e361f06ac165114889eb49f3",
+    "ablation_tier": "no_joint"
+  },
+  "exact": {
+    "prediction_equal_to_full": true,
+    "max_abs_logit_error": 0.0,
+    "amp_enabled": true,
+    "b16": {
+      "median_ms": 26.250240325927734,
+      "mean_ms": 26.27617833137512,
+      "std_ms": 0.3551394768060318,
+      "p10_ms": 25.925632667541507,
+      "p90_ms": 26.578227996826172,
+      "images_per_second": 609.5182292177559
+    },
+    "b1": {
+      "median_ms": 11.116015911102295,
+      "mean_ms": 11.25957073688507,
+      "std_ms": 0.5537987983155999,
+      "p10_ms": 10.74391040802002,
+      "p90_ms": 12.282367610931397,
+      "images_per_second": 89.96028864993207
+    },
+    "executed_blocks": {
+      "s1": 6,
+      "s2": 5
+    },
+    "plan_sha256": "56b499c0314dc85a76955a2ae746d9df90f31579e5dac1d2f96b01030ca7f56a",
+    "ablation_tier": "exact"
+  }
+}
