@@ -180,6 +180,11 @@ def main() -> int:
         choices=("baseline", "strengthening", "screening", "confirmation", "acceptance", "extension"),
         default="baseline",
     )
+    parser.add_argument(
+        "--model-config",
+        default="geotoken3path.yaml",
+        help="Model YAML under configs/model (e.g. geotoken3path_d1_o4.yaml for task-depth rows)",
+    )
     parser.add_argument("--data-manifest")
     parser.add_argument("--audit-report")
     parser.add_argument("--output-dir")
@@ -203,7 +208,10 @@ def main() -> int:
     if args.execution_scale == "cloud":
         if not args.data_manifest or not args.audit_report or not args.output_dir:
             raise RuntimeError("formal cloud execution requires --data-manifest, --audit-report and --output-dir")
-        resolved = resolve_approved_config(code_root, args.mechanism_set, execution_scale=args.formal_scale)
+        resolved = resolve_approved_config(
+            code_root, args.mechanism_set, execution_scale=args.formal_scale,
+            model_config_name=args.model_config,
+        )
         resolved["runtime"] = dict(resolved["runtime"])
         resolved["runtime"]["seed"] = int(args.seed)
         init_cfg = json.loads(json.dumps({}))
@@ -224,7 +232,9 @@ def main() -> int:
         )
         print(result)
         return 0
-    resolved = resolve_approved_config(code_root, args.mechanism_set)
+    resolved = resolve_approved_config(
+        code_root, args.mechanism_set, model_config_name=args.model_config
+    )
     print(run_synthetic_smoke(resolved))
     return 0
 

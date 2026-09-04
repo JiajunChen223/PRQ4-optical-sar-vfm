@@ -1,5 +1,5 @@
-route_id: PRQ4-DEPTH-2-OPTICAL-3
-candidate_id: DEPTH-2-ALWAYS-FUSE
+route_id: PRQ4-BASELINE-VERIFIED-R2
+candidate_id: BASELINE-ALWAYS-FUSE
 backbone_family: croma_radar_optical_vit_b
 initialization_ref: configs/model/pretrained_audit_successor.json
 backbone:
